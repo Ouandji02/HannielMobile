@@ -19,7 +19,7 @@ class ScreenPrincipal extends StatelessWidget {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image:AssetImage('undraw_doctors_hwty.png'))),
+                  image: AssetImage('assets/images/undraw_doctors_hwty.png'))),
         ),
       ),
       body: Container(
