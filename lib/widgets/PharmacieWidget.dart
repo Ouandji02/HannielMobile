@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget PharmacieWidget(img, nomPharmacie, nomGerant, nbreEtoile) {
+Widget pharmacyWidget(img, namePharmacy, nameHost, numberStar) {
   return Row(
     children: [
       const Image(
@@ -8,9 +8,9 @@ Widget PharmacieWidget(img, nomPharmacie, nomGerant, nbreEtoile) {
       ),
       Column(
         children: [
-          Text('Pharmacie ${nomPharmacie}'),
-          Text('Gerant:${nomGerant}'),
-          Text('Service:${nbreEtoile}'),
+          Text('Pharmacie $namePharmacy'),
+          Text('Gerant:$nameHost'),
+          Text('Service:$numberStar'),
           Container(
             margin: const EdgeInsets.only(
               top: 10,
