@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreen createState() => _LoginScreen();
 }
@@ -24,7 +26,7 @@ class _LoginScreen extends State<LoginScreen> {
         toolbarHeight: 60,
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 30),
         child: Column(
           children: [
             Container(
@@ -49,7 +51,7 @@ class _LoginScreen extends State<LoginScreen> {
             ),
             Container(
               color: Colors.blueAccent,
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
                   Container(
@@ -77,26 +79,24 @@ class _LoginScreen extends State<LoginScreen> {
                     ),
                   ),
                   Container(
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 5),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 5),
-                      width: width * .6,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.lock,
-                            color: Colors.black38,
-                          ),
-                          hintText: "Enter your password",
-                          border: InputBorder.none,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 0, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 5),
+                    width: width * .6,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: const TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.lock,
+                          color: Colors.black38,
                         ),
+                        hintText: "Enter your password",
+                        border: InputBorder.none,
                       ),
                     ),
                   ),

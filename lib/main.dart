@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/screens/LoginScreen.dart';
-import 'package:projet_flutter/screens/ScreenPrincipal.dart';
+import 'screens/LoginScreen.dart';
+import 'screens/ScreenPrincipal.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -8,14 +8,16 @@ void main() {
       fontFamily: 'Poppins',
     ),
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return LoginScreen();
+    return const LoginScreen();
   }
 }
