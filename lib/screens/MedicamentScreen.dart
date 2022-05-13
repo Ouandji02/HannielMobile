@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/widgets/BottomNavigation.dart';
 import 'package:projet_flutter/widgets/MedicamentWidget.dart';
 
 class MedicamentScreen extends StatefulWidget {
@@ -42,18 +43,7 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                 ),
               ),
             )),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex,
-          selectedItemColor: const Color(0xff5fbeff),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'pharmacy'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'message'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'calendar'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'profile'),
-          ],
-        ),
+        bottomNavigationBar: BottomNavigation(selectedIndex),
         body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
