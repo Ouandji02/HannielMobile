@@ -50,6 +50,7 @@ Widget pharmacyWidget(context) {
                             fontWeight: FontWeight.bold,
                             fontSize: 10,
                           ),
+
                         ),
                       ],
                     )),

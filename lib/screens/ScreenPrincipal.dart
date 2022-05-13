@@ -12,7 +12,7 @@ class ScreenPrincipal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color(0xff008ED6),
         elevation: 0,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -33,7 +33,7 @@ class ScreenPrincipal extends StatelessWidget {
               child: Text(
                 'HANNIEL',
                 style: TextStyle(
-                    color: Colors.blueAccent,
+                    color: Color(0xff008ED6),
                     fontWeight: FontWeight.w900,
                     fontSize: 35),
               ),
@@ -72,7 +72,8 @@ class ScreenPrincipal extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
                     },
-                    color: Colors.blueAccent,
+    color: Color(0xff008ED6),
+
                     child: const Text(
                       "SUIVANT",
                       style: TextStyle(
