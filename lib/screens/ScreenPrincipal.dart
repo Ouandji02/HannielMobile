@@ -11,7 +11,7 @@ class ScreenPrincipal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color(0xff008ED6),
         elevation: 0,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -30,7 +30,7 @@ class ScreenPrincipal extends StatelessWidget {
             child: Text(
               'Hanniel',
               style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: Color(0xff008ED6),
                   fontWeight: FontWeight.bold,
                   fontSize: 35),
             ),
@@ -56,7 +56,7 @@ class ScreenPrincipal extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 5),
                     onPressed: () {},
-                    color: Colors.blueAccent,
+                    color: const Color(0xff008ED6),
                     child: const Text(
                       "SUIVANT",
                       style: TextStyle(

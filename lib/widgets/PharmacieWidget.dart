@@ -21,14 +21,14 @@ Widget pharmacyWidget(img, namePharmacy, nameHost, numberStar) {
                   padding: const EdgeInsets.symmetric(
                       vertical: 10, horizontal: 5),
                   onPressed: () {},
-                  color: Colors.blueAccent,
+                  color: const Color(0xff008ED6),
                   child: Row(
                     children: const [
                       Icon(Icons.location_city),
                       Text(
                         "VOIR LA CARTE",
                         style: TextStyle(
-                          color: Colors.blueAccent,
+                          color: Color(0xff008ED6),
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
