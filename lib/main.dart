@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/LoginScreen.dart';
-import 'screens/ScreenPrincipal.dart';
+import 'package:projet_flutter/screens/MedicamentScreenDetail.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -18,6 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const ScreenPrincipal();
+    return const MedicamentScreenDetail();
   }
 }
