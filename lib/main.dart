@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/screens/Accueil.dart';
 import 'screens/LoginScreen.dart';
 import 'screens/ScreenPrincipal.dart';
 
@@ -18,6 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const LoginScreen();
+    return Accueil();
   }
 }

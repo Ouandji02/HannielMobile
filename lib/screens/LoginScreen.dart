@@ -18,56 +18,80 @@ class _LoginScreen extends State<LoginScreen> {
         title: const Text(
           'HANNIEL',
           style: TextStyle(
-              fontSize: 20,
+              fontSize: 30,
               color: Colors.blueAccent,
               fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 55,
+        toolbarHeight: 50,
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: 10),
           color: Colors.white,
           child: Column(
             children: [
               Container(
                   padding: const EdgeInsets.only(top: 20, left: 10, right: 5),
                   child: const Text(
-                      "Ne parcourez plus les rues a la recherche d’un medicament, les hopitaux a larecherche d’un medecin.",
-                      style: TextStyle(color: Colors.black45, fontSize: 16))),
-               const Text(
-                  'tout est dans ta poche',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
+                      "Ne parcourez plus les rues a la recherche d’un medicament, les hopitaux a la recherche d’un medecin.",
+                      style: TextStyle(color: Colors.black45, fontSize: 18))),
+               Container(
+                 margin: EdgeInsets.only(left: 10),
+                 child:Align(
+                   alignment: Alignment.centerLeft,
+                   child: const Text(
+                     'Tout est dans ta poche',
+                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                   ),
+                 ),
+               ),
               Container(
-                margin: const EdgeInsets.only(top: 15, bottom: 15),
+                margin: const EdgeInsets.only(top: 20, bottom: 40),
                 padding: const EdgeInsets.only(left: 10, right: 5),
                 child: const Text(
                   'Connectes toi pour profiter de l’experience',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
               Container(
-                color: Colors.blueAccent,
+                height: heigth * 0.65,
                 padding: const EdgeInsets.all(15),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                      color: Colors.blueAccent.withOpacity(1),
+                      offset: Offset(0,-1),
+                        blurRadius: 0,
+                        spreadRadius: 3
+                    )
+                    ]
+                  ),
                   child: Column(
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 5),
                         child: Container(
                           margin: const EdgeInsets.symmetric(
-                              horizontal: 0, vertical: 5),
+                              horizontal: 20, vertical: 5),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
+                              horizontal: 20, vertical: 5),
                           width: width * .8,
                           height: heigth * .08,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12.withOpacity(0.2),
+                                offset: Offset(0,-3),
+                                blurRadius: 7,
+                                spreadRadius: 3
+                              )
+                            ]
                           ),
                           child: const TextField(
                             decoration: InputDecoration(
@@ -83,7 +107,7 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 0, vertical: 5),
+                            horizontal: 20, vertical: 5),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 5),
                         width: width * .8,
@@ -91,6 +115,14 @@ class _LoginScreen extends State<LoginScreen> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12.withOpacity(0.2),
+                                  offset: Offset(0,-3),
+                                  blurRadius: 7,
+                                  spreadRadius: 3
+                              )
+                            ]
                         ),
                         child:  const TextField(
                           obscureText: true,
@@ -124,9 +156,21 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       Center(
                         child: Container(
-                          width: width * .6,
+                          width: width * .8,
                           margin: const EdgeInsets.only(
-                            top: 15,
+                            top: 25,
+                          ),
+                          padding: EdgeInsets.all(0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12.withOpacity(0.1),
+                                blurRadius: 7,
+                                spreadRadius: 3
+                              )
+                            ]
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -136,7 +180,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 child: const Text(
                                   "Je me connecte",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.blueAccent,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
@@ -148,18 +192,17 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       Center(
                         child: Container(
-                          margin: const EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 25),
                           child: const Text(
                             'Je suis nouveau, je n’ai pas de compe ?',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                           ),
                         ),
                       )
                     ],
                   ),
                 ) ,
-              )
             ],
           ),
         ),
