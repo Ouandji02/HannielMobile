@@ -11,7 +11,7 @@ Widget pharmacyWidget(context) {
             BoxShadow(
                 color: Colors.black12.withOpacity(.2),
                 blurRadius: 20,
-                offset: Offset(0, -3),
+                offset: Offset(0, -2),
                 spreadRadius: 3)
           ],
           color: const Color(0xff008ED6)),
