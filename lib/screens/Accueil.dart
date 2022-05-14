@@ -22,7 +22,7 @@ class _Accueil extends State<Accueil> {
     double width = MediaQuery.of(context).size.width;
     double heigth = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBarPrincipal(nom: nom),
+      appBar: AppBarPrincipal(nom,context),
       drawer: DrawerLayout(user, context),
       body: Container(
         padding: EdgeInsets.all(15),
@@ -71,8 +71,10 @@ class _Accueil extends State<Accueil> {
             ),
             Container(
                 child: SingleChildScrollView(
+                  padding: EdgeInsets.all(30),
               scrollDirection: Axis.vertical,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
                     margin: EdgeInsets.all(10),

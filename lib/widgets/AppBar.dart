@@ -3,31 +3,38 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../screens/ScreenPrincipal.dart';
 
-AppBarPrincipal({required String nom}) {
+AppBarPrincipal(nom, context) {
   return AppBar(
-    backgroundColor: Colors.black12.withOpacity(.005),
-    elevation: 0,
-    title: Column(
-      children: [
-        Text(
-          'Hello,${nom}',
-          style: TextStyle(fontSize: 14, color: Colors.black),
-        ),
-        Text(
-          'Welcome,From Dschang,Cameroun',
-          style: TextStyle(fontSize: 14, color: Colors.black),
+      backgroundColor: Colors.black12.withOpacity(.005),
+      iconTheme: IconThemeData(color: Colors.black, size: 30),
+      elevation: 0,
+      title: Column(
+        children: [
+          Text(
+            'Hello,${nom}',
+            style: TextStyle(fontSize: 14, color: Colors.black),
+          ),
+          Text(
+            'Welcome,From Dschang,Cameroun',
+            style: TextStyle(fontSize: 14, color: Colors.black),
+          )
+        ],
+      ),
+      actions: [
+        Container(
+          margin: EdgeInsets.only(right: 10),
+          child: CircleAvatar(
+            backgroundImage:
+                AssetImage('assets/images/undraw_doctors_hwty.png'),
+          ),
         )
       ],
-    ),
-    actions: [
-      Container(
-        margin: EdgeInsets.only(right: 10),
-        child: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/undraw_doctors_hwty.png'),
-        ),
-      )
-    ],
-  );
+      leading: Builder(builder: (context) {
+        return IconButton(
+          icon: Icon(Icons.reorder_outlined),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        );
+      }));
 }
 
 Widget DrawerLayout(user, context) {
