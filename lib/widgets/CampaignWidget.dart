@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-Widget CampagneWidget(context) {
+Widget CampaignWidget(context) {
   final size = MediaQuery.of(context).size;
   return Container(
     padding: EdgeInsets.all(10),

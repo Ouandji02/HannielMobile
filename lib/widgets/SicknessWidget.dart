@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget MaladieWidget() {
+Widget SicknessWidget() {
   return Container(
     constraints: BoxConstraints(
       maxWidth: 100

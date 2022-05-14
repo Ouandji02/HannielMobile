@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:projet_flutter/screens/MedicamentScreen.dart';
+import 'package:projet_flutter/screens/MedicationScreen.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/BottomNavigation.dart';
-import 'package:projet_flutter/widgets/CampagneWidget.dart';
-import 'package:projet_flutter/widgets/MaladieWidget.dart';
+import 'package:projet_flutter/widgets/CampaignWidget.dart';
+import 'package:projet_flutter/widgets/SicknessWidget.dart';
 
-import '../widgets/PharmacieWidget.dart';
+import '../widgets/PharmacyWidget.dart';
 
 class Accueil extends StatefulWidget {
   @override
@@ -64,7 +64,7 @@ class _Accueil extends State<Accueil> {
                   height: heigth * .08,
                   child: ListView.builder(
                     itemBuilder: (context, snapshot) {
-                      return MaladieWidget();
+                      return SicknessWidget();
                     },
                     scrollDirection: Axis.horizontal,
                     itemCount: 6,
@@ -109,7 +109,7 @@ class _Accueil extends State<Accueil> {
                         height: heigth * .20,
                         child: ListView.builder(
                           itemBuilder: (context, snapshot) {
-                            return CampagneWidget(context);
+                            return CampaignWidget(context);
                           },
                           scrollDirection: Axis.horizontal,
                           itemCount: 6,
