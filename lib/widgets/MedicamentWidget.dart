@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class MedicamentWidget extends StatelessWidget {
   const MedicamentWidget({Key? key}) : super(key: key);
 

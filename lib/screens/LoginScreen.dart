@@ -19,7 +19,7 @@ class _LoginScreen extends State<LoginScreen> {
           'HANNIEL',
           style: TextStyle(
               fontSize: 30,
-              color: Colors.blueAccent,
+              color: const Color(0xff008ED6),
               fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
@@ -32,38 +32,45 @@ class _LoginScreen extends State<LoginScreen> {
           color: Colors.white,
           child: Column(
             children: [
-              Container(
-                  padding: const EdgeInsets.only(top: 20, left: 10, right: 5),
-                  child: const Text(
-                      "Ne parcourez plus les rues a la recherche d’un medicament, les hopitaux a la recherche d’un medecin.",
-                      style: TextStyle(color: Colors.black45, fontSize: 18))),
-               Container(
-                 margin: EdgeInsets.only(left: 10),
-                 child:Align(
-                   alignment: Alignment.centerLeft,
-                   child: const Text(
-                     'Tout est dans ta poche',
-                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+             Container(
+               height: heigth * .4,
+               child: Column(
+                 children: [
+                   Container(
+                       padding: const EdgeInsets.only(top: 20, left: 10, right: 5),
+                       child: const Text(
+                           "Ne parcourez plus les rues a la recherche d’un medicament, les hopitaux a la recherche d’un medecin.",
+                           style: TextStyle(color: Colors.black45, fontSize: 18))),
+                   Container(
+                     margin: EdgeInsets.only(left: 10),
+                     child:Align(
+                       alignment: Alignment.centerLeft,
+                       child: const Text(
+                         'Tout est dans ta poche',
+                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                       ),
+                     ),
                    ),
-                 ),
+                   Container(
+                     margin: const EdgeInsets.only(top: 20, bottom: 40),
+                     padding: const EdgeInsets.only(left: 10, right: 5),
+                     child: const Text(
+                       'Connectes toi pour profiter de l’experience',
+                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                     ),
+                   ),
+                 ],
                ),
+             ),
               Container(
-                margin: const EdgeInsets.only(top: 20, bottom: 40),
-                padding: const EdgeInsets.only(left: 10, right: 5),
-                child: const Text(
-                  'Connectes toi pour profiter de l’experience',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
-              Container(
-                height: heigth * 0.65,
+                height: heigth * 0.5,
                 padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent,
+                    color: const Color(0xff008ED6),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                      color: Colors.blueAccent.withOpacity(1),
+                      color: const Color(0xff008ED6).withOpacity(1),
                       offset: Offset(0,-1),
                         blurRadius: 0,
                         spreadRadius: 3
@@ -180,7 +187,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 child: const Text(
                                   "Je me connecte",
                                   style: TextStyle(
-                                    color: Colors.blueAccent,
+                                    color: const Color(0xff008ED6),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
