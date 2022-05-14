@@ -99,9 +99,13 @@ class _LoginScreen extends State<LoginScreen> {
                                       ),
                                       obscureText: true,
                                       decoration: InputDecoration(
+
+                                        suffixIcon: Icon(Icons.email,color: Colors.white,),
                                         fillColor: Colors.white.withOpacity(.1),
                                         filled: true,
-                                        border: InputBorder.none,
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10)
+                                        ),
                                         labelText: 'Email Address',
                                         labelStyle: TextStyle(
                                             color: Colors.white,
@@ -119,9 +123,12 @@ class _LoginScreen extends State<LoginScreen> {
                                       ),
                                       obscureText: true,
                                       decoration: InputDecoration(
+                                        suffixIcon: Icon(Icons.remove_red_eye,color: Colors.white,),
                                         fillColor: Colors.white.withOpacity(.1),
                                         filled: true,
-                                        border: InputBorder.none,
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(10)
+                                        ),
                                         labelStyle: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600),
