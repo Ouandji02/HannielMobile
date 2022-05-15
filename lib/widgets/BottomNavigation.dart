@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/CONSTANTS/color.dart';
 
 BottomNavigation(selectedIndex) {
   return BottomNavigationBar(
+    backgroundColor: HexColor(PRIMARY_COLOR),
     type: BottomNavigationBarType.fixed,
     currentIndex: selectedIndex,
     selectedItemColor: const Color(0xff5fbeff),

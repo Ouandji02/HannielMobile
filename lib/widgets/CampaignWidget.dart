@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/CONSTANTS/color.dart';
 
 Widget CampaignWidget(context) {
   final size = MediaQuery.of(context).size;
@@ -9,7 +10,7 @@ Widget CampaignWidget(context) {
     height: size.height * .18,
     width: size.width * .7,
     decoration: BoxDecoration(
-        color: HexColor('0061A4'),
+        color: HexColor(PRIMARY_COLOR),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -23,7 +24,7 @@ Widget CampaignWidget(context) {
         Text(
           'Campagne de vaccination gratuite contre la rougeole',
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
         ),
         Positioned(
           bottom: 0,
@@ -38,17 +39,24 @@ Widget CampaignWidget(context) {
                 'En svoir plus',
                 style: TextStyle(
                     color: Colors.blueAccent,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold),
               ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black12,
-                elevation: 0,
-              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                  minimumSize: MaterialStateProperty.all(
+                      Size(size.width * .05, 30)),
+                  shadowColor: MaterialStateProperty.all<Color>(
+                      HexColor('0061A4')),
+                  elevation: MaterialStateProperty.all(30),
+                  shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(5)))),
               icon: Icon(
                 Icons.remove_red_eye_outlined,
                 color: Colors.blueAccent,
+                size: 16,
               ),
             ),
           ),

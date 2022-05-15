@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:projet_flutter/widgets/BottomNavigation.dart';
+import 'package:projet_flutter/widgets/CampaignWidget.dart';
+import 'package:projet_flutter/widgets/DoctorWidget.dart';
+import 'package:projet_flutter/widgets/PharmacyWidget.dart';
+import 'package:projet_flutter/widgets/SicknessWidget.dart';
 
 class Exemple extends StatelessWidget {
   @override
@@ -8,162 +14,158 @@ class Exemple extends StatelessWidget {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBarPrincipal('thierry', context),
+      drawer: DrawerLayout('thierry', context),
       body: Container(
-        height: size.height,
-        child: Stack(
+        constraints:
+            BoxConstraints(minHeight: size.height, minWidth: size.width),
+        color: HexColor(PRIMARY_COLOR).withOpacity(.93),
+        child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://media.istockphoto.com/photos/hospital-doctor-with-digital-tablet-talks-to-male-patient-picture-id504477658?b=1&k=20&m=504477658&s=170667a&w=0&h=L4QmnCGmI3UW4wZLtGu73AEzYGQ38P-BQtWn_qxRZyM='),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                          HexColor(PRIMARY_COLOR).withOpacity(.7),
-                          BlendMode.darken))),
-              child: Container(
-                height: size.height * .5,
-                width: size.width,
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                          bottom: size.height * .1,
-                          left: 30,
-                          child: Text(
-                            'Hanniel Apps',
-                            style: TextStyle(
-                                color: HexColor('5FBEFF'),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          )),
-                      Positioned(
-                          bottom: size.height * .16,
-                          left: 30,
-                          child: Container(
-                            width: size.width * .8,
-                            child: Text(
-                              'Care your health, care your life',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: size.width * .11),
-                            ),
-                          )),
-                    ],
+              width: size.width * .9,
+              margin: EdgeInsets.only(top: 25),
+              child: TextField(
+                style: TextStyle(
+                  fontSize: 12.0,
+                  height: .002,
+                ),
+                obscureText: true,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.white,
                   ),
+                  fillColor: Colors.white.withOpacity(.1),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  labelStyle: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  labelText: 'Search doctor or medication',
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                decoration: BoxDecoration(color: HexColor(PRIMARY_COLOR)),
-                height: (size.height * .5) + 5,
-                width: size.width,
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                          top: 20,
-                          left: 30,
-                          child: Text(
-                            'Log in',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          )),
-                      Positioned(
-                          top: 60,
-                          left: 30,
-                          child: Container(
-                              width: size.width * .8,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: TextField(
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        height: .10,
-                                      ),
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white.withOpacity(.1),
-                                        filled: true,
-                                        border: InputBorder.none,
-                                        labelText: 'Email Address',
-                                        labelStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(top: 30, bottom: 30),
-                                    child: TextField(
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        height: .10,
-                                      ),
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white.withOpacity(.1),
-                                        filled: true,
-                                        border: InputBorder.none,
-                                        labelStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                        labelText: 'Password',
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Get Started',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        style: ButtonStyle(
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(size.width * .8, 50)),
-                                            shadowColor: MaterialStateProperty
-                                                .all<Color>(HexColor('0061A4')),
-                                            elevation:
-                                                MaterialStateProperty.all(30),
-                                            shape: MaterialStateProperty.all(
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10))))),
-                                  ),
-                                  Container(
-                                      margin: EdgeInsets.only(top: 20),
-                                      alignment:
-                                          AlignmentDirectional.centerStart,
-                                      child: Text(
-                                        'Forgot Password ?',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
-                                      )),
-                                ],
-                              ))),
-                    ],
-                  ),
-                ),
+            Container(
+                width: size.width * .9,
+                margin: EdgeInsets.only(top: 20, bottom: 5),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      child: Text(
+                        'Medecinal Campaign',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ),
+                    Positioned(
+                      right: 10,
+                      top: 5,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16),
+                      ),
+                    )
+                  ],
+                )),
+            Container(
+              height: size.height * .20,
+              width: size.width * .9,
+              child: ListView.builder(
+                itemBuilder: (context, snapshot) {
+                  return CampaignWidget(context);
+                },
+                scrollDirection: Axis.horizontal,
+                itemCount: 6,
               ),
-            )
+            ),
+            Container(
+              width: size.width * .9,
+              margin: EdgeInsets.only(top: 20, bottom: 10),
+              child: Stack(
+                children: [
+                  Positioned(
+                    child: Text(
+                      'Medecinal Campaign',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ),
+                  Positioned(
+                    right: 10,
+                    top: 5,
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: size.height * .045,
+              width: size.width * .9,
+              margin: EdgeInsets.only(top: 10,bottom: 20),
+              child: ListView.builder(
+                itemBuilder: (context, snapshot) {
+                  return Card(
+                    color: HexColor(PRIMARY_COLOR),
+                    margin: EdgeInsets.only(right: 10),
+                    shadowColor: Colors.blueAccent,
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: const BorderRadius.all(
+                      Radius.circular(30),
+                    )),
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      constraints: BoxConstraints(minWidth: 80),
+                      child: Row(
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                                size: 16,
+                              )),
+                          Text('Fievre',style: TextStyle(
+                            color: Colors.white
+                          ),)
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+                itemCount: 6,
+              ),
+            ),
+            Container(
+              height: size.height * .332,
+              width: size.width * .9,
+              child: ListView.builder(
+                itemBuilder: (context, snapshot) {
+                  return DoctorWidget(context);
+                },
+                scrollDirection: Axis.vertical,
+                itemCount: 6,
+              ),
+            ),
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigation(1),
     );
   }
 }
