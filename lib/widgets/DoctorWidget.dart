@@ -58,7 +58,7 @@ Widget DoctorWidget(context) {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: 10),
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       'Service: 4 etoiles',
