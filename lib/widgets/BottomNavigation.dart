@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 BottomNavigation(selectedIndex) {
   return BottomNavigationBar(
-    backgroundColor: Color(0XFF001B2E),
+    backgroundColor: HexColor('001B2E'),
     type: BottomNavigationBarType.fixed,
     currentIndex: selectedIndex,
-    selectedItemColor: const Color(0xff008ED6),
+    selectedItemColor: HexColor('5FBEFF'),
     items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'pharmacy'),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'message'),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'calendar'),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'profile'),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+          label: 'home'),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.local_pharmacy, color: Colors.white),
+          label: 'pharmacy'),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.home, color: Colors.white), label: 'message'),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.home, color: Colors.white), label: 'calendar'),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.person, color: Colors.white), label: 'profile'),
     ],
   );
 }
