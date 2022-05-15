@@ -17,7 +17,7 @@ class MedicamentWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: HexColor('001B2E'),
             border:
-                Border(left: BorderSide(color: Colors.blueAccent, width: 6))),
+                Border(left: BorderSide(color: HexColor('5FBEFF'), width: 6))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
