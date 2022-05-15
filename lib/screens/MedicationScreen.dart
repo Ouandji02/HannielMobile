@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/widgets/BottomNavigation.dart';
 import 'package:projet_flutter/widgets/MedicationWidget.dart';
+
+import '../widgets/BottomNavigation.dart';
 
 class MedicamentScreen extends StatefulWidget {
   const MedicamentScreen({Key? key}) : super(key: key);
@@ -20,42 +23,68 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        backgroundColor: const Color(0xFFF0F2F8),
-        appBar: AppBar(
-            centerTitle: true,
-            toolbarHeight: height / 6,
-            elevation: 0,
-            backgroundColor: const Color(0xff008ED6),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            title: const SizedBox(
-              width: 300,
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.white,
-                  hintText: 'Search medicament...',
-                  hintStyle: TextStyle(color: Colors.white),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50))),
-                ),
+      backgroundColor: HexColor('1c2d38'),
+      appBar: AppBar(
+        toolbarHeight: height / 9,
+        backgroundColor: HexColor('1c2d38'),
+        title: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text("Medication List",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              style: TextStyle(
+                fontSize: 12.0,
+                height: .10,
               ),
-            )),
-        bottomNavigationBar: BottomNavigation(selectedIndex),
-        body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: const [
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-              ],
-            )));
+              obscureText: true,
+              decoration: InputDecoration(
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                fillColor: Colors.white.withOpacity(0.1),
+                filled: true,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                hintStyle: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontWeight: FontWeight.w300),
+                hintText: 'Search medication...',
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      bottomNavigationBar: BottomNavigation(selectedIndex),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(right: 20, left: 20),
+        child: Column(
+          children: [
+            SizedBox(height: 30),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget(),
+            MedicamentWidget()
+          ],
+        ),
+      ),
+    );
   }
 }
