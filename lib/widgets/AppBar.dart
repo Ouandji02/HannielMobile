@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/CONSTANTS/color.dart';
 
 import '../screens/ScreenPrincipal.dart';
 
 AppBarPrincipal(nom, context) {
   return AppBar(
-      backgroundColor: Colors.black12.withOpacity(.005),
+      backgroundColor: HexColor(PRIMARY_COLOR).withOpacity(.93),
       iconTheme: IconThemeData(color: Colors.black, size: 30),
       elevation: 0,
       title: Column(
         children: [
           Text(
             'Hello,${nom}',
-            style: TextStyle(fontSize: 14, color: Colors.black),
+            style: TextStyle(fontSize: 14, color: Colors.white),
           ),
           Text(
             'Welcome,From Dschang,Cameroun',
-            style: TextStyle(fontSize: 14, color: Colors.black),
+            style: TextStyle(fontSize: 14, color: Colors.white),
           )
         ],
       ),
@@ -31,7 +32,7 @@ AppBarPrincipal(nom, context) {
       ],
       leading: Builder(builder: (context) {
         return IconButton(
-          icon: Icon(Icons.reorder_outlined),
+          icon: Icon(Icons.reorder_outlined,color: Colors.white,),
           onPressed: () => Scaffold.of(context).openDrawer(),
         );
       }));
@@ -40,7 +41,7 @@ AppBarPrincipal(nom, context) {
 Widget DrawerLayout(user, context) {
   return Drawer(
       child: Material(
-    color: Colors.black,
+    color: HexColor(PRIMARY_COLOR),
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -127,7 +128,7 @@ Widget DrawerLayout(user, context) {
 }
 
 Widget userAccountHeader(name, email) => Container(
-      color: HexColor('0061A4'),
+      color: HexColor(PRIMARY_COLOR),
       width: double.infinity,
       height: 200,
       padding: const EdgeInsets.only(top: 20.0),

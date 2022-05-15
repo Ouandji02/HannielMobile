@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:projet_flutter/screens/MedicationScreen.dart';
+import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/BottomNavigation.dart';
 import 'package:projet_flutter/widgets/CampaignWidget.dart';
+import 'package:projet_flutter/widgets/DoctorWidget.dart';
+import 'package:projet_flutter/widgets/PharmacyWidget.dart';
 import 'package:projet_flutter/widgets/SicknessWidget.dart';
 
-import '../CONSTANTS/color.dart';
-import '../widgets/DoctorWidget.dart';
-import '../widgets/PharmacyWidget.dart';
-
-class Accueil extends StatefulWidget {
-  @override
-  _Accueil createState() => _Accueil();
-}
-
-class _Accueil extends State<Accueil> {
+class Exemple extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -26,7 +18,7 @@ class _Accueil extends State<Accueil> {
       drawer: DrawerLayout('thierry', context),
       body: Container(
         constraints:
-        BoxConstraints(minHeight: size.height, minWidth: size.width),
+            BoxConstraints(minHeight: size.height, minWidth: size.width),
         color: HexColor(PRIMARY_COLOR).withOpacity(.93),
         child: Column(
           children: [
@@ -133,8 +125,8 @@ class _Accueil extends State<Accueil> {
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                         borderRadius: const BorderRadius.all(
-                          Radius.circular(30),
-                        )),
+                      Radius.circular(30),
+                    )),
                     child: Container(
                       alignment: AlignmentDirectional.center,
                       constraints: BoxConstraints(minWidth: 80),
@@ -148,7 +140,7 @@ class _Accueil extends State<Accueil> {
                                 size: 16,
                               )),
                           Text('Fievre',style: TextStyle(
-                              color: Colors.white
+                            color: Colors.white
                           ),)
                         ],
                       ),
