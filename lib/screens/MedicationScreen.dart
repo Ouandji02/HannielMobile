@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:projet_flutter/widgets/BottomNavigation.dart';
 import 'package:projet_flutter/widgets/MedicationWidget.dart';
 
+import '../widgets/BottomNavigation.dart';
+
 class MedicamentScreen extends StatefulWidget {
   const MedicamentScreen({Key? key}) : super(key: key);
 

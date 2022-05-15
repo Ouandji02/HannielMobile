@@ -4,7 +4,7 @@ BottomNavigation(selectedIndex) {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: selectedIndex,
-    selectedItemColor: const Color(0xff5fbeff),
+    selectedItemColor: const Color(0xff008ED6),
     items: const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
       BottomNavigationBarItem(icon: Icon(Icons.home), label: 'pharmacy'),
