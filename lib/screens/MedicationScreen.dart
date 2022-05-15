@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/widgets/BottomNavigation.dart';
-import 'package:projet_flutter/widgets/MedicationWidget.dart';
 
 import '../widgets/BottomNavigation.dart';
 
@@ -22,42 +21,22 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        backgroundColor: const Color(0xFFF0F2F8),
-        appBar: AppBar(
-            centerTitle: true,
-            toolbarHeight: height / 6,
-            elevation: 0,
-            backgroundColor: const Color(0xff008ED6),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            title: const SizedBox(
-              width: 300,
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.white,
-                  hintText: 'Search medicament...',
-                  hintStyle: TextStyle(color: Colors.white),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50))),
-                ),
-              ),
-            )),
-        bottomNavigationBar: BottomNavigation(selectedIndex),
-        body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: const [
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-                MedicamentWidget(),
-              ],
-            )));
+      backgroundColor: Color(0XFF001B2E),
+      appBar: AppBar(
+        backgroundColor: Color(0XFF001B2E),
+        title: Text("Medication List",
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      bottomNavigationBar: BottomNavigation(selectedIndex),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [],
+          ),
+        ),
+      ),
+    );
   }
 }

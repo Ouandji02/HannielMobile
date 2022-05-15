@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 BottomNavigation(selectedIndex) {
   return BottomNavigationBar(
+    backgroundColor: Color(0XFF001B2E),
     type: BottomNavigationBarType.fixed,
     currentIndex: selectedIndex,
     selectedItemColor: const Color(0xff008ED6),
