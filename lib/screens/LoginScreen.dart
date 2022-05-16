@@ -120,6 +120,7 @@ class _LoginScreen extends State<LoginScreen> {
                                       style: TextStyle(
                                         fontSize: 12.0,
                                         height: .10,
+                                        color: Colors.white
                                       ),
                                       obscureText: true,
                                       decoration: InputDecoration(

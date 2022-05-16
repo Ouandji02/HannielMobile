@@ -130,7 +130,6 @@ class _Accueil extends State<Accueil> {
                     color: HexColor(PRIMARY_COLOR),
                     margin: EdgeInsets.only(right: 10),
                     shadowColor: Colors.blueAccent,
-                    elevation: 10,
                     shape: RoundedRectangleBorder(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(30),
