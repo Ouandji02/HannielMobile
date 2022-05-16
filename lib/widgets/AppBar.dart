@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/Accueil.dart';
+import 'package:projet_flutter/screens/LoginScreen.dart';
 import 'package:projet_flutter/screens/MedicationScreen.dart';
+import 'package:projet_flutter/screens/PharmacieScreen.dart';
+import 'package:projet_flutter/screens/Profil.dart';
+import 'package:projet_flutter/screens/SettingScreen.dart';
+import 'package:projet_flutter/screens/SpecialistScreen.dart';
 
 import '../screens/ScreenPrincipal.dart';
 
@@ -182,7 +188,21 @@ selectItem(BuildContext context, index) async {
     case 0:
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ScreenPrincipal(),
+          builder: (context) =>Accueil(),
+        ),
+      );
+      break;
+    case 1:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Profil(),
+        ),
+      );
+      break;
+    case 2:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Pharmacy(),
         ),
       );
       break;
@@ -190,6 +210,27 @@ selectItem(BuildContext context, index) async {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => MedicamentScreen(),
+        ),
+      );
+      break;
+    case 4:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Specialist(),
+        ),
+      );
+      break;
+    case 7:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Setting(),
+        ),
+      );
+      break;
+    case 8:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
         ),
       );
       break;

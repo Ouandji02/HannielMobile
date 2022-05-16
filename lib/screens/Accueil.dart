@@ -146,7 +146,7 @@ class _Accueil extends State<Accueil> {
                                 color: Colors.red,
                                 size: 16,
                               )),
-                          Text('Fievre',style: TextStyle(
+                          Text('Health',style: TextStyle(
                               color: Colors.white
                           ),)
                         ],
@@ -172,7 +172,7 @@ class _Accueil extends State<Accueil> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigation(1),
+      bottomNavigationBar: BottomNavigation(0),
     );
   }
 }
