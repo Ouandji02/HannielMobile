@@ -22,12 +22,17 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       appBar: AppBar(
         elevation: 0,
         title: Text("Detail Larissa Bolando"),
-        leading: Container(
-          margin: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-              color: HexColor('001B2E'),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Icon(Icons.arrow_back_ios),
+        leading: InkWell(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child:Container(
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                color: HexColor('001B2E'),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Icon(Icons.arrow_back_ios),
+          ),
         ),
         backgroundColor: HexColor('1c2d38'),
       ),

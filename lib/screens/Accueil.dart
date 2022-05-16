@@ -35,10 +35,10 @@ class _Accueil extends State<Accueil> {
               margin: EdgeInsets.only(top: 25),
               child: TextField(
                 style: TextStyle(
-                  fontSize: 12.0,
-                  height: .002,
+                  fontSize: 16.0,
+                  height: .9,
+                  color: Colors.white
                 ),
-                obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.search,
@@ -49,7 +49,7 @@ class _Accueil extends State<Accueil> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
                   labelStyle: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
+                      color: Colors.white, fontWeight: FontWeight.w400),
                   labelText: 'Search doctor or medication',
                 ),
               ),
@@ -159,7 +159,7 @@ class _Accueil extends State<Accueil> {
               ),
             ),
             Container(
-              height: size.height * .332,
+              height: size.height * .32,
               width: size.width * .9,
               child: ListView.builder(
                 itemBuilder: (context, snapshot) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/MedicationScreen.dart';
 
 import '../screens/ScreenPrincipal.dart';
 
@@ -182,6 +183,13 @@ selectItem(BuildContext context, index) async {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ScreenPrincipal(),
+        ),
+      );
+      break;
+    case 3:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => MedicamentScreen(),
         ),
       );
       break;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/screens/Accueil.dart';
 
 import '../CONSTANTS/color.dart';
 
@@ -94,52 +95,60 @@ class _LoginScreen extends State<LoginScreen> {
                                   Container(
                                     child: TextField(
                                       style: TextStyle(
-                                        fontSize: 12.0,
-                                        height: .10,
+                                        fontSize: 16.0,
+                                        height: .9,
+                                        color: Colors.white
                                       ),
-                                      obscureText: true,
                                       decoration: InputDecoration(
-
-                                        suffixIcon: Icon(Icons.email,color: Colors.white,),
+                                        suffixIcon: Icon(
+                                          Icons.email,
+                                          color: Colors.white,
+                                        ),
                                         fillColor: Colors.white.withOpacity(.1),
                                         filled: true,
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10)
-                                        ),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         labelText: 'Email Address',
                                         labelStyle: TextStyle(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w400),
                                       ),
                                     ),
                                   ),
                                   Container(
                                     margin:
-                                    EdgeInsets.only(top: 30, bottom: 30),
+                                        EdgeInsets.only(top: 30, bottom: 30),
                                     child: TextField(
                                       style: TextStyle(
-                                        fontSize: 12.0,
-                                        height: .10,
-                                        color: Colors.white
-                                      ),
+                                          fontSize: 16.0,
+                                          height: .9,
+                                          color: Colors.white),
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                        suffixIcon: Icon(Icons.remove_red_eye,color: Colors.white,),
+                                        suffixIcon: Icon(
+                                          Icons.remove_red_eye,
+                                          color: Colors.white,
+                                        ),
                                         fillColor: Colors.white.withOpacity(.1),
                                         filled: true,
                                         border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(10)
-                                        ),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         labelStyle: TextStyle(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w400),
                                         labelText: 'Password',
                                       ),
                                     ),
                                   ),
                                   Container(
                                     child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Accueil())),
                                         child: Text(
                                           'Get Started',
                                           style: TextStyle(
@@ -149,22 +158,22 @@ class _LoginScreen extends State<LoginScreen> {
                                         ),
                                         style: ButtonStyle(
                                             minimumSize:
-                                            MaterialStateProperty.all(
-                                                Size(size.width * .8, 50)),
+                                                MaterialStateProperty.all(
+                                                    Size(size.width * .8, 50)),
                                             shadowColor: MaterialStateProperty
                                                 .all<Color>(HexColor('0061A4')),
                                             elevation:
-                                            MaterialStateProperty.all(30),
+                                                MaterialStateProperty.all(30),
                                             shape: MaterialStateProperty.all(
                                                 RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        10))))),
+                                                        BorderRadius.circular(
+                                                            10))))),
                                   ),
                                   Container(
                                       margin: EdgeInsets.only(top: 20),
                                       alignment:
-                                      AlignmentDirectional.centerStart,
+                                          AlignmentDirectional.centerStart,
                                       child: Text(
                                         'Forgot Password ?',
                                         style: TextStyle(
@@ -182,6 +191,7 @@ class _LoginScreen extends State<LoginScreen> {
           ],
         ),
       ),
-    );;
+    );
+    ;
   }
 }
