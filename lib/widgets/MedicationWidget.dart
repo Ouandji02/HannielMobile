@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MedicamentWidget extends StatelessWidget {
   const MedicamentWidget({Key? key}) : super(key: key);
@@ -33,12 +34,21 @@ class MedicamentWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("pharmacie Nectar",
+                Text("pharmacie de la menoua",
                     style: TextStyle(
                         fontSize: 10,
                         color: Colors.white.withOpacity(0.5),
                         fontWeight: FontWeight.w400)),
-                Icon(Icons.arrow_right, color: Colors.white)
+                InkWell(
+                  onTap: () => launchUrl(
+                      Uri.parse(
+                        "https://www.google.com/maps/dir/?api=1&origin=5.4544993,10.0750859&destination=5.4471192,10.0581761&travelmode=driving&dir_action=navigate",
+                      ),
+                      mode: LaunchMode.inAppWebView,
+                      webViewConfiguration:
+                          const WebViewConfiguration(enableJavaScript: true)),
+                  child: Icon(Icons.add_location, color: Colors.white),
+                ),
               ],
             ),
             SizedBox(
