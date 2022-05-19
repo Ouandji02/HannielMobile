@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/screens/Accueil.dart';
-import 'package:projet_flutter/screens/ScreenPrincipal.dart';
+import 'package:hexcolor/hexcolor.dart';
+
+import 'CONSTANTS/color.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -18,6 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ScreenPrincipal();
+    return Scaffold(
+      body: Center(
+        child: Text(
+          "mandela",
+          style: TextStyle(color: HexColor(COLOR_SUBTITLE_MESSAGE)),
+        ),
+      ),
+    );
   }
 }
