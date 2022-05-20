@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/screens/Home.dart';
+import 'package:projet_flutter/screens/Messaging.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Home();
+    return Messaging();
   }
 }
