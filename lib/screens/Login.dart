@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
+import 'package:projet_flutter/screens/Register.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class Login extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(
                     top: size.height * .08, right: 20, left: 20, bottom: 10),
-                child: Text('Create an account to get started',
+                child: Text('Login to your account to continue',
                     style: TextStyle(
                         color: HexColor(COLOR_TITLE),
                         fontSize: 25,
@@ -148,7 +149,8 @@ class Login extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Register())),
                         child: Text('Register now'),
                       ),
                     )

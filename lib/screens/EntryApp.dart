@@ -14,10 +14,15 @@ class EntryApp extends StatelessWidget {
       body: Container(
         height: size.height,
         width: size.width,
-        color: HexColor(COLOR_PRIMARY),
+        decoration:BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/accueil.png'),
+            fit: BoxFit.cover
+          )
+        ),
         child: Stack(
           children: [
-            Positioned(
+            /*Positioned(
               top: size.height * .35,
                 right: size.width * .35,
                 child: Row(
@@ -34,10 +39,10 @@ class EntryApp extends StatelessWidget {
                 Text('Med',style: TextStyle(color: Colors.white,fontSize: 30),),
                 Text('APP',style: TextStyle(color: Colors.white.withOpacity(.3),fontSize: 30))
               ],
-            )),
+            )),*/
             Positioned(
               bottom: size.height * .35,
-                right: size.width * .35,
+                right: size.width * .32,
                 child: Container(
                   width: size.width * .4,
                   child:const LinearProgressIndicator(
