@@ -34,7 +34,7 @@ class EntryApp extends StatelessWidget {
                         'MedApp',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 30,
+                            fontSize: size.height * .07,
                             fontWeight: FontWeight.bold),
                       )),
                   Positioned(
@@ -47,7 +47,7 @@ class EntryApp extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: size.width * .1),
+                              fontSize: size.width * .09),
                         ),
                       )),
                   Positioned(
