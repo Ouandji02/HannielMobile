@@ -3,24 +3,20 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/Login.dart';
 
-import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
-
 class EntryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('/home/thierry/Desktop/HannielMobile/assets/images/firstDoctor.jpg'),
+                  image: AssetImage('assets/images/firstDoctor.png'),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
-                      HexColor(COLOR_PRIMARY).withOpacity(.85), BlendMode.darken))),
+                      HexColor(COLOR_PRIMARY).withOpacity(.85),
+                      BlendMode.darken))),
           child: Container(
             height: size.height,
             width: size.width,
@@ -71,8 +67,10 @@ class EntryApp extends StatelessWidget {
                     child: Container(
                       child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Login()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Login()));
                           },
                           child: Text(
                             'Get Started',
@@ -82,7 +80,8 @@ class EntryApp extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(.9)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.white.withOpacity(.9)),
                               minimumSize: MaterialStateProperty.all(
                                   Size(size.width * .7, 50)),
                               shadowColor: MaterialStateProperty.all<Color>(
@@ -91,7 +90,7 @@ class EntryApp extends StatelessWidget {
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(10))))),
+                                          BorderRadius.circular(10))))),
                     ),
                   )
                 ],

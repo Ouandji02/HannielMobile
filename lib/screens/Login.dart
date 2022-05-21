@@ -25,8 +25,7 @@ class Login extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage(
-                                  '/home/thierry/Desktop/HannielMobile/assets/images/signImage.jpg'),
+                              image: AssetImage('assets/images/signImage.png'),
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   HexColor(COLOR_PRIMARY).withOpacity(.7),
