@@ -20,23 +20,32 @@ class Register extends StatelessWidget {
               Container(
                 height: size.height * .35,
                 width: size.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/image1.png'),
-                      fit: BoxFit.cover),
-                ),
                 child: Stack(
                   children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  '/home/thierry/Desktop/HannielMobile/assets/images/signImage.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  HexColor(COLOR_PRIMARY).withOpacity(.7),
+                                  BlendMode.darken))),
+
+                    ),
                     Positioned(
-                        top: 15,
-                        left: 5,
-                        child: IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                              size: 30,
-                            )))
+                        bottom: 30,
+                        child: Container(
+                          width: size.width,
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Welcome to MedAPP',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 35,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ))
                   ],
                 ),
               ),

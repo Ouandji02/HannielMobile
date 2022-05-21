@@ -20,15 +20,17 @@ class Login extends StatelessWidget {
               Container(
                 height: size.height * .35,
                 width: size.width,
-                color: HexColor(COLOR_PRIMARY),
                 child: Stack(
                   children: [
-                    Center(
-                      child: Icon(
-                        Icons.rocket_launch,
-                        size: size.height * .15,
-                        color: Colors.white,
-                      ),
+                    Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  '/home/thierry/Desktop/HannielMobile/assets/images/signImage.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  HexColor(COLOR_PRIMARY).withOpacity(.7),
+                                  BlendMode.darken))),
                     ),
                     Positioned(
                         bottom: 30,
@@ -149,8 +151,10 @@ class Login extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: TextButton(
-                        onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Register())),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Register())),
                         child: Text('Register now'),
                       ),
                     )
