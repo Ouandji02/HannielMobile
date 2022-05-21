@@ -25,7 +25,7 @@ class Register extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('/assets/images/signImage.png'),
+                              image: AssetImage('assets/images/signImage.png'),
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   HexColor(COLOR_PRIMARY).withOpacity(.7),
