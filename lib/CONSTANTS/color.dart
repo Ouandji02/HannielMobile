@@ -1,5 +1,5 @@
-const COLOR_PRIMARY = '4c5bfb';
-const COLOR_SECONDARY = '5873da';
+const COLOR_PRIMARY = '0c73c2';
+const COLOR_SECONDARY = '004891';
 const COLOR_TITLE = '273558';
 const COLOR_START = '273558';
 const COLOR_SUBTITLE = 'dedede';

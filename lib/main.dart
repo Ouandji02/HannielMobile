@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/EntryApp.dart';
-import 'package:projet_flutter/screens/Login.dart';
-import 'package:projet_flutter/screens/Register.dart';
 
 void main() {
   runApp(MaterialApp(
