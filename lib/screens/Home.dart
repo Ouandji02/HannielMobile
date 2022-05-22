@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
 
 import 'Notifications.dart';
 
@@ -51,45 +52,7 @@ class _Home extends State<Home> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        unselectedItemColor: HexColor(COLOR_UNSELECTED_ICON),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        unselectedIconTheme: IconThemeData(
-          color: HexColor(COLOR_UNSELECTED_ICON),
-        ),
-        selectedIconTheme: IconThemeData(
-          color: HexColor(COLOR_PRIMARY),
-          size: 30,
-        ),
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded,
-                  color: HexColor(COLOR_PRIMARY), size: 30),
-              label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded,
-                  color: HexColor(COLOR_PRIMARY), size: 30),
-              label: ""),
-          BottomNavigationBarItem(
-              tooltip: "voir docteurs",
-              icon: Icon(Icons.medical_services_rounded,
-                  color: HexColor(COLOR_PRIMARY), size: 30),
-              label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.message_rounded,
-                color: HexColor(COLOR_PRIMARY),
-                size: 30,
-              ),
-              label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.medication_rounded,
-                  color: HexColor(COLOR_PRIMARY), size: 30),
-              label: ""),
-        ],
-      ),
+      bottomNavigationBar: CustomBottomNavigation1(),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(color: Colors.white),
