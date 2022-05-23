@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/Messaging.dart';
 import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
 
 import 'Notifications.dart';
@@ -25,7 +26,10 @@ class _Home extends State<Home> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Messaging()));
+          },
           child: Icon(
             Icons.dehaze,
             color: HexColor(COLOR_PRIMARY),

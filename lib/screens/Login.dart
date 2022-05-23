@@ -5,6 +5,8 @@ import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
 import 'package:projet_flutter/screens/Register.dart';
 
+import 'Home.dart';
+
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -116,7 +118,10 @@ class Login extends StatelessWidget {
                       alignment: AlignmentDirectional.centerStart,
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          print('object');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
                         },
                         label: Text(
                           'Login',

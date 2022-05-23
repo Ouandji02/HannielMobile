@@ -94,16 +94,13 @@ class _Messaging extends State<Messaging> {
                                 AssetImage("assets/images/doctor.png"),
                           ),
                           title: Text(
-                            i % 2 == 0 ? "Larissa babes" : "Manick Bolando",
+                            i % 2 == 0 ? "Larissa Simo" : "Manick Bolando",
                             style: TextStyle(
                                 color: HexColor("27355a"),
                                 fontSize: screen.width / 22,
                                 fontWeight: FontWeight.w600),
                           ),
-                          subtitle: Text(
-                              i % 2 == 0
-                                  ? "Hey hey whats up b?"
-                                  : "You : Babes my chair",
+                          subtitle: Text(i % 2 == 0 ? "Hey hey" : "You : Hi Dr",
                               style: TextStyle(
                                   color: HexColor(
                                     COLOR_SUBTITLE_MESSAGE,
