@@ -56,7 +56,7 @@ class _Home extends State<Home> {
           )
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigation1(),
+      bottomNavigationBar: CustomBottomNavigation(context),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(color: Colors.white),
@@ -79,14 +79,13 @@ class _Home extends State<Home> {
                       Text(
                         "Bonjour Larissa,",
                         style: TextStyle(
-                            color: HexColor(COLOR_TITLE),
-                            fontSize: screen.width / 20),
+                            color: HexColor(COLOR_TITLE), fontSize: 15),
                       ),
                       Text(
                         "Comment tu vas aujourd'hui?",
                         style: TextStyle(
                             color: HexColor(COLOR_SUBTITLE_MESSAGE),
-                            fontSize: screen.width / 25),
+                            fontSize: 15),
                       )
                     ],
                   )
@@ -98,8 +97,8 @@ class _Home extends State<Home> {
               Text("Prochain rendez vous",
                   style: TextStyle(
                       color: HexColor(COLOR_TITLE),
-                      fontWeight: FontWeight.bold,
-                      fontSize: screen.width / 16)),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 22)),
               SizedBox(
                 height: 20,
               ),
@@ -123,15 +122,14 @@ class _Home extends State<Home> {
                                   "Demain",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 Text("20 Mai 2021, 10:00",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: screen.width / 30))
+                                        color: Colors.white, fontSize: 12))
                               ],
                             ),
                             CircleAvatar(
@@ -163,12 +161,11 @@ class _Home extends State<Home> {
                                   "Larissa babes",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 Text("Hopital district, dentiste",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: screen.width / 30))
+                                        color: Colors.white, fontSize: 12))
                               ],
                             )
                           ],
@@ -182,8 +179,8 @@ class _Home extends State<Home> {
               Text("Doctors",
                   style: TextStyle(
                       color: HexColor(COLOR_TITLE),
-                      fontWeight: FontWeight.bold,
-                      fontSize: screen.width / 16)),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 22)),
               SizedBox(
                 height: 20,
               ),
@@ -210,7 +207,7 @@ class _Home extends State<Home> {
                                   "Larissa Babes",
                                   style: TextStyle(
                                       color: HexColor(COLOR_TITLE),
-                                      fontSize: screen.width / 20),
+                                      fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -218,7 +215,8 @@ class _Home extends State<Home> {
                                 Text(
                                   "Hopital de District",
                                   style: TextStyle(
-                                      color: HexColor(COLOR_SUBTITLE_MESSAGE)),
+                                      color: HexColor(COLOR_SUBTITLE_MESSAGE),
+                                      fontSize: 13),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -226,7 +224,8 @@ class _Home extends State<Home> {
                                 Text(
                                   "Dentiste",
                                   style: TextStyle(
-                                      color: HexColor(COLOR_SUBTITLE_MESSAGE)),
+                                      color: HexColor(COLOR_SUBTITLE_MESSAGE),
+                                      fontSize: 13),
                                 ),
                               ],
                             ),

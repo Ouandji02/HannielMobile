@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
 
 import '../CONSTANTS/color.dart';
 import 'Notifications.dart';
@@ -50,6 +51,7 @@ class _Messaging extends State<Messaging> {
           )
         ],
       ),
+      bottomNavigationBar: CustomBottomNavigation(context),
       body: Container(
         height: screen.height,
         padding: EdgeInsets.only(top: 20),
@@ -97,15 +99,15 @@ class _Messaging extends State<Messaging> {
                             i % 2 == 0 ? "Larissa Simo" : "Manick Bolando",
                             style: TextStyle(
                                 color: HexColor("27355a"),
-                                fontSize: screen.width / 22,
-                                fontWeight: FontWeight.w600),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
                           ),
                           subtitle: Text(i % 2 == 0 ? "Hey hey" : "You : Hi Dr",
                               style: TextStyle(
                                   color: HexColor(
                                     COLOR_SUBTITLE_MESSAGE,
                                   ),
-                                  fontSize: screen.width / 25)),
+                                  fontSize: 15)),
                           trailing: Column(
                             children: [
                               Text(

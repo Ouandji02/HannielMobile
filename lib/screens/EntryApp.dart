@@ -39,10 +39,10 @@ class EntryApp extends StatelessWidget {
                       child: Container(
                         width: size.width * .8,
                         child: Text(
-                          'Sick is easy, but health is hard',
+                          'Sick is easy, \nbut health is hard',
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w300,
                               fontSize: size.width * .09),
                         ),
                       )),
