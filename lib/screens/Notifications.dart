@@ -29,7 +29,7 @@ class _Notifications extends State<Notifications> {
             child: Icon(
               Icons.arrow_back_rounded,
               color: HexColor(COLOR_PRIMARY),
-              size: screen.width / 12,
+              size: 30,
             ),
           ),
           centerTitle: true,
@@ -56,9 +56,8 @@ class _Notifications extends State<Notifications> {
                       i % 2 == 0
                           ? "Rendez vous proche"
                           : "Rendez-vous Confirmé",
-                      style: TextStyle(
-                          color: HexColor(COLOR_TITLE),
-                          fontSize: screen.width / 22),
+                      style:
+                          TextStyle(color: HexColor(COLOR_TITLE), fontSize: 15),
                     ),
                     subtitle: Text(
                         i % 2 == 0
@@ -68,7 +67,7 @@ class _Notifications extends State<Notifications> {
                             color: HexColor(
                               COLOR_TITLE,
                             ),
-                            fontSize: screen.width / 30)),
+                            fontSize: 12)),
                     trailing: Text(
                       "2h",
                       style: TextStyle(color: HexColor(COLOR_SUBTITLE)),

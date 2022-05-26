@@ -42,7 +42,7 @@ class Login extends StatelessWidget {
                             'Welcome to MedAPP',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: size.height * .045,
+                                fontSize: 25,
                                 fontWeight: FontWeight.w700),
                           ),
                         ))
@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                 child: Text('Login to your account to continue',
                     style: TextStyle(
                         color: HexColor(COLOR_TITLE),
-                        fontSize: size.height * .035,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600)),
               ),
               Container(
@@ -127,7 +127,7 @@ class Login extends StatelessWidget {
                           'Login',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                         style: ButtonStyle(
