@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/DetailDoctor.dart';
 import 'package:projet_flutter/screens/Messaging.dart';
 import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
+import 'package:projet_flutter/widgets/Drawer.dart';
 
 import 'Notifications.dart';
 
@@ -23,39 +25,37 @@ class _Home extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: TextButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Messaging()));
-          },
-          child: Icon(
-            Icons.dehaze,
-            color: HexColor(COLOR_PRIMARY),
-            size: screen.width / 12,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            "MediApp",
+            style: TextStyle(color: HexColor(COLOR_PRIMARY)),
           ),
-        ),
-        title: Text(
-          "MediApp",
-          style: TextStyle(color: HexColor(COLOR_PRIMARY)),
-        ),
-        centerTitle: true,
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Notifications()));
-            },
-            child: Icon(
-              Icons.notifications_none_outlined,
-              color: HexColor(COLOR_PRIMARY),
+          centerTitle: true,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Notifications()));
+              },
+              child: Icon(
+                Icons.notifications_none_outlined,
+                color: HexColor(COLOR_PRIMARY),
+              ),
+            )
+          ],
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Icons.reorder_outlined,
+                color: HexColor(COLOR_PRIMARY),
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
             ),
-          )
-        ],
-      ),
+          )),
+      drawer: DrawerLayout("user", context),
       bottomNavigationBar: CustomBottomNavigation1(),
       body: SingleChildScrollView(
         child: Container(
@@ -193,44 +193,52 @@ class _Home extends State<Home> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 100,
                     itemBuilder: (context, i) {
-                      return Card(
-                          elevation: 5,
-                          child: Container(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  foregroundImage:
-                                      AssetImage("assets/images/doctor.png"),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Larissa Babes",
-                                  style: TextStyle(
-                                      color: HexColor(COLOR_TITLE),
-                                      fontSize: screen.width / 20),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Hopital de District",
-                                  style: TextStyle(
-                                      color: HexColor(COLOR_SUBTITLE_MESSAGE)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Dentiste",
-                                  style: TextStyle(
-                                      color: HexColor(COLOR_SUBTITLE_MESSAGE)),
-                                ),
-                              ],
-                            ),
-                          ));
+                      return InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailDoctor())),
+                        child: Card(
+                            elevation: 5,
+                            child: Container(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    foregroundImage:
+                                        AssetImage("assets/images/doctor.png"),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Larissa Babes",
+                                    style: TextStyle(
+                                        color: HexColor(COLOR_TITLE),
+                                        fontSize: screen.width / 20),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Hopital de District",
+                                    style: TextStyle(
+                                        color:
+                                            HexColor(COLOR_SUBTITLE_MESSAGE)),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Dentiste",
+                                    style: TextStyle(
+                                        color:
+                                            HexColor(COLOR_SUBTITLE_MESSAGE)),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      );
                     },
                   ))
             ],
