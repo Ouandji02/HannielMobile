@@ -1,16 +1,98 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
 import 'package:projet_flutter/screens/Register.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Home.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
-
+class Login extends StatefulWidget {
   @override
+  _Login createState() {
+    // TODO: implement createState
+    return _Login();
+  }
+}
+
+class _Login extends State<Login> {
+  @override
+  bool _loading = false;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  signIn(String email, String password, BuildContext context) async {
+    Map body = {"email": email.trim(), "password": password};
+    var url1 = 'http://phrasebook.cameroonetranslate.com/api/login';
+    var response = await http.post(
+      Uri.parse(url1),
+      body: body,
+    );
+    if (response.statusCode == 201) {
+      var bodyResponse = json.decode(response.body).cast<String, dynamic>();
+      print(bodyResponse['error']);
+      if (bodyResponse['error'] == false) {
+        setState(() {
+          _loading = false;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString('user', response.body);
+        if (prefs.getString('user') != null) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        }
+        const snackbar = SnackBar(
+          content: Text(
+            'Connexion reussie',
+            style: TextStyle(color: Colors.white),
+          ),
+          duration: Duration(seconds: 5),
+          backgroundColor: Colors.greenAccent,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      } else {
+        setState(() {
+          _loading = false;
+        });
+        return Alert(
+                context: context,
+                type: AlertType.warning,
+                desc: "cet utilisateur n'existe pas")
+            .show();
+      }
+    } else {
+      setState(() {
+        _loading = false;
+      });
+      const snackbar = SnackBar(
+        content: Text(
+          "Une erreur inconnu s'est produite",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(seconds: 5),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    }
+  }
+
+  alertInfo() {
+    setState(() {
+      _loading = false;
+    });
+    Alert(
+            context: context,
+            type: AlertType.warning,
+            title: 'Information',
+            desc: "veuillez renseigner les champs")
+        .show();
+  }
+
   Widget build(BuildContext context) {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
@@ -76,6 +158,7 @@ class Login extends StatelessWidget {
                             ),
                           ),
                           TextField(
+                              controller: email,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                   hintText: 'thierry@gmail.com',
@@ -96,6 +179,7 @@ class Login extends StatelessWidget {
                             ),
                           ),
                           TextField(
+                              controller: password,
                               obscureText: true,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
@@ -116,20 +200,26 @@ class Login extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       alignment: AlignmentDirectional.centerStart,
-                      child: ElevatedButton.icon(
+                      child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Home()));
+                          setState(() {
+                            _loading = true;
+                          });
+                          email.text == '' || password.text == ''
+                              ? alertInfo()
+                              : signIn(email.text, password.text, context);
                         },
-                        label: Text(
-                          'Login',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        child: _loading
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 HexColor(COLOR_PRIMARY)),
@@ -138,11 +228,6 @@ class Login extends StatelessWidget {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5)))),
-                        icon: Icon(
-                          Icons.remove_red_eye_outlined,
-                          color: Colors.blueAccent,
-                          size: 0,
-                        ),
                       ),
                     ),
                     Container(
