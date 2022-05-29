@@ -36,8 +36,11 @@ class _Register extends State<Register> {
   bool _loading = false;
 
   //variable permettant de recuperer la date
-
   DateTime? datetime;
+
+  //visbiite password
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
 
   //Declaration des variables permettant d'afficher les erreurs
   String emailError = '';
@@ -46,12 +49,19 @@ class _Register extends State<Register> {
   String phoneError = '';
   String firstnameError = '';
   String lastnameError = "";
-  String genreError = "";
   String dateError = "";
 
 // methode de connexion
-  signUp(String email, String password, String confirm, String phone,
-      String name, BuildContext context) async {
+  signUp(
+      String email,
+      String password,
+      String confirm,
+      String firstname,
+      BuildContext context,
+      String lastname,
+      DateTime datetime,
+      String sexe,
+      String phone) async {
     if (password != confirm) {
       setState(() {
         _loading = false;
@@ -59,19 +69,30 @@ class _Register extends State<Register> {
       });
     } else {
       Map body = {
-        "name": name,
-        "tel": phone,
-        "email": email.trim(),
-        "password": password,
-        "confirm_password": confirm
+        'name': 'firstname',
+        'surname': 'lastname',
+        'date': '10-12-18',
+        'sexe': 'sexe',
+        'email': "",
+        'phone': '"699665914',
+        'password': '',
       };
-      var url1 = 'http://phrasebook.cameroonetranslate.com/api/register';
+      var url1 = "https://hanniel-api.herokuapp.com/hanniel/patient/signUp";
       var response = await http.post(
         Uri.parse(url1),
-        body: body,
+        body: {
+          'name': 'firstname',
+          'surname': 'lastname',
+          'date': '10-12-18',
+          'sexe': 'sexe',
+          'email': "",
+          'phone': '"699665914',
+          'password': '',
+        },
       );
-      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 201 || response.statusCode == 200) {
+        print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         var bodyResponse = json.decode(response.body).cast<String, dynamic>();
         print(bodyResponse['error']);
         if (bodyResponse['error'] == false) {
@@ -96,7 +117,6 @@ class _Register extends State<Register> {
           print(bodyResponse['messages']);
           var message = bodyResponse['message'];
           setState(() {
-            message['tel'] != null ? phoneError = message['tel'] : null;
             message['name'] != null ? firstnameError = message['name'] : null;
             message['email'] != null ? emailError = message['email'] : null;
             message['password'] != null
@@ -113,7 +133,7 @@ class _Register extends State<Register> {
         });
         final snackbar = SnackBar(
           content: const Text(
-            "Une erreur unknow s'est produite",
+            "Une erreur inconnu s'est produite",
             style: TextStyle(color: Colors.red),
           ),
           duration: const Duration(seconds: 5),
@@ -134,6 +154,9 @@ class _Register extends State<Register> {
       _phoneController.text == ''
           ? phoneError = 'veuillez remplir le champ'
           : '';
+      _phoneController.text == ''
+          ? phoneError = 'veuillez remplir le champ'
+          : '';
       _firstnameController.text == ''
           ? firstnameError = 'veuillez remplir le champ'
           : '';
@@ -143,9 +166,6 @@ class _Register extends State<Register> {
       _passwordController.text == ''
           ? passwordError = 'veuillez remplir le champ'
           : '';
-      _genreController.text == ""
-          ? genreError = "veuillez preciser votre sexe"
-          : "";
       _dateController.text == ""
           ? dateError = "Veuillez prciser votre annee de naissance"
           : "";
@@ -280,34 +300,31 @@ class _Register extends State<Register> {
                                   ),
                                 ),
                                 Container(
-                                    child: DropdownButton<String>(
-                                  value: dropdownValue,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style:
-                                      const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
+                                  child: DropdownButton<String>(
+                                    value: dropdownValue,
+                                    icon: const Icon(Icons.arrow_downward),
+                                    elevation: 16,
+                                    style: const TextStyle(
+                                        color: Colors.deepPurple),
+                                    underline: Container(
+                                      height: 2,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        dropdownValue = newValue!;
+                                      });
+                                    },
+                                    items: <String>['Male', 'Female']
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    isExpanded: true,
                                   ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownValue = newValue!;
-                                    });
-                                  },
-                                  items: <String>['Male', 'Female']
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  isExpanded: true,
-                                )),
-                                Text(
-                                  genreError,
-                                  style: TextStyle(color: Colors.red),
                                 )
                               ],
                             ),
@@ -346,11 +363,38 @@ class _Register extends State<Register> {
                                 Container(
                                   alignment: AlignmentDirectional.centerStart,
                                   child: Text(
+                                    'number',
+                                    style: STYLE_INPUT,
+                                  ),
+                                ),
+                                TextField(
+                                  controller: _phoneController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                      hintText: '699665914',
+                                      hintStyle: STYLE_INPUT),
+                                ),
+                                Text(
+                                  phoneError,
+                                  style: TextStyle(color: Colors.red),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
                                     'Date de naissance',
                                     style: STYLE_INPUT,
                                   ),
                                 ),
                                 TextField(
+                                  keyboardType: TextInputType.datetime,
                                   onTap: () async {
                                     DateTime? newDate = await showDatePicker(
                                         context: context,
@@ -363,7 +407,6 @@ class _Register extends State<Register> {
                                         datetime = newDate;
                                       });
                                   },
-                                  keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                       hintText:
                                           "${datetime?.day}--${datetime?.month}--${datetime?.year}",
@@ -390,10 +433,18 @@ class _Register extends State<Register> {
                                 ),
                                 TextField(
                                   controller: _passwordController,
-                                  obscureText: true,
+                                  obscureText: obscurePassword,
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: InputDecoration(
-                                      suffixIcon: Icon(Icons.remove_red_eye),
+                                      suffixIcon: IconButton(
+                                          onPressed: () => setState(() {
+                                                obscurePassword =
+                                                    !obscurePassword;
+                                              }),
+                                          icon: obscurePassword
+                                              ? Icon(
+                                                  Icons.visibility_off_rounded)
+                                              : Icon(Icons.remove_red_eye)),
                                       hintText: '********',
                                       hintStyle: STYLE_INPUT),
                                 ),
@@ -418,10 +469,18 @@ class _Register extends State<Register> {
                                 ),
                                 TextField(
                                   controller: _passwordConfirmController,
-                                  obscureText: true,
+                                  obscureText: obscureConfirmPassword,
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: InputDecoration(
-                                      suffixIcon: Icon(Icons.remove_red_eye),
+                                      suffixIcon: IconButton(
+                                          onPressed: () => setState(() {
+                                                obscureConfirmPassword =
+                                                    !obscureConfirmPassword;
+                                              }),
+                                          icon: obscureConfirmPassword
+                                              ? Icon(
+                                                  Icons.visibility_off_rounded)
+                                              : Icon(Icons.remove_red_eye)),
                                       hintText: '********',
                                       hintStyle: STYLE_INPUT),
                                 ),
@@ -435,17 +494,48 @@ class _Register extends State<Register> {
                           Container(
                             margin: EdgeInsets.only(top: 20),
                             alignment: AlignmentDirectional.centerStart,
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                print('object');
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  _loading = true;
+                                  confirmPasswordError = "";
+                                  phoneError = "";
+                                  firstnameError = "";
+                                  lastnameError = "";
+                                  firstnameError = "";
+                                  passwordError = "";
+                                  emailError = "";
+                                });
+                                _emailController.text == '' ||
+                                        _passwordController.text == '' ||
+                                        _lastnameController == '' ||
+                                        _firstnameController == '' ||
+                                        _phoneController == '' ||
+                                        datetime == null ||
+                                        _passwordConfirmController == ''
+                                    ? alertInfo()
+                                    : signUp(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                        _passwordConfirmController.text,
+                                        _firstnameController.text,
+                                        context,
+                                        _lastnameController.text,
+                                        datetime!,
+                                        dropdownValue,
+                                        _phoneController.text);
+                                // ignore: unnecessary_const
                               },
-                              label: Text(
-                                'Register',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              child: _loading
+                                  ? CircularProgressIndicator(
+                                      color: Colors.white)
+                                  : Text(
+                                      'Register',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       HexColor(COLOR_PRIMARY)),
@@ -455,11 +545,6 @@ class _Register extends State<Register> {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(5)))),
-                              icon: Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: Colors.blueAccent,
-                                size: 0,
-                              ),
                             ),
                           ),
                           Container(

@@ -24,15 +24,17 @@ class _Login extends State<Login> {
   bool _loading = false;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool obscurePassword = true;
 
   signIn(String email, String password, BuildContext context) async {
-    Map body = {"email": email.trim(), "password": password};
-    var url1 = 'http://phrasebook.cameroonetranslate.com/api/login';
+    Map body = {"email": email, "password": password};
+    var url1 = 'https://hanniel-api.herokuapp.com/hanniel/patient/signIn';
+    print(body);
     var response = await http.post(
       Uri.parse(url1),
-      body: body,
+      body:{"email": email, "password": password},
     );
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       var bodyResponse = json.decode(response.body).cast<String, dynamic>();
       print(bodyResponse['error']);
       if (bodyResponse['error'] == false) {
@@ -183,7 +185,13 @@ class _Login extends State<Login> {
                               obscureText: true,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.remove_red_eye),
+                                  suffixIcon: IconButton(
+                                      onPressed: () => setState(() {
+                                            obscurePassword = !obscurePassword;
+                                          }),
+                                      icon: obscurePassword
+                                          ? Icon(Icons.visibility_off_rounded)
+                                          : Icon(Icons.remove_red_eye)),
                                   hintText: '********',
                                   hintStyle: STYLE_INPUT))
                         ],
