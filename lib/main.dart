@@ -4,6 +4,7 @@ import 'package:projet_flutter/screens/EntryApp.dart';
 import 'package:projet_flutter/screens/Home.dart';
 import 'package:projet_flutter/screens/ListDoctors.dart';
 import 'package:projet_flutter/screens/Medication.dart';
+import 'package:projet_flutter/screens/PatientDetails.dart';
 import 'package:projet_flutter/screens/PrescriptionDetail.dart';
 
 void main() {
@@ -21,6 +22,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PrescriptionDetail();
+    return PatientDetails();
   }
 }
