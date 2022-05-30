@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -27,47 +28,65 @@ class _Login extends State<Login> {
   bool obscurePassword = true;
 
   signIn(String email, String password, BuildContext context) async {
-    Map body = {"email": email, "password": password};
-    var url1 = 'https://hanniel-api.herokuapp.com/hanniel/patient/signIn';
-    print(body);
-    var response = await http.post(
-      Uri.parse(url1),
-      body:{"email": email, "password": password},
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      var bodyResponse = json.decode(response.body).cast<String, dynamic>();
-      print(bodyResponse['error']);
-      if (bodyResponse['error'] == false) {
-        setState(() {
-          _loading = false;
-        });
-        SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      var response = await http.post(
+        Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signIn"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body:
+            jsonEncode(<String, String>{"email": email, "password": password}),
+      );
+      print(response.body + "         " + response.statusCode.toString());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var bodyResponse = json.decode(response.body).cast<String, dynamic>();
+        print("ddddddddddddddddddddddddddddddddddddddd" +
+            bodyResponse['message']);
+        if (bodyResponse["message"]["id"] != null) {
+          setState(() {
+            _loading = false;
+          });
+          SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        prefs.setString('user', response.body);
-        if (prefs.getString('user') != null) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Home()));
+          prefs.setString('user', bodyResponse["message"]);
+          if (prefs.getString('user') != null) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          }
+          const snackbar = SnackBar(
+            content: Text(
+              'Connexion reussie',
+              style: TextStyle(color: Colors.white),
+            ),
+            duration: Duration(seconds: 5),
+            backgroundColor: Colors.greenAccent,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        } else {
+          setState(() {
+            _loading = false;
+          });
+          return Alert(
+                  context: context,
+                  type: AlertType.warning,
+                  desc: "cet utilisateur n'existe pas")
+              .show();
         }
-        const snackbar = SnackBar(
-          content: Text(
-            'Connexion reussie',
-            style: TextStyle(color: Colors.white),
-          ),
-          duration: Duration(seconds: 5),
-          backgroundColor: Colors.greenAccent,
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackbar);
       } else {
         setState(() {
           _loading = false;
         });
-        return Alert(
-                context: context,
-                type: AlertType.warning,
-                desc: "cet utilisateur n'existe pas")
-            .show();
+        const snackbar = SnackBar(
+          content: Text(
+            "Une erreur inconnu s'est produite",
+            style: TextStyle(color: Colors.white),
+          ),
+          duration: Duration(seconds: 5),
+          backgroundColor: Colors.red,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
       }
-    } else {
+    } catch (e) {
       setState(() {
         _loading = false;
       });
@@ -182,7 +201,7 @@ class _Login extends State<Login> {
                           ),
                           TextField(
                               controller: password,
-                              obscureText: true,
+                              obscureText: obscurePassword,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                   suffixIcon: IconButton(

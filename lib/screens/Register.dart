@@ -59,7 +59,7 @@ class _Register extends State<Register> {
       String firstname,
       BuildContext context,
       String lastname,
-      DateTime datetime,
+      String datetime,
       String sexe,
       String phone) async {
     if (password != confirm) {
@@ -69,33 +69,36 @@ class _Register extends State<Register> {
       });
     } else {
       Map body = {
-        'name': 'firstname',
-        'surname': 'lastname',
-        'date': '10-12-18',
-        'sexe': 'sexe',
-        'email': "",
-        'phone': '"699665914',
-        'password': '',
+        'name': firstname,
+        'surname': lastname,
+        'date': datetime,
+        'sexe': sexe,
+        'email': email.trim(),
+        'phone': phone,
+        'password': password,
       };
       var url1 = "https://hanniel-api.herokuapp.com/hanniel/patient/signUp";
       var response = await http.post(
-        Uri.parse(url1),
-        body: {
-          'name': 'firstname',
-          'surname': 'lastname',
-          'date': '10-12-18',
-          'sexe': 'sexe',
-          'email': "",
-          'phone': '"699665914',
-          'password': '',
+        Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signUp"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      );
+        body: jsonEncode(<String, String>{
+          'name': firstname,
+          'surname': lastname,
+          'date': datetime,
+          'sexe': sexe,
+          'email': email.trim(),
+          'phone': phone,
+          'password': password,
+        }),
+      );;
       print(response.body);
       if (response.statusCode == 201 || response.statusCode == 200) {
         print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         var bodyResponse = json.decode(response.body).cast<String, dynamic>();
-        print(bodyResponse['error']);
-        if (bodyResponse['error'] == false) {
+        print(bodyResponse["message"]);
+        if (bodyResponse["message"] == "Patient créé avec succès") {
           setState(() {
             _loading = false;
           });
@@ -521,7 +524,7 @@ class _Register extends State<Register> {
                                         _firstnameController.text,
                                         context,
                                         _lastnameController.text,
-                                        datetime!,
+                                        datetime.toString(),
                                         dropdownValue,
                                         _phoneController.text);
                                 // ignore: unnecessary_const
