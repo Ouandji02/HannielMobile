@@ -48,7 +48,7 @@ class _Login extends State<Login> {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        prefs.setString('user', bodyResponse["message"]);
+        prefs.setString('user', response.body);
         if (prefs.getString('user') != null) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Home()));
