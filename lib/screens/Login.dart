@@ -28,65 +28,51 @@ class _Login extends State<Login> {
   bool obscurePassword = true;
 
   signIn(String email, String password, BuildContext context) async {
-    try {
-      var response = await http.post(
-        Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signIn"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body:
-            jsonEncode(<String, String>{"email": email, "password": password}),
-      );
-      print(response.body + "         " + response.statusCode.toString());
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        var bodyResponse = json.decode(response.body).cast<String, dynamic>();
-        print("ddddddddddddddddddddddddddddddddddddddd" +
-            bodyResponse['message']);
-        if (bodyResponse["message"]["id"] != null) {
-          setState(() {
-            _loading = false;
-          });
-          SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map body = {"email": email, "password": password};
+    var url1 = 'https://hanniel-api.herokuapp.com/hanniel/patient/signIn';
+    print(body);
+    var response = await http.post(
+      Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signIn"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{"email": email, "password": password}),
+    );
+    ;
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      var bodyResponse = json.decode(response.body).cast<String, dynamic>();
+      print(bodyResponse['error']);
+      if (bodyResponse['message']['id'] != null) {
+        setState(() {
+          _loading = false;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
 
-          prefs.setString('user', bodyResponse["message"]);
-          if (prefs.getString('user') != null) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home()));
-          }
-          const snackbar = SnackBar(
-            content: Text(
-              'Connexion reussie',
-              style: TextStyle(color: Colors.white),
-            ),
-            duration: Duration(seconds: 5),
-            backgroundColor: Colors.greenAccent,
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackbar);
-        } else {
-          setState(() {
-            _loading = false;
-          });
-          return Alert(
-                  context: context,
-                  type: AlertType.warning,
-                  desc: "cet utilisateur n'existe pas")
-              .show();
+        prefs.setString('user', response.body);
+        if (prefs.getString('user') != null) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
+        const snackbar = SnackBar(
+          content: Text(
+            'Connexion reussie',
+            style: TextStyle(color: Colors.white),
+          ),
+          duration: Duration(seconds: 5),
+          backgroundColor: Colors.greenAccent,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
       } else {
         setState(() {
           _loading = false;
         });
-        const snackbar = SnackBar(
-          content: Text(
-            "Une erreur inconnu s'est produite",
-            style: TextStyle(color: Colors.white),
-          ),
-          duration: Duration(seconds: 5),
-          backgroundColor: Colors.red,
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        return Alert(
+                context: context,
+                type: AlertType.warning,
+                desc: "cet utilisateur n'existe pas")
+            .show();
       }
-    } catch (e) {
+    } else {
       setState(() {
         _loading = false;
       });

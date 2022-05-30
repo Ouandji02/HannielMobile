@@ -138,7 +138,7 @@ class ListDoctors extends StatelessWidget {
                 )),
             Container(
               margin: EdgeInsets.only(top: heigth * .03),
-              height: heigth * .75,
+              height: heigth * .60,
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Column(
