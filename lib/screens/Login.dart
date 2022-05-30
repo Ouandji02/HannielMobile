@@ -187,7 +187,7 @@ class _Login extends State<Login> {
                           ),
                           TextField(
                               controller: password,
-                              obscureText: true,
+                              obscureText: obscurePassword,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                   suffixIcon: IconButton(
