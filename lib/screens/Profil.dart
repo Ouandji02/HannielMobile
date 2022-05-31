@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/screens/UpdateProfil.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 
 class Profil extends StatelessWidget {
@@ -8,13 +9,15 @@ class Profil extends StatelessWidget {
     return Scaffold(
       appBar: AppBarItem("profil"),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => UpdateProfil())),
         child: Icon(Icons.edit),
       ),
       body: SingleChildScrollView(
         child: Container(
             color: Colors.white,
-            height: MediaQuery.of(context).size.height,
+            constraints:
+                BoxConstraints(minHeight: MediaQuery.of(context).size.height),
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10),
             child: Column(

@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
 import 'package:projet_flutter/screens/DetailDoctor.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:projet_flutter/widgets/Drawer.dart';
 
 import '../CONSTANTS/color.dart';
 import '../classes/DoctorClass.dart';
@@ -105,9 +106,8 @@ class ListDoctors extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
             ),
             Container(
-                margin: EdgeInsets.only(top: heigth * .04),
-                alignment: AlignmentDirectional.centerStart,
-                height: heigth * .05,
+              height: heigth * .2,
+                margin: EdgeInsets.only(bottom: 10),
                 child: ListView.builder(
                   itemBuilder: (context, snapshot) {
                     return Container(
@@ -136,9 +136,7 @@ class ListDoctors extends StatelessWidget {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                 )),
-            Container(
-              margin: EdgeInsets.only(top: heigth * .03),
-              height: heigth * .60,
+            Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Column(
@@ -157,13 +155,6 @@ class ListDoctors extends StatelessWidget {
                               children: [
                                 Text('docteur familiale' +
                                     doctors[index].specialite),
-                                Text(
-                                  'Commence a partir 5000frs',
-                                  style: TextStyle(
-                                    color: HexColor(COLOR_TITLE),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
                               ],
                             ),
                           ),
@@ -198,9 +189,6 @@ class ListDoctors extends StatelessWidget {
                                       ))),
                         ),
                       ),
-                      Divider(
-                        color: HexColor(COLOR_SUBTITLE),
-                      )
                     ],
                   );
                 },
