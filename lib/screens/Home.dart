@@ -6,6 +6,7 @@ import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/DetailDoctor.dart';
 import 'package:projet_flutter/screens/Messaging.dart';
 import 'package:projet_flutter/screens/pages/Dashboard.dart';
+import 'package:projet_flutter/screens/pages/ListVisit.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
 import 'package:projet_flutter/widgets/Drawer.dart';
@@ -23,19 +24,11 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   @override
+  int index = 0;
+
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    int index = 0;
-    change(int a){
-      setState(() {
-        index = a;
-      });
-    }
-    print(index);
-    final pages = [
-      Dashboard(screen),
-      Medication1(screen)
-    ];
+    final pages = [Dashboard(screen), ListVisit(), Medication1(screen)];
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.white,
@@ -69,38 +62,44 @@ class _Home extends State<Home> {
             ),
           )),
       drawer: DrawerLayout("user", context),
-      bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: HexColor(COLOR_PRIMARY),
-          index: index,
-          items: [
-            TextButton(
-                onPressed: ()=>setState(() {
-                  index = 0;
-                }),
-                child: Icon(
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          indicatorColor: HexColor(COLOR_PRIMARY).withOpacity(.8),
+          labelTextStyle: MaterialStateProperty.all(
+            TextStyle(fontSize: 14),
+          ),
+        ),
+        child: NavigationBar(
+          backgroundColor: Colors.white,
+          elevation: 1,
+          selectedIndex: index,
+          onDestinationSelected: (index) {
+            setState(() {
+              this.index = index;
+            });
+          },
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          destinations: [
+            NavigationDestination(
+                icon: Icon(
                   Icons.home,
-                  color: HexColor(COLOR_PRIMARY),
-                  size: 20,
-                )),
-            TextButton(
-                onPressed: ()=>setState(() {
-                  index = 1;
-                }),
-                child: Icon(Icons.person_rounded,
-                    color: HexColor(COLOR_PRIMARY), size: 20)),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Messaging()));
-                },
-                child: Icon(Icons.message_rounded,
-                    color: HexColor(COLOR_PRIMARY), size: 20)),
-            TextButton(
-                onPressed: ()=>change(2),
-                child: Icon(Icons.medication_rounded,
-                    color: HexColor(COLOR_PRIMARY), size: 20))
-          ]),
-      body: pages[index]
+                  color: index == 0 ? Colors.white : Colors.black,
+                ),
+                label: 'home'),
+            NavigationDestination(
+                icon: Icon(Icons.person,
+                    color: index == 1 ? Colors.white : Colors.black),
+                label: 'profil'),
+            NavigationDestination(
+                icon: Icon(Icons.message_rounded,
+                    color: index == 2 ? Colors.white : Colors.black),
+                label: 'message'),
+            NavigationDestination(
+                icon: Icon(Icons.medication_outlined), label: 'medicament'),
+          ],
+        ),
+      ),
+      body: pages[index],
     );
   }
 }
