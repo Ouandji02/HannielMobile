@@ -34,10 +34,7 @@ Widget Medication1(screen){
         SizedBox(
           height: 20,
         ),
-        Container(
-          decoration: BoxDecoration(color: Colors.white),
-          height: screen.height - 170,
-          padding: EdgeInsets.only(top: 20),
+        Expanded(
           child: ListView.builder(
               itemCount: 16,
               itemBuilder: (context, i) {

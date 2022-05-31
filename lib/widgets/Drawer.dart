@@ -6,6 +6,7 @@ import 'package:projet_flutter/screens/Medication.dart';
 import 'package:projet_flutter/screens/Settings.dart';
 
 import '../screens/Home.dart';
+import '../screens/Profil.dart';
 
 Widget DrawerLayout(user, context) {
   return Drawer(
@@ -154,14 +155,14 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-      /*case 1:
+      case 1:
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => Profil(),
         ),
       );
       break;
-    case 2:
+    /*case 2:
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => Pharmacy(),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -24,18 +25,24 @@ class _Login extends State<Login> {
   bool _loading = false;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool obscurePassword = true;
 
   signIn(String email, String password, BuildContext context) async {
-    Map body = {"email": email.trim(), "password": password};
-    var url1 = 'http://phrasebook.cameroonetranslate.com/api/login';
+    Map body = {"email": email, "password": password};
+    var url1 = 'https://hanniel-api.herokuapp.com/hanniel/patient/signIn';
+    print(body);
     var response = await http.post(
-      Uri.parse(url1),
-      body: body,
+      Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signIn"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{"email": email, "password": password}),
     );
-    if (response.statusCode == 201) {
+    ;
+    if (response.statusCode == 200 || response.statusCode == 201) {
       var bodyResponse = json.decode(response.body).cast<String, dynamic>();
       print(bodyResponse['error']);
-      if (bodyResponse['error'] == false) {
+      if (bodyResponse['message']['id'] != null) {
         setState(() {
           _loading = false;
         });
@@ -180,10 +187,16 @@ class _Login extends State<Login> {
                           ),
                           TextField(
                               controller: password,
-                              obscureText: true,
+                              obscureText: obscurePassword,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.remove_red_eye),
+                                  suffixIcon: IconButton(
+                                      onPressed: () => setState(() {
+                                            obscurePassword = !obscurePassword;
+                                          }),
+                                      icon: obscurePassword
+                                          ? Icon(Icons.visibility_off_rounded)
+                                          : Icon(Icons.remove_red_eye)),
                                   hintText: '********',
                                   hintStyle: STYLE_INPUT))
                         ],
