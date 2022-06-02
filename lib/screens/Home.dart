@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/DetailDoctor.dart';
-import 'package:projet_flutter/screens/Messaging.dart';
 import 'package:projet_flutter/screens/pages/Dashboard.dart';
 import 'package:projet_flutter/screens/pages/ListVisit.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
-import 'package:projet_flutter/widgets/CustomBottomNavigation.dart';
+import 'package:projet_flutter/screens/pages/Messages.dart';
+import 'package:projet_flutter/screens/pages/ProfilAndList.dart';
 import 'package:projet_flutter/widgets/Drawer.dart';
 
 import 'Notifications.dart';
@@ -28,7 +28,7 @@ class _Home extends State<Home> {
 
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    final pages = [Dashboard(screen), ListVisit(), Medication1(screen)];
+    final pages = [Dashboard(screen), ProfilAndList(), Message(screen),Medication()];
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.white,

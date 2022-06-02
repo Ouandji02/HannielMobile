@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/ListDoctors.dart';
-import 'package:projet_flutter/screens/Medication.dart';
+import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/Settings.dart';
 
 import '../screens/Home.dart';

@@ -27,6 +27,7 @@ dependencies:
   http: ^0.13.4
   dio: ^4.0.6
   file_picker: ^3.0.4
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

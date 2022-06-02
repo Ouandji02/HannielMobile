@@ -137,7 +137,7 @@ class DetailDoctor extends StatelessWidget {
                               progressColor: HexColor(COLOR_PRIMARY),
                               footer: Text("Good Reviews",
                                   style: TextStyle(
-                                    fontSize: size.width * .048,
+                                    fontSize: 16,
                                     color: Colors.black26,
                                   )),
                             ),
@@ -155,7 +155,7 @@ class DetailDoctor extends StatelessWidget {
                               progressColor: HexColor(COLOR_PRIMARY),
                               footer: Text("Total Score",
                                   style: TextStyle(
-                                    fontSize: size.width * .048,
+                                    fontSize: 16,
                                     color: Colors.black26,
                                   )),
                             ),
@@ -173,7 +173,7 @@ class DetailDoctor extends StatelessWidget {
                               footer: Text(
                                 "Satisfaction",
                                 style: TextStyle(
-                                  fontSize: size.width * .048,
+                                  fontSize: 16,
                                   color: Colors.black26,
                                 ),
                               ),

@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/screens/Profil.dart';
 import 'package:http/http.dart' as http;
 import 'package:projet_flutter/widgets/AppBar.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import '../CONSTANTS/color.dart';
 import '../CONSTANTS/style.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UpdateProfil extends StatefulWidget {
   @override
@@ -22,8 +21,8 @@ class _UpdateProfil extends State<UpdateProfil> {
   @override
   String dropdownValue = "Male";
   String sanguin = "O+";
-  File? file;
-  String image='';
+  XFile? _image;
+  String image = '';
 
   // Controller pour les differents champs
   final TextEditingController _emailController = TextEditingController();
@@ -54,6 +53,17 @@ class _UpdateProfil extends State<UpdateProfil> {
   String firstnameError = '';
   String lastnameError = "";
   String dateError = "";
+  String poidsError = "";
+  String tailleError = "";
+
+  Future getImage() async {
+    XFile? image = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
+    print(_image?.path);
+    print(_image?.name);
+  }
 
 // methode de connexion
   signUp(
@@ -66,29 +76,33 @@ class _UpdateProfil extends State<UpdateProfil> {
       String datetime,
       String sexe,
       String phone,
-      String sanguin) async {
-    var response = await http.post(
-      Uri.parse("https://hanniel-api.herokuapp.com/hanniel/patient/signUp"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'name': firstname,
-        'surname': lastname,
-        'date': datetime,
-        'sexe': sexe,
-        'email': email.trim(),
-        'phone': phone,
-        'poids': poids,
-        'taille': taille,
-        'sanguin': sanguin
-      }),
-    );
-    ;
-    print(response.body);
-    if (response.statusCode == 201 || response.statusCode == 200) {
+      String sanguin,
+      XFile _image) async {
+    print(
+        "jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    var formData = FormData.fromMap({
+      'name': firstname,
+      'surname': lastname,
+      'date': datetime,
+      'sexe': sexe,
+      'email': email.trim(),
+      'phone': phone,
+      'poids': poids,
+      'taille': taille,
+      'sanguin': sanguin,
+      'image': await MultipartFile.fromFile(_image.path, filename: _image.name)
+    });
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
+    Dio dio = new Dio();
+    dio.options.headers["authorization"] = "Bearer " + token;
+    var responseDio = await dio.post(
+        "https://hanniel-api.herokuapp.com/hanniel/patient/post",
+        data: formData);
+    print(responseDio.data);
+    if (responseDio.statusCode == 201 || responseDio.statusCode == 200) {
       print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-      var bodyResponse = json.decode(response.body).cast<String, dynamic>();
+      var bodyResponse = json.decode(responseDio.data).cast<String, dynamic>();
       print(bodyResponse["message"]);
       if (bodyResponse["message"] == "Patient créé avec succès") {
         setState(() {
@@ -98,7 +112,7 @@ class _UpdateProfil extends State<UpdateProfil> {
             context, MaterialPageRoute(builder: (context) => Profil()));
         const snackbar = SnackBar(
           content: Text(
-            'votre compte a ete cree avec succes',
+            'Mis a jour reussie',
             style: TextStyle(color: Colors.white),
           ),
           duration: Duration(seconds: 5),
@@ -108,12 +122,6 @@ class _UpdateProfil extends State<UpdateProfil> {
       } else {
         setState(() {
           _loading = false;
-        });
-        print(bodyResponse['messages']);
-        var message = bodyResponse['message'];
-        setState(() {
-          message['name'] != null ? firstnameError = message['name'] : null;
-          message['email'] != null ? emailError = message['email'] : null;
         });
       }
     } else {
@@ -154,6 +162,8 @@ class _UpdateProfil extends State<UpdateProfil> {
       _dateController.text == ""
           ? dateError = "Veuillez prciser votre annee de naissance"
           : "";
+      _poids.text == "" ? poidsError = "Veuillez precisez votre poids" : "";
+      _taille.text == "" ? tailleError = "veuillez preciser votre taille" : "";
     });
   }
 
@@ -181,48 +191,29 @@ class _UpdateProfil extends State<UpdateProfil> {
                           children: [
                             InkWell(
                                 child: CircleAvatar(
-                                  backgroundImage: AssetImage(file!=null ? image: "assets/images/firstDoctor.png"),
+                                  backgroundImage: AssetImage("assets/images/firstDoctor.png"),
                                   radius: 60,
                                 ),
                                 onTap: () => showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
                                       return Dialog(
-
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage("assets/images/firstDoctor.png")
-                                            )
-                                          ),
-                                          height: MediaQuery.of(context).size.height * .6,
-                                        ) ,
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      "assets/images/firstDoctor.png"))),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .6,
+                                        ),
                                       );
                                     })),
                             Container(
                               margin: EdgeInsets.only(top: 10),
                               child: TextButton(
-                                onPressed: () async {
-                                  final result = await FilePicker.platform
-                                      .pickFiles(
-                                          allowedExtensions: [
-                                        'jpg',
-                                        'png',
-                                        'jpeg'
-                                      ],
-                                          type: FileType.custom,
-                                          allowMultiple: false);
-
-                                  // if no file is picked
-                                  if (result == null) return;
-
-                                  // we will log the name, size and path of the
-                                  // first picked file (if multiple are selected)
-                                  setState(() {
-                                    image = result.files.single.path!;
-                                    file = File(result.files.single.path!);
-                                  });
-                                },
+                                onPressed: getImage,
                                 child: Text(
                                   'Change avatar',
                                   style:
@@ -436,12 +427,12 @@ class _UpdateProfil extends State<UpdateProfil> {
                                 ),
                                 TextField(
                                   controller: _taille,
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       hintText: '1.60', hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
-                                  firstnameError,
+                                  tailleError,
                                   style: TextStyle(color: Colors.red),
                                 )
                               ],
@@ -460,12 +451,12 @@ class _UpdateProfil extends State<UpdateProfil> {
                                 ),
                                 TextField(
                                   controller: _poids,
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       hintText: '45Kg', hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
-                                  firstnameError,
+                                  poidsError,
                                   style: TextStyle(color: Colors.red),
                                 )
                               ],
@@ -533,14 +524,17 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   lastnameError = "";
                                   firstnameError = "";
                                   emailError = "";
+                                  dateError = "";
+                                  tailleError = "";
                                 });
                                 _emailController.text == '' ||
-                                        _passwordController.text == '' ||
                                         _lastnameController == '' ||
                                         _firstnameController == '' ||
                                         _phoneController == '' ||
                                         datetime == null ||
-                                        _passwordConfirmController == ''
+                                        _poids.text == "" ||
+                                        _taille.text == "" ||
+                                        _image == null
                                     ? alertInfo()
                                     : signUp(
                                         _emailController.text,
@@ -552,7 +546,8 @@ class _UpdateProfil extends State<UpdateProfil> {
                                         datetime.toString(),
                                         dropdownValue,
                                         _phoneController.text,
-                                        sanguin);
+                                        sanguin,
+                                        _image!);
                                 // ignore: unnecessary_const
                               },
                               child: _loading

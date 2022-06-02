@@ -106,7 +106,7 @@ class ListDoctors extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
             ),
             Container(
-              height: heigth * .2,
+              height: heigth * .1,
                 margin: EdgeInsets.only(bottom: 10),
                 child: ListView.builder(
                   itemBuilder: (context, snapshot) {
@@ -122,13 +122,12 @@ class ListDoctors extends StatelessWidget {
                         label: Text(
                           "FEMALE",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.blueAccent,
                               fontWeight: FontWeight.bold,
                               fontSize: heigth * .02),
                         ),
-                        backgroundColor: Colors.blue,
-                        elevation: 1.0,
-                        shadowColor: Colors.grey[60],
+                        backgroundColor: Colors.white,
+                        elevation: 7.0,
                         padding: EdgeInsets.all(8.0),
                       ),
                     );
