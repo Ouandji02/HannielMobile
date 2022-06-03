@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -80,36 +81,46 @@ class _UpdateProfil extends State<UpdateProfil> {
       XFile _image) async {
     print(
         "jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-    var formData = FormData.fromMap({
-      'name': firstname,
-      'surname': lastname,
-      'date': datetime,
-      'sexe': sexe,
-      'email': email.trim(),
-      'phone': phone,
-      'poids': poids,
-      'taille': taille,
-      'sanguin': sanguin,
-      'image': await MultipartFile.fromFile(_image.path, filename: _image.name)
-    });
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
-    Dio dio = new Dio();
-    dio.options.headers["authorization"] = "Bearer " + token;
-    var responseDio = await dio.post(
-        "https://hanniel-api.herokuapp.com/hanniel/patient/post",
-        data: formData);
-    print(responseDio.data);
-    if (responseDio.statusCode == 201 || responseDio.statusCode == 200) {
-      print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-      var bodyResponse = json.decode(responseDio.data).cast<String, dynamic>();
-      print(bodyResponse["message"]);
-      if (bodyResponse["message"] == "Patient créé avec succès") {
+    try {
+      var formData = FormData.fromMap({
+        'name': firstname,
+        'surname': lastname,
+        'date': datetime,
+        'sexe': sexe,
+        'email': email.trim(),
+        'phone': phone,
+        'poids': poids,
+        'taille': taille,
+        'sanguin': sanguin,
+        'image':
+            await MultipartFile.fromFile(_image.path, filename: _image.name)
+      });
+      String token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
+      Dio dio = Dio(BaseOptions(
+        connectTimeout: 30000,
+        responseType: ResponseType.json,
+        contentType: ContentType.json.toString(),
+      ));
+      dio.options.headers["Authorization"] = "Bearer " + token;
+      var responseDio = await dio.post(
+          "https://hanniel-api.herokuapp.com/hanniel/patient/post",
+          data: formData);
+      print(responseDio.statusCode);
+      if (responseDio.statusCode == 201 || responseDio.statusCode == 200) {
+        print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        var bodyResponse =
+            json.decode(responseDio.data).cast<String, dynamic>();
+        print(bodyResponse["message"]);
         setState(() {
           _loading = false;
         });
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Profil()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => Profil(),
+          ),
+        );
         const snackbar = SnackBar(
           content: Text(
             'Mis a jour reussie',
@@ -119,12 +130,16 @@ class _UpdateProfil extends State<UpdateProfil> {
           backgroundColor: Colors.greenAccent,
         );
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        setState(() {
+          _loading = false;
+        });
       } else {
         setState(() {
           _loading = false;
         });
       }
-    } else {
+    } catch (Exception) {
+      print(Exception);
       setState(() {
         _loading = false;
       });
@@ -141,30 +156,34 @@ class _UpdateProfil extends State<UpdateProfil> {
   }
 
   alertInfo() {
-    setState(() {
-      _loading = false;
+    setState(
+      () {
+        _loading = false;
 
-      _emailController.text == ''
-          ? emailError = 'veuillez remplir le champ'
-          : '';
-      _phoneController.text == ''
-          ? phoneError = 'veuillez remplir le champ'
-          : '';
-      _phoneController.text == ''
-          ? phoneError = 'veuillez remplir le champ'
-          : '';
-      _firstnameController.text == ''
-          ? firstnameError = 'veuillez remplir le champ'
-          : '';
-      _lastnameController.text == ''
-          ? lastnameError = 'veuillez remplir le champ'
-          : '';
-      _dateController.text == ""
-          ? dateError = "Veuillez prciser votre annee de naissance"
-          : "";
-      _poids.text == "" ? poidsError = "Veuillez precisez votre poids" : "";
-      _taille.text == "" ? tailleError = "veuillez preciser votre taille" : "";
-    });
+        _emailController.text == ''
+            ? emailError = 'veuillez remplir le champ'
+            : '';
+        _phoneController.text == ''
+            ? phoneError = 'veuillez remplir le champ'
+            : '';
+        _phoneController.text == ''
+            ? phoneError = 'veuillez remplir le champ'
+            : '';
+        _firstnameController.text == ''
+            ? firstnameError = 'veuillez remplir le champ'
+            : '';
+        _lastnameController.text == ''
+            ? lastnameError = 'veuillez remplir le champ'
+            : '';
+        _dateController.text == ""
+            ? dateError = "Veuillez prciser votre annee de naissance"
+            : "";
+        _poids.text == "" ? poidsError = "Veuillez precisez votre poids" : "";
+        _taille.text == ""
+            ? tailleError = "veuillez preciser votre taille"
+            : "";
+      },
+    );
   }
 
   Widget build(BuildContext context) {
@@ -191,7 +210,8 @@ class _UpdateProfil extends State<UpdateProfil> {
                           children: [
                             InkWell(
                                 child: CircleAvatar(
-                                  backgroundImage: AssetImage("assets/images/firstDoctor.png"),
+                                  backgroundImage: AssetImage(
+                                      "assets/images/firstDoctor.png"),
                                   radius: 60,
                                 ),
                                 onTap: () => showDialog(
