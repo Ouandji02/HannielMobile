@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.0"
+    version: "2.8.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -28,7 +28,14 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.0"
+  charcode:
+    dependency: transitive
+    description:
+      name: charcode
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.1"
   clock:
     dependency: transitive
     description:
@@ -42,7 +49,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.16.0"
+    version: "1.15.0"
   cross_file:
     dependency: transitive
     description:
@@ -71,20 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.6"
   fake_async:
     dependency: transitive
     description:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.0"
+    version: "1.2.0"
   ffi:
     dependency: transitive
     description:
@@ -99,13 +99,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
-  file_picker:
-    dependency: "direct main"
-    description:
-      name: file_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -142,48 +135,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  geolocator:
-    dependency: "direct main"
-    description:
-      name: geolocator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "8.2.1"
-  geolocator_android:
-    dependency: transitive
-    description:
-      name: geolocator_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.8"
-  geolocator_apple:
-    dependency: transitive
-    description:
-      name: geolocator_apple
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.4"
-  geolocator_platform_interface:
-    dependency: transitive
-    description:
-      name: geolocator_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.5"
-  geolocator_web:
-    dependency: transitive
-    description:
-      name: geolocator_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.5"
-  geolocator_windows:
-    dependency: transitive
-    description:
-      name: geolocator_windows
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
   google_fonts:
     dependency: "direct main"
     description:
@@ -253,7 +204,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.4"
+    version: "0.6.3"
   lints:
     dependency: transitive
     description:
@@ -261,6 +212,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  location:
+    dependency: "direct main"
+    description:
+      name: location
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.4.0"
+  location_platform_interface:
+    dependency: transitive
+    description:
+      name: location_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.0"
+  location_web:
+    dependency: transitive
+    description:
+      name: location_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   matcher:
     dependency: transitive
     description:
@@ -274,21 +246,21 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5"
+    version: "0.1.3"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.7.0"
   path:
     dependency: transitive
     description:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.2"
+    version: "1.8.0"
   path_provider:
     dependency: transitive
     description:
@@ -447,7 +419,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:
@@ -468,7 +440,7 @@ packages:
       name: string_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.0"
   term_glyph:
     dependency: transitive
     description:
@@ -482,7 +454,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.9"
+    version: "0.4.8"
   typed_data:
     dependency: transitive
     description:
@@ -552,7 +524,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.1"
   win32:
     dependency: transitive
     description:
@@ -568,5 +540,5 @@ packages:
     source: hosted
     version: "0.2.0+1"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
+  dart: ">=2.16.1 <3.0.0"
   flutter: ">=2.10.0"

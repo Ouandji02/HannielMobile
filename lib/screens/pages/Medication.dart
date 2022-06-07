@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../CONSTANTS/color.dart';
 
@@ -15,48 +13,12 @@ class Medication extends StatefulWidget {
 }
 
 class _Medication extends State<Medication> {
-  bool showSpinner = false;
-
-  void _determinePosition() async {
-    setState(() {
-      showSpinner = true;
-    });
-    Position pos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    Uri url = Uri.parse(
-        "https://www.google.com/maps/dir/?api=1&origin=${pos.latitude},${pos.longitude}&destination=5.4471192,10.0581761&travelmode=driving");
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      print("impossible de lancer l'url, vous devez intallez google Maps");
-    } else {
-      setState(() {
-        showSpinner = false;
-      });
-    }
-  }
-
-  Future<void> _openNavigation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        null;
-      } else {
-        _determinePosition();
-      }
-    } else {
-      _determinePosition();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
+    Size screen = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
         body: Container(
@@ -79,9 +41,9 @@ class _Medication extends State<Medication> {
                               avatar: Image(
                                 image: i % 2 == 0
                                     ? AssetImage(
-                                        "assets/images/icons8-syrup-28.png")
+                                    "assets/images/icons8-syrup-28.png")
                                     : AssetImage(
-                                        "assets/images/icons8-pills-28.png"),
+                                    "assets/images/icons8-pills-28.png"),
                               ),
                               label: Text(
                                 "Sirop",
@@ -105,11 +67,11 @@ class _Medication extends State<Medication> {
                               child: ListTile(
                                   leading: i % 2 == 0
                                       ? Image(
-                                          image: AssetImage(
-                                              "assets/images/icons8-syrup-28.png"))
+                                      image: AssetImage(
+                                          "assets/images/icons8-syrup-28.png"))
                                       : Image(
-                                          image: AssetImage(
-                                              "assets/images/icons8-pills-28.png")),
+                                      image: AssetImage(
+                                          "assets/images/icons8-pills-28.png")),
                                   contentPadding: EdgeInsets.all(10),
                                   title: Text(
                                     "Paracétamol 500mg | 200 XAF",
@@ -120,8 +82,8 @@ class _Medication extends State<Medication> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
                                     children: [
                                       Text(
                                         "Phamarcie Menoua",
@@ -138,21 +100,21 @@ class _Medication extends State<Medication> {
                                       )
                                     ],
                                   ),
-                                  trailing: showSpinner
+                                  trailing: true
                                       ? CircularProgressIndicator(
-                                          color: HexColor(COLOR_PRIMARY),
-                                          strokeWidth: 1,
-                                        )
+                                    color: HexColor(COLOR_PRIMARY),
+                                    strokeWidth: 1,
+                                  )
                                       : InkWell(
-                                          onTap: () {
-                                            _openNavigation();
-                                          },
-                                          child: Icon(
-                                            Icons.arrow_right_rounded,
-                                            size: 30,
-                                            color: HexColor(COLOR_SECONDARY),
-                                          ),
-                                        )),
+                                    onTap: () {
+                                      null;
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_right_rounded,
+                                      size: 30,
+                                      color: HexColor(COLOR_SECONDARY),
+                                    ),
+                                  )),
                             ));
                       }),
                 ),
