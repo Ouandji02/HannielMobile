@@ -1,7 +1,7 @@
-List<PharmacyModel> pharmacyFromJson(dynamic str) =>
-    List<PharmacyModel>.from((str).map((x) => PharmacyModel.fromJson(x)));
+List<HospitalModel> HospitalFromJson(dynamic str) =>
+    List<HospitalModel>.from((str).map((x) => HospitalModel.fromJson(x)));
 
-class PharmacyModel {
+class HospitalModel {
   late String? nom;
   late String? longitude;
   late String? latitude;
@@ -11,7 +11,7 @@ class PharmacyModel {
   late String? email;
   late String? id;
 
-  PharmacyModel(
+  HospitalModel(
       {this.nom,
       this.longitude,
       this.description,
@@ -21,7 +21,7 @@ class PharmacyModel {
       this.phone,
       this.id});
 
-  PharmacyModel.fromJson(Map<String, dynamic> json) {
+  HospitalModel.fromJson(Map<String, dynamic> json) {
     nom = json["name"];
     longitude = json["longitude"];
     latitude = json["latitude"];

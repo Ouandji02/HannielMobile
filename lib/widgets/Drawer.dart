@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
-import 'package:projet_flutter/classes/PharmacyModel.dart';
 import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
-import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
-import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
 import 'package:projet_flutter/screens/settings/Settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/Home.dart';
+import '../screens/Login.dart';
 import '../screens/profil/Profil.dart';
 
 Widget DrawerLayout(user, context) {
@@ -85,16 +84,10 @@ Widget DrawerLayout(user, context) {
             onClicked: () => selectItem(context, 7)),
         const SizedBox(
           height: 5,
-        ),
-        user == null
-            ? MenuList(
-                text: 'Login',
-                icon: Icons.login,
-                onClicked: () => selectItem(context, 8))
-            : MenuList(
+        ), MenuList(
                 text: 'Logout',
                 icon: Icons.logout,
-                onClicked: () => selectItem(context, 9)),
+                onClicked: () => selectItem(context, 8))
       ],
     ),
   ));
@@ -193,12 +186,14 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-    /*case 8:
+    case 8:
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove("userId");
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => Login(),
         ),
       );
-      break;*/
+      break;
   }
 }

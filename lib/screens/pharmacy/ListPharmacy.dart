@@ -3,13 +3,15 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
 
-Widget pharmacyWidget(context) {
+import '../../API_SERVICES/pharmacyApi.dart';
+
+Widget pharmacyWidget(context, snapshot,index) {
   final size = MediaQuery.of(context).size;
   return Container(
-      margin: EdgeInsets.only(right: 30, top: 10),
+      margin: EdgeInsets.only(right: 10, top: 10),
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
                 color: Colors.black12.withOpacity(.1),
@@ -23,44 +25,43 @@ Widget pharmacyWidget(context) {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://cdn.pixabay.com/photo/2016/08/29/14/25/medications-1628372__340.jpg"))),
+                image: DecorationImage(image: NetworkImage(snapshot[index].logo))),
             width: size.width * .3,
-            height: size.height * .16,
+            height: size.height * .22,
           ),
           Container(
-              width: size.width * .45,
+              width: size.width * .6,
               padding: EdgeInsets.only(left: 10, top: 5),
               child: Column(
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Pharmacie du District ',
+                      snapshot[index].nom,
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                     ),
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Gerant: Dr BAPEMBE',
+                      snapshot[index].email,
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 15),
+                          fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
                   Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      'Service: 4 etoiles',
+                      'phone: ${snapshot[index].phone}',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 15),
+                          fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
                   Container(
                       child: ElevatedButton.icon(
                         onPressed: () {
+                          PharmacyApi.getPharmacy();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

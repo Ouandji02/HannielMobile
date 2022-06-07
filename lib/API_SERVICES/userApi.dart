@@ -5,7 +5,7 @@ import 'package:projet_flutter/CONSTANTS/CONFIG.dart';
 
 class userApi {
   static var client = http.Client();
-  Future getUser() async {
+  Future getOneUser() async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
