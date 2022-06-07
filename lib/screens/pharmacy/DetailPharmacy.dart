@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:projet_flutter/screens/pages/Medication.dart';
 
 import '../../CONSTANTS/color.dart';
 
-class DetailDoctor extends StatelessWidget {
-  String nom;
-  String image;
-  String desc;
-  String specialite;
-  String prenom;
-  DetailDoctor({
-    required this.prenom,
+class DetailHospital extends StatelessWidget {
+  late String? nom;
+  late String? image;
+  late String? desc;
+
+  DetailHospital({
     required this.nom,
     required this.image,
     required this.desc,
-    required this.specialite
-});
+  });
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -37,7 +36,7 @@ class DetailDoctor extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(this.image),
+                          image: AssetImage(this.image!),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -46,7 +45,7 @@ class DetailDoctor extends StatelessWidget {
                         top: 5,
                         left: 5,
                         child: IconButton(
-                            onPressed: ()=>Navigator.pop(context),
+                            onPressed: () => Navigator.pop(context),
                             icon: Icon(
                               Icons.arrow_back,
                               color: HexColor(COLOR_PRIMARY),
@@ -68,13 +67,13 @@ class DetailDoctor extends StatelessWidget {
                           Positioned(
                               top: (size.height * .13) / 3 - 20,
                               child: Text(
-                                "Disponible maintenant",
+                                "ouvert de 08h:00 - 18h:00",
                                 style: TextStyle(color: Colors.green),
                               )),
                           Positioned(
                             top: (size.height * .13) / 3,
                             child: Text(
-                              this.nom + " " + this.prenom,
+                              this.nom!,
                               style: TextStyle(
                                 color: HexColor(COLOR_TITLE),
                                 fontWeight: FontWeight.bold,
@@ -84,7 +83,7 @@ class DetailDoctor extends StatelessWidget {
                           Positioned(
                               top: (size.height * .13) / 3 + 20,
                               child: Text(
-                                'Docteur familial '+ this.specialite,
+                                'responsable ',
                                 style: TextStyle(color: Colors.black26),
                               )),
                           Positioned(
@@ -122,66 +121,6 @@ class DetailDoctor extends StatelessWidget {
                       ),
                     ),
                     Divider(),
-                    Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Row(
-                        children: [
-                          Container(
-                            child: CircularPercentIndicator(
-                              animation: true,
-                              animationDuration: 2500,
-                              radius: size.width * .133,
-                              lineWidth: 10.0,
-                              percent: .85,
-                              center: new Text("85%"),
-                              progressColor: HexColor(COLOR_PRIMARY),
-                              footer: Text("Good Reviews",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black26,
-                                  )),
-                            ),
-                            margin: EdgeInsets.only(right: 5),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 5),
-                            child: CircularPercentIndicator(
-                              animation: true,
-                              animationDuration: 2500,
-                              radius: size.width * .133,
-                              lineWidth: 10.0,
-                              percent: .95,
-                              center: new Text("95%"),
-                              progressColor: HexColor(COLOR_PRIMARY),
-                              footer: Text("Total Score",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black26,
-                                  ),),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 5),
-                            child: CircularPercentIndicator(
-                              animation: true,
-                              animationDuration: 2500,
-                              radius: size.width * .133,
-                              lineWidth: 10.0,
-                              percent: .90,
-                              center: new Text("90%"),
-                              progressColor: HexColor(COLOR_PRIMARY),
-                              footer: Text(
-                                "Satisfaction",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black26,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
                     Divider(),
                     Container(
                       margin: EdgeInsets.only(bottom: 20),
@@ -198,7 +137,7 @@ class DetailDoctor extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 20),
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        this.desc,
+                        this.desc!,
                         style: TextStyle(
                           fontSize: size.width * .048,
                           color: Colors.black26,
@@ -237,20 +176,26 @@ class DetailDoctor extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          child: Chip(
-                            labelPadding: EdgeInsets.only(
-                              top: 2,
-                              bottom: 2,
-                            ),
-                            backgroundColor: HexColor(COLOR_PRIMARY),
-                            elevation: 5.0,
-                            shadowColor: Colors.grey[60],
-                            label: Text(
-                              "BOOK AND APPOINTMENT",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: size.width * .04),
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Medication())),
+                          child: Container(
+                            child: Chip(
+                              labelPadding: EdgeInsets.only(
+                                top: 2,
+                                bottom: 2,
+                              ),
+                              backgroundColor: HexColor(COLOR_PRIMARY),
+                              elevation: 5.0,
+                              shadowColor: Colors.grey[60],
+                              label: Text(
+                                "Voir les medicaments",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: size.width * .04),
+                              ),
                             ),
                           ),
                         )

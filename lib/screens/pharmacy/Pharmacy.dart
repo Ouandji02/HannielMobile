@@ -29,18 +29,6 @@ class _Pharmacy extends State<Pharmacy> {
         padding: EdgeInsets.only(top: 10, left: 10),
         child: Column(
           children: [
-            Container(
-              color: Colors.white,
-              alignment: AlignmentDirectional.centerStart,
-              margin: EdgeInsets.only(bottom: 10),
-              child: Text(
-                "Liste des pharmacies",
-                style: TextStyle(
-                    color: HexColor(COLOR_TITLE),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
-              ),
-            ),
             Expanded(
                 child: FutureBuilder(
                     future: PharmacyApi.getPharmacy(),

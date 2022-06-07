@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
+import 'package:projet_flutter/screens/pharmacy/DetailPharmacy.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
 
-Widget pharmacyWidget(context, snapshot,index) {
+Widget pharmacyWidget(context, snapshot, index) {
   final size = MediaQuery.of(context).size;
   return Container(
       margin: EdgeInsets.only(right: 10, top: 10),
@@ -25,7 +26,8 @@ Widget pharmacyWidget(context, snapshot,index) {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(image: NetworkImage(snapshot[index].logo))),
+                image:
+                    DecorationImage(image: NetworkImage(snapshot[index].logo))),
             width: size.width * .3,
             height: size.height * .22,
           ),
@@ -65,12 +67,15 @@ Widget pharmacyWidget(context, snapshot,index) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Medication(),
+                              builder: (context) => DetailHospital(
+                                  nom: snapshot[index].nom,
+                                  image: snapshot[index].logo,
+                                  desc: snapshot[index].description),
                             ),
                           );
                         },
                         label: Text(
-                          'Voir les medicaments',
+                          'Voir les details',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,
@@ -88,7 +93,7 @@ Widget pharmacyWidget(context, snapshot,index) {
                           ),
                         ),
                         icon: Icon(
-                          Icons.medication_outlined,
+                          Icons.details_sharp,
                           color: Colors.white,
                         ),
                       ),
