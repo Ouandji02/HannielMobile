@@ -3,7 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../widgets/AppBar.dart';
+import '../../widgets/AppBar.dart';
 
 class Settings extends StatefulWidget {
   final String title;

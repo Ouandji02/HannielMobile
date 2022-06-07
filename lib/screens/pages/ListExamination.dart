@@ -3,7 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../CONSTANTS/color.dart';
 import '../../widgets/CardPatient.dart';
-import '../Profil.dart';
+import '../profil/Profil.dart';
 
 class ListExamination extends StatelessWidget {
   @override

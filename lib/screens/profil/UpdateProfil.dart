@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:projet_flutter/screens/Profil.dart';
+import 'package:projet_flutter/screens/profil/Profil.dart';
 import 'package:http/http.dart' as http;
 import 'package:projet_flutter/widgets/AppBar.dart';
-import '../CONSTANTS/color.dart';
-import '../CONSTANTS/style.dart';
+import '../../CONSTANTS/CONFIG.dart';
+import '../../CONSTANTS/color.dart';
+import '../../CONSTANTS/style.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UpdateProfil extends StatefulWidget {
@@ -58,7 +59,7 @@ class _UpdateProfil extends State<UpdateProfil> {
   String tailleError = "";
 
   Future getImage() async {
-    XFile? image = await ImagePicker().pickImage(source: ImageSource.camera);
+    XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       _image = image;
     });
@@ -67,7 +68,7 @@ class _UpdateProfil extends State<UpdateProfil> {
   }
 
 // methode de connexion
-  signUp(
+  Future signUp(
       String email,
       String poids,
       String taille,
@@ -81,37 +82,34 @@ class _UpdateProfil extends State<UpdateProfil> {
       XFile _image) async {
     print(
         "jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
     try {
-      var formData = FormData.fromMap({
-        'name': firstname,
-        'surname': lastname,
-        'date': datetime,
-        'sexe': sexe,
-        'email': email.trim(),
-        'phone': phone,
-        'poids': poids,
-        'taille': taille,
-        'sanguin': sanguin,
-        'image':
-            await MultipartFile.fromFile(_image.path, filename: _image.name)
-      });
       String token =
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
-      Dio dio = Dio(BaseOptions(
-        connectTimeout: 30000,
-        responseType: ResponseType.json,
-        contentType: ContentType.json.toString(),
-      ));
-      dio.options.headers["Authorization"] = "Bearer " + token;
-      var responseDio = await dio.post(
-          "https://hanniel-api.herokuapp.com/hanniel/patient/post",
-          data: formData);
-      print(responseDio.statusCode);
-      if (responseDio.statusCode == 201 || responseDio.statusCode == 200) {
+
+      var url = Uri.http(APIURL, UPDATEUSERURL);
+      var requestMethod = "POST";
+      var request = http.MultipartRequest(requestMethod, url);
+      request.fields["name"] = firstname;
+      request.fields["surname"] = lastname;
+      request.fields["date"] = datetime;
+      request.fields["sexe"] = sexe;
+      request.fields["email"] = email;
+      request.fields["phone"] = phone;
+      request.fields["poids"] = poids;
+      request.fields["taille"] = taille;
+      request.fields["sanguin"] = sanguin;
+      http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+        "image",
+        _image.path,
+      );
+      request.headers['Authorization'] = "Bearer $token";
+      request.files.add(multipartFile);
+      var response = await request.send();
+      print(
+          "cccccccccccccccccccccccc ${response.statusCode} ${response.request}");
+      if (response.statusCode == 201 || response.statusCode == 200) {
         print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        var bodyResponse =
-            json.decode(responseDio.data).cast<String, dynamic>();
-        print(bodyResponse["message"]);
         setState(() {
           _loading = false;
         });
@@ -137,6 +135,15 @@ class _UpdateProfil extends State<UpdateProfil> {
         setState(() {
           _loading = false;
         });
+        final snackbar = SnackBar(
+          content: const Text(
+            "Une erreur inconnu s'est produite",
+            style: TextStyle(color: Colors.red),
+          ),
+          duration: const Duration(seconds: 5),
+          backgroundColor: HexColor('#FFD700'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
       }
     } catch (Exception) {
       print(Exception);
@@ -209,10 +216,22 @@ class _UpdateProfil extends State<UpdateProfil> {
                         child: Column(
                           children: [
                             InkWell(
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      "assets/images/firstDoctor.png"),
-                                  radius: 60,
+                                child: Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(100),
+                                      image: _image != null
+                                          ? DecorationImage(
+                                              image:
+                                                  FileImage(File(_image!.path)),
+                                              fit: BoxFit.cover)
+                                          : DecorationImage(
+                                              image: AssetImage(
+                                                "assets/images/firstDoctor.png",
+                                              ),
+                                              fit: BoxFit.cover)),
                                 ),
                                 onTap: () => showDialog(
                                     context: context,
@@ -220,9 +239,25 @@ class _UpdateProfil extends State<UpdateProfil> {
                                       return Dialog(
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      "assets/images/firstDoctor.png"))),
+                                              image: _image != null
+                                                  ? DecorationImage(
+                                                      image: FileImage(
+                                                          File(_image!.path)))
+                                                  : DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/images/firstDoctor.png")),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.black12,
+                                                    blurRadius: 10,
+                                                    offset: Offset(2, -2),
+                                                    spreadRadius: 3),
+                                                BoxShadow(
+                                                    color: Colors.black12,
+                                                    blurRadius: 10,
+                                                    offset: Offset(-2, 2),
+                                                    spreadRadius: 3)
+                                              ]),
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -572,23 +607,27 @@ class _UpdateProfil extends State<UpdateProfil> {
                               },
                               child: _loading
                                   ? CircularProgressIndicator(
-                                      color: Colors.white)
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    )
                                   : Text(
-                                      'Update',
+                                      'update',
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 25,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      HexColor(COLOR_PRIMARY)),
-                                  minimumSize: MaterialStateProperty.all(
-                                      Size(size.width * .9, 40)),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)))),
+                                backgroundColor: MaterialStateProperty.all(
+                                    HexColor(COLOR_PRIMARY)),
+                                minimumSize: MaterialStateProperty.all(
+                                    Size(size.width * .9, 40)),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],

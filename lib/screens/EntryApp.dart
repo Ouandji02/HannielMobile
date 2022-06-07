@@ -2,21 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Home.dart';
 
 class EntryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
+
+    /*Future.delayed(const Duration(seconds: 0), () async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("userId") != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Home()));
+      } else {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return Login();
+          },
+        ));
+      }
+    });*/
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/firstDoctor.png'),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      HexColor(COLOR_PRIMARY).withOpacity(.85),
-                      BlendMode.darken))),
+            image: DecorationImage(
+              image: AssetImage('assets/images/firstDoctor.png'),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  HexColor(COLOR_PRIMARY).withOpacity(.85), BlendMode.darken),
+            ),
+          ),
           child: Container(
             height: size.height,
             width: size.width,

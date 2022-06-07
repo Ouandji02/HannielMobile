@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/screens/UpdateProfil.dart';
+import 'package:projet_flutter/screens/profil/UpdateProfil.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 
 class Profil extends StatelessWidget {
@@ -24,58 +24,68 @@ class Profil extends StatelessWidget {
               children: [
                 Container(
                   child: ListTile(
-                    title: Text("Nom"),
-                    subtitle: Text("simo Larissa"),
+                    title: Text("simo Larissa"),
+                    subtitle: Text("Nom"),
                     trailing: CircleAvatar(
-                      child: Text("S"),
+                      backgroundImage: AssetImage("assets/images/firstDoctor.png"),
                     ),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Contact number"),
+                    title: Text(
+                      "Contact number",
+                      style: TextStyle(color: Colors.black45,fontSize: 14),
+                    ),
                     trailing: Text("699665914"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Email"),
+                    title:
+                        Text("Email", style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("simolarissa@gmail.com"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Gender"),
+                    title:
+                        Text("Gender", style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("Female"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Date of birth"),
+                    title: Text("Date of birth",
+                        style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("yyyy mm dd"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Blood group"),
+                    title: Text("Blood group",
+                        style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("o+"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("height"),
+                    title:
+                        Text("height", style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("1.6"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("weight"),
+                    title:
+                        Text("weight", style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("55kg"),
                   ),
                 ),
                 Container(
                   child: ListTile(
-                    subtitle: Text("Location"),
+                    title: Text("Location",
+                        style: TextStyle(color: Colors.black45,fontSize: 14)),
                     trailing: Text("add location"),
                   ),
                 )

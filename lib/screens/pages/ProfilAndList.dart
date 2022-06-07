@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:projet_flutter/screens/Profil.dart';
+import 'package:projet_flutter/screens/profil/Profil.dart';
 import 'package:projet_flutter/screens/pages/ListExamination.dart';
 import 'package:projet_flutter/screens/pages/ListPresscription.dart';
 import 'package:projet_flutter/screens/pages/ListText.dart';
@@ -9,7 +9,7 @@ import 'package:projet_flutter/widgets/CardPatient.dart';
 
 import '../../CONSTANTS/color.dart';
 import '../../widgets/Drawer.dart';
-import '../Notifications.dart';
+import '../notification/Notifications.dart';
 
 class ProfilAndList extends StatelessWidget {
   @override

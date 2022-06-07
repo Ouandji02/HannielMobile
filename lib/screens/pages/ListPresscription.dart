@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:projet_flutter/screens/PrescriptionDetail.dart';
+import 'package:projet_flutter/screens/prescription/PrescriptionDetail.dart';
 
 import '../../CONSTANTS/color.dart';
 import '../../widgets/CardPatient.dart';

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
-import 'package:projet_flutter/screens/DetailDoctor.dart';
+import 'package:projet_flutter/screens/doctor/DetailDoctor.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/Drawer.dart';
 
-import '../CONSTANTS/color.dart';
-import '../classes/DoctorClass.dart';
-import 'Home.dart';
+import '../../CONSTANTS/color.dart';
+import '../../classes/DoctorClass.dart';
+import '../Home.dart';
 
 class ListDoctors extends StatelessWidget {
   @override

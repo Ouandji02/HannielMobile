@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-import '../CONSTANTS/color.dart';
+import '../../CONSTANTS/color.dart';
 
 class DetailDoctor extends StatelessWidget {
   String nom;

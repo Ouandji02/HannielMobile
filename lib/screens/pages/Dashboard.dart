@@ -3,7 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/classes/DoctorClass.dart';
 
 import '../../CONSTANTS/color.dart';
-import '../DetailDoctor.dart';
+import '../doctor/DetailDoctor.dart';
 
 Widget Dashboard(screen) {
   final doctors = [

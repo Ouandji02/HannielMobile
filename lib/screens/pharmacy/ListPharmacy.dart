@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/pages/Medication.dart';
 
 Widget pharmacyWidget(context) {
   final size = MediaQuery.of(context).size;
@@ -9,23 +12,24 @@ Widget pharmacyWidget(context) {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-                color: Colors.black12.withOpacity(.2),
+                color: Colors.black12.withOpacity(.1),
                 blurRadius: 20,
-                offset: Offset(0, -2),
+                offset: Offset(0, -1),
                 spreadRadius: 3)
           ],
-          color: const Color(0xff008ED6)),
-      width: size.width * .7,
+          color: Colors.white),
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.red),
-            width: size.width * .2,
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://cdn.pixabay.com/photo/2016/08/29/14/25/medications-1628372__340.jpg"))),
+            width: size.width * .3,
             height: size.height * .16,
           ),
           Container(
-              height: size.height * .17,
               width: size.width * .45,
               padding: EdgeInsets.only(left: 10, top: 5),
               child: Column(
@@ -34,10 +38,8 @@ Widget pharmacyWidget(context) {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Pharmacie du District ',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   Align(
@@ -45,9 +47,7 @@ Widget pharmacyWidget(context) {
                     child: Text(
                       'Gerant: Dr BAPEMBE',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15),
+                          fontWeight: FontWeight.normal, fontSize: 15),
                     ),
                   ),
                   Align(
@@ -55,30 +55,40 @@ Widget pharmacyWidget(context) {
                     child: Text(
                       'Service: 4 etoiles',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15),
+                          fontWeight: FontWeight.normal, fontSize: 15),
                     ),
                   ),
                   Container(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          print('object');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Medication(),
+                            ),
+                          );
                         },
                         label: Text(
-                          'Voir sur la carte',
+                          'Voir les medicaments',
                           style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 12,
+                              color: Colors.white,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black12,
-                            elevation: 0),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              HexColor(COLOR_PRIMARY)),
+                          minimumSize: MaterialStateProperty.all(
+                              Size(size.width * .3, 30)),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                        ),
                         icon: Icon(
-                          Icons.location_on_outlined,
-                          color: Colors.blueAccent,
+                          Icons.medication_outlined,
+                          color: Colors.white,
                         ),
                       ),
                       alignment: AlignmentDirectional.centerStart)

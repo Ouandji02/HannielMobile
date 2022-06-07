@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../CONSTANTS/color.dart';
+import '../../CONSTANTS/color.dart';
 
 class PrescriptionDetail extends StatefulWidget {
   const PrescriptionDetail({Key? key}) : super(key: key);

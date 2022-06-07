@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
-import 'package:projet_flutter/screens/ListDoctors.dart';
+import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
+import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
-import 'package:projet_flutter/screens/Settings.dart';
+import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
+import 'package:projet_flutter/screens/settings/Settings.dart';
 
 import '../screens/Home.dart';
-import '../screens/Profil.dart';
+import '../screens/profil/Profil.dart';
 
 Widget DrawerLayout(user, context) {
   return Drawer(
@@ -172,7 +175,7 @@ selectItem(BuildContext context, index) async {
     */case 3:
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Medication(),
+          builder: (context) => Pharmacy(),
         ),
       );
       break;
