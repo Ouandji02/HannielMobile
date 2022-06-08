@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:projet_flutter/screens/pages/Medication.dart';
+import 'package:projet_flutter/screens/notification/MedicationScreen.dart';
 
 import '../../CONSTANTS/color.dart';
 
@@ -36,7 +35,7 @@ class DetailHospital extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(this.image!),
+                          image: NetworkImage(this.image!),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -180,7 +179,7 @@ class DetailHospital extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Medication())),
+                                  builder: (context) => MedicationScreen())),
                           child: Container(
                             child: Chip(
                               labelPadding: EdgeInsets.only(
