@@ -98,14 +98,6 @@ class ListDoctors extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text("Choisir un docteur",
-                  style: TextStyle(
-                      color: HexColor(COLOR_TITLE),
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold)),
-            ),
-            Container(
               height: heigth * .1,
                 margin: EdgeInsets.only(bottom: 10),
                 child: ListView.builder(
@@ -127,7 +119,7 @@ class ListDoctors extends StatelessWidget {
                               fontSize: heigth * .02),
                         ),
                         backgroundColor: Colors.white,
-                        elevation: 7.0,
+                        elevation: 1.0,
                         padding: EdgeInsets.all(8.0),
                       ),
                     );

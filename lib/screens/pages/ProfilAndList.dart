@@ -27,7 +27,7 @@ class ProfilAndList extends StatelessWidget {
                     trailing: CircleAvatar(
                       child: IconButton(
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Profil())),
+                            MaterialPageRoute(builder: (context) => ProfilUser())),
                         icon: Icon(
                           Icons.edit,
                           color: Colors.white,

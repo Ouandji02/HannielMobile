@@ -9,7 +9,9 @@ import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/pages/Messages.dart';
 import 'package:projet_flutter/screens/pages/ProfilAndList.dart';
 import 'package:projet_flutter/widgets/Drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../API_SERVICES/userApi.dart';
 import 'notification/Notifications.dart';
 
 class Home extends StatefulWidget {
@@ -22,6 +24,19 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+
+  void userStorage() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    UserApi.getOneUser(await prefs.getString("userId"), await  prefs.getString("token"));
+
+  }
+  @override
+  void initState(){
+    super.initState();
+    print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    userStorage();
+  }
+
   @override
   int index = 0;
 

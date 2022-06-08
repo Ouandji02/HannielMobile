@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
-import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/pharmacy/DetailPharmacy.dart';
-
-import '../../API_SERVICES/pharmacyApi.dart';
 
 Widget pharmacyWidget(context, snapshot, index) {
   final size = MediaQuery.of(context).size;
@@ -16,9 +13,9 @@ Widget pharmacyWidget(context, snapshot, index) {
           boxShadow: [
             BoxShadow(
                 color: Colors.black12.withOpacity(.1),
-                blurRadius: 20,
+                blurRadius: 2,
                 offset: Offset(0, -1),
-                spreadRadius: 3)
+                spreadRadius: 1)
           ],
           color: Colors.white),
       child: Row(
@@ -29,7 +26,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                 image:
                     DecorationImage(image: NetworkImage(snapshot[index].logo))),
             width: size.width * .3,
-            height: size.height * .22,
+            height: size.height * .19,
           ),
           Container(
               width: size.width * .6,
@@ -40,8 +37,10 @@ Widget pharmacyWidget(context, snapshot, index) {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       snapshot[index].nom,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19,
+                          color: HexColor(COLOR_TITLE)),
                     ),
                   ),
                   Align(
@@ -61,43 +60,34 @@ Widget pharmacyWidget(context, snapshot, index) {
                     ),
                   ),
                   Container(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          PharmacyApi.getPharmacy();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailHospital(
-                                  nom: snapshot[index].nom,
-                                  image: snapshot[index].logo,
-                                  desc: snapshot[index].description),
-                            ),
-                          );
-                        },
-                        label: Text(
-                          'Voir les details',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              HexColor(COLOR_PRIMARY)),
-                          minimumSize: MaterialStateProperty.all(
-                              Size(size.width * .3, 30)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextButton.icon(
+                          style: ButtonStyle(
+                              side: MaterialStateProperty.all(
+                                  BorderSide(color: HexColor(COLOR_PRIMARY)))),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailHospital(
+                                    nom: snapshot[index].nom,
+                                    image: snapshot[index].logo,
+                                    desc: snapshot[index].description),
+                              ),
+                            );
+                          },
+                          label: Text(
+                            "Detail",
+                            style: TextStyle(color: HexColor(COLOR_PRIMARY)),
                           ),
-                        ),
-                        icon: Icon(
-                          Icons.details_sharp,
-                          color: Colors.white,
-                        ),
-                      ),
-                      alignment: AlignmentDirectional.centerStart)
+                          icon: Icon(
+                            Icons.arrow_left,
+                            color: HexColor(COLOR_PRIMARY),
+                          ),
+                        )),
+                  )
                 ],
               ))
         ],

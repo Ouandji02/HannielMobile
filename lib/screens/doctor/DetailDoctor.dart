@@ -86,7 +86,7 @@ class DetailDoctor extends StatelessWidget {
                               child: Text(
                                 'Docteur familial '+ this.specialite,
                                 style: TextStyle(color: Colors.black26),
-                              )),
+                              ),),
                           Positioned(
                             top: (size.height * .13) / 3,
                             right: 0,

@@ -115,7 +115,7 @@ class _UpdateProfil extends State<UpdateProfil> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Profil(),
+            builder: (context) => ProfilUser(),
           ),
         );
         const snackbar = SnackBar(

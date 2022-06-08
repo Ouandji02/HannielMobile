@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/API_SERVICES/userApi.dart';
 import 'package:projet_flutter/CONSTANTS/CONFIG.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
@@ -50,8 +51,8 @@ class _Login extends State<Login> {
           });
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString("userId", bodyResponse["userId"]);
-          prefs.setString('user', response.body);
-          if (prefs.getString('user') != null) {
+          prefs.setString("token", bodyResponse["token"]);
+          if (prefs.getString('userId') != null) {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           }

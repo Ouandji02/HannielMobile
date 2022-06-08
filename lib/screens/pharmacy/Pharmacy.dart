@@ -23,6 +23,7 @@ class _Pharmacy extends State<Pharmacy> {
     return Scaffold(
       appBar: AppBarItem("Pharmacy"),
       body: Container(
+        color: Colors.white,
         constraints: BoxConstraints(
           minHeight: size.height,
         ),
@@ -35,8 +36,6 @@ class _Pharmacy extends State<Pharmacy> {
                     builder: (BuildContext context,
                         AsyncSnapshot<List<PharmacyModel>?> snapshot) {
                       if (snapshot.hasData) {
-                        print(
-                            "mbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvb");
                         return ListView.builder(itemBuilder: (context,index){
                          return pharmacyWidget(context, snapshot.data,index);
                         },itemCount: snapshot.data?.length,);
@@ -48,7 +47,7 @@ class _Pharmacy extends State<Pharmacy> {
                           ),
                         );
                       }
-                    }))
+                    },),)
           ],
         ),
       ),

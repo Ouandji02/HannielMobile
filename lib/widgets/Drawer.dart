@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
@@ -10,6 +12,19 @@ import '../screens/Home.dart';
 import '../screens/Login.dart';
 import '../screens/profil/Profil.dart';
 
+
+var user;
+
+void getUserStorage() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getString("user") != null) {
+    var userP = jsonDecode(prefs.getString("user")!);
+    print("fbgbgbgbbbb${userP["message"]}");
+    user = userP["message"];
+    print(user);
+  }
+}
+
 Widget DrawerLayout(user, context) {
   return Drawer(
       child: Material(
@@ -19,7 +34,7 @@ Widget DrawerLayout(user, context) {
       children: [
         user != null
             ? userAccountHeader(user, user)
-            : userAccountHeader('name', 'email@gmail.com'),
+            : userAccountHeader(user["name"], user["email"]),
         const SizedBox(
           height: 5,
         ),
@@ -154,7 +169,7 @@ selectItem(BuildContext context, index) async {
       case 1:
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Profil(),
+          builder: (context) => ProfilUser(),
         ),
       );
       break;
