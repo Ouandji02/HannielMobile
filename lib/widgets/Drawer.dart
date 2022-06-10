@@ -12,7 +12,6 @@ import '../screens/Home.dart';
 import '../screens/Login.dart';
 import '../screens/profil/Profil.dart';
 
-
 var user;
 
 void getUserStorage() async {
@@ -33,8 +32,8 @@ Widget DrawerLayout(user, context) {
       padding: EdgeInsets.zero,
       children: [
         user != null
-            ? userAccountHeader(user, user)
-            : userAccountHeader(user["name"], user["email"]),
+            ? userAccountHeader("ouandji", "ouandjil@gmail.com")
+            : userAccountHeader("ouandji", "ouandjil@gmail.com"),
         const SizedBox(
           height: 5,
         ),
@@ -99,10 +98,11 @@ Widget DrawerLayout(user, context) {
             onClicked: () => selectItem(context, 7)),
         const SizedBox(
           height: 5,
-        ), MenuList(
-                text: 'Logout',
-                icon: Icons.logout,
-                onClicked: () => selectItem(context, 8))
+        ),
+        MenuList(
+            text: 'Logout',
+            icon: Icons.logout,
+            onClicked: () => selectItem(context, 8))
       ],
     ),
   ));
@@ -166,7 +166,7 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-      case 1:
+    case 1:
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ProfilUser(),
@@ -180,7 +180,8 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-    */case 3:
+    */
+    case 3:
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => Pharmacy(),
@@ -194,16 +195,15 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-      case 7:
+    case 7:
       Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Settings(title: "Settings")
-        ),
+        MaterialPageRoute(builder: (context) => Settings(title: "Settings")),
       );
       break;
     case 8:
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.remove("userId");
+      prefs.clear();
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => Login(),
