@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
+import 'package:projet_flutter/screens/hopitaux/ListHospitals.dart';
 import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
 import 'package:projet_flutter/screens/settings/Settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -173,14 +174,13 @@ selectItem(BuildContext context, index) async {
         ),
       );
       break;
-    /*case 2:
+    case 2:
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Pharmacy(),
+          builder: (context) => Hospital(),
         ),
       );
       break;
-    */
     case 3:
       Navigator.of(context).push(
         MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/EntryApp.dart';
+import 'package:projet_flutter/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -26,6 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EntryApp();
+    return Home();
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/hopitaux/DetailsHospital.dart';
 import 'package:projet_flutter/screens/pharmacy/DetailPharmacy.dart';
 
-Widget pharmacyWidget(context, snapshot, index) {
+Widget hospitalWidget(context, snapshot, index) {
   final size = MediaQuery.of(context).size;
   return Container(
       margin: EdgeInsets.only(right: 10, top: 10),
@@ -24,7 +25,7 @@ Widget pharmacyWidget(context, snapshot, index) {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image:
-                    DecorationImage(image: NetworkImage(snapshot[index].logo))),
+                DecorationImage(image: NetworkImage(snapshot[index].logo))),
             width: size.width * .3,
             height: size.height * .19,
           ),
@@ -71,7 +72,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailPharmacy(
+                                builder: (context) => DetailHospital(
                                     nom: snapshot[index].nom,
                                     image: snapshot[index].logo,
                                     desc: snapshot[index].description),

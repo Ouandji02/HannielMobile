@@ -28,14 +28,36 @@ class _Medication extends State<Medication> {
             child: Column(
               children: [
                 Container(
-                  height: 50,
+                  width: screen.width * .9,
+                  margin: EdgeInsets.only(top: 25),
+                  child: TextField(
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        height: .2,
+                        color: Colors.black
+                    ),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      fillColor: Colors.black.withOpacity(.1),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      labelStyle: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w400),
+                      labelText: 'Search medication',
+                    ),
+                  ),
+                ),
+                Container(
+                  height: screen.height * .1,
                   child: ListView.builder(
-                      shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: 20,
                       itemBuilder: (context, i) {
                         return Container(
-                            margin: EdgeInsets.only(right: 10),
+                            margin: EdgeInsets.all(10),
                             child: Chip(
                               backgroundColor: HexColor(COLOR_SECONDARY),
                               avatar: Image(
@@ -49,7 +71,6 @@ class _Medication extends State<Medication> {
                                 "Sirop",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              padding: EdgeInsets.all(5),
                             ));
                       }),
                 ),
@@ -78,7 +99,7 @@ class _Medication extends State<Medication> {
                                     overflow: TextOverflow.fade,
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: HexColor(COLOR_PRIMARY),
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Column(
@@ -88,13 +109,13 @@ class _Medication extends State<Medication> {
                                       Text(
                                         "Phamarcie Menoua",
                                         style: TextStyle(
-                                            color: HexColor(COLOR_PRIMARY)
+                                            color: Colors.white
                                                 .withOpacity(.6)),
                                       ),
                                       Text(
                                         "3km environ",
                                         style: TextStyle(
-                                            color: HexColor(COLOR_MESSAGE_SEND)
+                                            color: Colors.white
                                                 .withOpacity(.6),
                                             fontSize: 12),
                                       )

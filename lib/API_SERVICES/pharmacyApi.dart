@@ -7,7 +7,7 @@ import 'package:projet_flutter/classes/PharmacyModel.dart';
 class PharmacyApi {
   static var client = http.Client();
 
-  static Future<List<PharmacyModel>?> getPharmacy() async {
+  static Future<List<PharmacyModel>?> getPharmacy(String? key) async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
@@ -15,15 +15,16 @@ class PharmacyApi {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
-    print("sdffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-    print(response.statusCode);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      if (key != null) {
+        print('fffffffffffffffffffffffffffffffffffffffffffffff $key');
+        print(pharmacyFromJson(data["message"]).where((pharmacy) => pharmacy.nom!.contains(key)).toList());
+        return pharmacyFromJson(data["message"]).where((pharmacy) => pharmacy.nom!.contains(key)).toList();
+      }
       return pharmacyFromJson(data["message"]);
-
     } else {
       return null;
     }
   }
-
 }

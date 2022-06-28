@@ -2,28 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/function/Search.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
+import '../../classes/HospitalModel.dart';
+import 'Hospital.dart';
 
-class Pharmacy extends StatefulWidget {
+class Hospital extends StatefulWidget {
   @override
-  _Pharmacy createState() {
+  _Hospital createState() {
     // TODO: implement createState
-    return _Pharmacy();
+    return _Hospital();
   }
 }
 
-class _Pharmacy extends State<Pharmacy> {
+class _Hospital extends State<Hospital> {
+  late List<PharmacyModel> foundHospital;
   String? search;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBarItem("Pharmacy"),
+      appBar: AppBarItem("Hospital"),
       body: Container(
         color: Colors.white,
         constraints: BoxConstraints(
@@ -48,7 +58,7 @@ class _Pharmacy extends State<Pharmacy> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search pharmacy',
+                    labelText: 'Search hospitals',
                   ),
                   onChanged: (text) => {
                         if (text != null) {setState(() => search = text)}
@@ -62,9 +72,7 @@ class _Pharmacy extends State<Pharmacy> {
                   if (snapshot.hasData) {
                     return ListView.builder(
                       itemBuilder: (context, index) {
-                        if (snapshot.hasData == null)
-                          return Center(child: Text('No results'));
-                        return pharmacyWidget(context, snapshot.data, index);
+                        return hospitalWidget(context, snapshot.data, index);
                       },
                       itemCount: snapshot.data?.length,
                     );

@@ -101,7 +101,7 @@ Widget Dashboard(screen) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Bonjour Larissa,",
+                    "Bonjour Larissaaaaa,",
                     style:
                         TextStyle(color: HexColor(COLOR_TITLE), fontSize: 15),
                   ),
@@ -172,6 +172,7 @@ Widget Dashboard(screen) {
                         CircleAvatar(
                           foregroundImage:
                               AssetImage("assets/images/doctor.png"),
+                          backgroundColor: Colors.white,
                         ),
                         SizedBox(
                           width: 10,
@@ -233,6 +234,7 @@ Widget Dashboard(screen) {
                               CircleAvatar(
                                 foregroundImage:
                                     AssetImage(doctors[index].photo),
+                                backgroundColor: Colors.white,
                               ),
                               SizedBox(
                                 height: 10,
