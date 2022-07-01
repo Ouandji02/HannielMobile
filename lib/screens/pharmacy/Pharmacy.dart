@@ -17,6 +17,7 @@ class Pharmacy extends StatefulWidget {
 
 class _Pharmacy extends State<Pharmacy> {
   String? search;
+  List<PharmacyModel>? foundPharmacy;
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +62,29 @@ class _Pharmacy extends State<Pharmacy> {
                     AsyncSnapshot<List<PharmacyModel>?> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
-                      itemBuilder: (context, index) {
-                        if (snapshot.hasData == null)
-                          return Center(child: Text('No results'));
-                        return pharmacyWidget(context, snapshot.data, index);
-                      },
-                      itemCount: snapshot.data?.length,
-                    );
+                        itemBuilder: (context, index) {
+                          return search != null
+                              ? (filter(snapshot.data, search)?.length == 0)
+                                  ? Container(
+                                      height: size.height * .6,
+                                      child: Center(
+                                        child: Text(
+                                          "No results",
+                                          style: TextStyle(
+                                              color: Colors.black38,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    )
+                                  : pharmacyWidget(context,
+                                      filter(snapshot.data, search), index)
+                              : pharmacyWidget(context, snapshot.data, index);
+                        },
+                        itemCount: search != null
+                            ? (filter(snapshot.data, search)?.length == 0
+                                ? (filter(snapshot.data, search)?.length)! + 1
+                                : filter(snapshot.data, search)?.length)
+                            : snapshot.data!.length);
                   } else {
                     print(snapshot.data);
                     return Center(
@@ -84,4 +101,10 @@ class _Pharmacy extends State<Pharmacy> {
       ),
     );
   }
+}
+
+List<PharmacyModel>? filter(List<PharmacyModel>? snapshot, search) {
+  return snapshot
+      ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
+      .toList();
 }
