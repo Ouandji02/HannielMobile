@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/LoginScreen.dart';
-import 'screens/ScreenPrincipal.dart';
+import 'package:projet_flutter/screens/EntryApp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -8,16 +8,24 @@ void main() {
       fontFamily: 'Poppins',
     ),
     debugShowCheckedModeBanner: false,
-    home: const MyApp(),
+    home: SafeArea(
+      top: true,
+      child: MyApp(),
+    ),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  String userId = "";
+
+  @override
+  void initState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getString("userId")!;
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return const LoginScreen();
+    return EntryApp();
   }
 }
