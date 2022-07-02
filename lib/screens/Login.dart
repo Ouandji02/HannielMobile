@@ -41,7 +41,6 @@ class _Login extends State<Login> {
         body:
             jsonEncode(<String, String>{"email": email, "password": password}),
       );
-      ;
       if (response.statusCode == 200 || response.statusCode == 201) {
         var bodyResponse = json.decode(response.body).cast<String, dynamic>();
         print(bodyResponse);

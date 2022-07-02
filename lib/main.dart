@@ -6,6 +6,7 @@ import 'package:projet_flutter/screens/pages/ListPresscription.dart';
 import 'package:projet_flutter/screens/pages/ListVisit.dart';
 import 'package:projet_flutter/screens/prescription/PrescriptionDetail.dart';
 import 'package:projet_flutter/widgets/CardPatient.dart';
+import 'package:projet_flutter/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

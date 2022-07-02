@@ -54,7 +54,7 @@ class ListCampagne extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "See  more",
+                                  "See details",
                                   style: TextStyle(
                                       color: HexColor(COLOR_PRIMARY),
                                       fontSize: 16),

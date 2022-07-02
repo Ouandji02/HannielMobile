@@ -25,6 +25,7 @@ class ProfilAndList extends StatelessWidget {
                 Container(
                   child: ListTile(
                     trailing: CircleAvatar(
+                      backgroundColor: HexColor(COLOR_PRIMARY),
                       child: IconButton(
                         onPressed: () => Navigator.push(context,
                             MaterialPageRoute(builder: (context) => ProfilUser())),

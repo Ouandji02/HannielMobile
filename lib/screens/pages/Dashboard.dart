@@ -66,20 +66,6 @@ Widget Dashboard(screen) {
         grade: "A",
         experience: 5,
         specialite: "specialite"),
-    Doctor(
-        nom: "simo4",
-        prenom: "Larissa",
-        photo: "assets/images/doctor.png",
-        dateNaissance: "dateNaissance",
-        email: "simo@gmail.com",
-        tel: "699665914",
-        poids: 60,
-        grpe_sanguin: "A+",
-        taille: 160,
-        description: "description",
-        grade: "A",
-        experience: 5,
-        specialite: "specialite"),
   ];
   return SingleChildScrollView(
     child: Container(
@@ -101,7 +87,7 @@ Widget Dashboard(screen) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Bonjour Larissa,",
+                    "Bonjour Larissaaaaa,",
                     style:
                         TextStyle(color: HexColor(COLOR_TITLE), fontSize: 15),
                   ),
@@ -172,6 +158,7 @@ Widget Dashboard(screen) {
                         CircleAvatar(
                           foregroundImage:
                               AssetImage("assets/images/doctor.png"),
+                          backgroundColor: Colors.white,
                         ),
                         SizedBox(
                           width: 10,
@@ -233,6 +220,7 @@ Widget Dashboard(screen) {
                               CircleAvatar(
                                 foregroundImage:
                                     AssetImage(doctors[index].photo),
+                                backgroundColor: Colors.white,
                               ),
                               SizedBox(
                                 height: 10,

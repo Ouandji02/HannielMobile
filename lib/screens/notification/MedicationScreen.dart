@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 
+import '../../API_SERVICES/medicamentApi.dart';
 import '../../CONSTANTS/color.dart';
+import '../../classes/MedicationClass.dart';
 
 class MedicationScreen extends StatefulWidget {
   const MedicationScreen({Key? key}) : super(key: key);
@@ -14,6 +16,8 @@ class MedicationScreen extends StatefulWidget {
 }
 
 class _Medication extends State<MedicationScreen> {
+  String? search;
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
@@ -27,14 +31,36 @@ class _Medication extends State<MedicationScreen> {
             child: Column(
               children: [
                 Container(
-                  height: 50,
+                  width: screen.width * .9,
+                  margin: EdgeInsets.only(top: 25),
+                  child: TextField(
+                    style: TextStyle(
+                        fontSize: 16.0, height: .2, color: Colors.black),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      fillColor: Colors.black.withOpacity(.1),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      labelStyle: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w400),
+                      labelText: 'Search medication',
+                    ),
+                    onChanged: (text) {
+                      setState(() => search = text);
+                    },
+                  ),
+                ),
+                Container(
+                  height: screen.height * .1,
                   child: ListView.builder(
-                      shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: 20,
                       itemBuilder: (context, i) {
                         return Container(
-                            margin: EdgeInsets.only(right: 10),
+                            margin: EdgeInsets.all(10),
                             child: Chip(
                               backgroundColor: HexColor(COLOR_SECONDARY),
                               avatar: Image(
@@ -48,73 +74,27 @@ class _Medication extends State<MedicationScreen> {
                                 "Sirop",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              padding: EdgeInsets.all(5),
                             ));
                       }),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: 20,
-                      itemBuilder: (context, i) {
-                        return Container(
-                            margin: EdgeInsets.only(right: 10, left: 10),
-                            child: Card(
-                              color: HexColor(COLOR_CARD),
-                              elevation: 0,
-                              child: ListTile(
-                                  leading: i % 2 == 0
-                                      ? Image(
-                                          image: AssetImage(
-                                              "assets/images/icons8-syrup-28.png"))
-                                      : Image(
-                                          image: AssetImage(
-                                              "assets/images/icons8-pills-28.png")),
-                                  contentPadding: EdgeInsets.all(10),
-                                  title: Text(
-                                    "Paracétamol 500mg | 200 XAF",
-                                    overflow: TextOverflow.fade,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: HexColor(COLOR_PRIMARY),
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Phamarcie Menoua",
-                                        style: TextStyle(
-                                            color: HexColor(COLOR_PRIMARY)
-                                                .withOpacity(.6)),
-                                      ),
-                                      Text(
-                                        "3km environ",
-                                        style: TextStyle(
-                                            color: HexColor(COLOR_MESSAGE_SEND)
-                                                .withOpacity(.6),
-                                            fontSize: 12),
-                                      )
-                                    ],
-                                  ),
-                                  trailing: true
-                                      ? CircularProgressIndicator(
-                                          color: HexColor(COLOR_PRIMARY),
-                                          strokeWidth: 1,
-                                        )
-                                      : InkWell(
-                                          onTap: () {
-                                            null;
-                                          },
-                                          child: Icon(
-                                            Icons.arrow_right_rounded,
-                                            size: 30,
-                                            color: HexColor(COLOR_SECONDARY),
-                                          ),
-                                        )),
-                            ));
+                  child: FutureBuilder(
+                      future: MedicamentApi.getMedication(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<MedicationModel>?> snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, i) {
+                                return MedicationWidget(snapshot.data, i);
+                              });
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
                       }),
                 ),
               ],
@@ -122,4 +102,61 @@ class _Medication extends State<MedicationScreen> {
           ),
         ));
   }
+}
+
+List<MedicationModel>? filter(List<MedicationModel>? snapshot, search) {
+  return snapshot
+      ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
+      .toList();
+}
+
+Widget MedicationWidget(snapshot, i) {
+  return Container(
+    margin: EdgeInsets.only(right: 10, left: 10),
+    child: Card(
+      color: HexColor(COLOR_CARD),
+      elevation: 0,
+      child: ListTile(
+        leading: i % 2 == 0
+            ? Image(image: AssetImage("assets/images/icons8-syrup-28.png"))
+            : Image(image: AssetImage("assets/images/icons8-pills-28.png")),
+        contentPadding: EdgeInsets.all(10),
+        title: Text(
+          snapshot[i].nom,
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+              fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Phamarciee ${snapshot[i].pharmacyUid}",
+              style: TextStyle(color: Colors.white.withOpacity(.6)),
+            ),
+            Text(
+              "3km environ",
+              style:
+                  TextStyle(color: Colors.white.withOpacity(.6), fontSize: 12),
+            )
+          ],
+        ),
+        trailing: true
+            ? CircularProgressIndicator(
+                color: HexColor(COLOR_PRIMARY),
+                strokeWidth: 1,
+              )
+            : InkWell(
+                onTap: () {
+                  null;
+                },
+                child: Icon(
+                  Icons.arrow_right_rounded,
+                  size: 30,
+                  color: HexColor(COLOR_SECONDARY),
+                ),
+              ),
+      ),
+    ),
+  );
 }

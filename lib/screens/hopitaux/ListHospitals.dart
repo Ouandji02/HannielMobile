@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/API_SERVICES/hospitalApi.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/function/Search.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
+import '../../classes/HospitalModel.dart';
+import 'Hospital.dart';
 
-class Pharmacy extends StatefulWidget {
+class Hospital extends StatefulWidget {
   @override
-  _Pharmacy createState() {
+  _Hospital createState() {
     // TODO: implement createState
-    return _Pharmacy();
+    return _Hospital();
   }
 }
 
-class _Pharmacy extends State<Pharmacy> {
+class _Hospital extends State<Hospital> {
+  late List<PharmacyModel> foundHospital;
   String? search;
-  List<PharmacyModel>? foundPharmacy;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBarItem("Pharmacy"),
+      appBar: AppBarItem("Hospital"),
       body: Container(
         color: Colors.white,
         constraints: BoxConstraints(
@@ -49,17 +59,20 @@ class _Pharmacy extends State<Pharmacy> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search pharmacy',
+                    labelText: 'Search hospitals',
                   ),
                   onChanged: (text) => {
-                        if (text != null) {setState(() => search = text)}
+                        if (text != null)
+                          {
+                            setState(() => search = text),
+                          }
                       }),
             ),
             Expanded(
               child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(search),
+                future: HospitalApi.getHospital(),
                 builder: (BuildContext context,
-                    AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                    AsyncSnapshot<List<HospitalModel>?> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemBuilder: (context, index) {
@@ -67,7 +80,7 @@ class _Pharmacy extends State<Pharmacy> {
                               ? (filter(snapshot.data, search)?.length == 0)
                                   ? Container(
                                       height: size.height * .6,
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           "No results",
                                           style: TextStyle(
@@ -76,9 +89,9 @@ class _Pharmacy extends State<Pharmacy> {
                                         ),
                                       ),
                                     )
-                                  : pharmacyWidget(context,
+                                  : hospitalWidget(context,
                                       filter(snapshot.data, search), index)
-                              : pharmacyWidget(context, snapshot.data, index);
+                              : hospitalWidget(context, snapshot.data, index);
                         },
                         itemCount: search != null
                             ? (filter(snapshot.data, search)?.length == 0
@@ -103,7 +116,7 @@ class _Pharmacy extends State<Pharmacy> {
   }
 }
 
-List<PharmacyModel>? filter(List<PharmacyModel>? snapshot, search) {
+List<HospitalModel>? filter(List<HospitalModel>? snapshot, search) {
   return snapshot
       ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
       .toList();

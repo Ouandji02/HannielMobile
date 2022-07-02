@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/function/getCoordonates.dart';
+import 'package:projet_flutter/function/getUserStorage.dart';
 import 'package:projet_flutter/screens/pages/Dashboard.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/pages/Messages.dart';
@@ -24,17 +26,18 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-
-  void userStorage() async{
+  void userStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    UserApi.getOneUser(await prefs.getString("userId"), await  prefs.getString("token"));
-
+    UserApi.getOneUser(
+        await prefs.getString("userId"), await prefs.getString("token"));
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     userStorage();
+    getCoordonate();
   }
 
   @override
@@ -45,7 +48,6 @@ class _Home extends State<Home> {
     final pages = [
       Dashboard(screen),
       ProfilAndList(),
-      Message(screen),
       Medication()
     ];
 
@@ -82,7 +84,7 @@ class _Home extends State<Home> {
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               )),
-          drawer: DrawerLayout("user", context),
+          drawer: DrawerLayout(),
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
               indicatorColor: HexColor(COLOR_PRIMARY).withOpacity(.8),
@@ -113,11 +115,9 @@ class _Home extends State<Home> {
                         color: index == 1 ? Colors.white : Colors.black),
                     label: 'profil'),
                 NavigationDestination(
-                    icon: Icon(Icons.message_rounded,
-                        color: index == 2 ? Colors.white : Colors.black),
-                    label: 'message'),
-                NavigationDestination(
-                    icon: Icon(Icons.medication_outlined), label: 'medicament'),
+                    icon: Icon(Icons.medication_outlined,
+                        color: index == 3 ? Colors.white : Colors.black),
+                    label: 'medicament'),
               ],
             ),
           ),

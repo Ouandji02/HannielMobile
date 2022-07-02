@@ -17,12 +17,13 @@ Widget CardPatient(size,percent){
             child: Icon(
               Icons.medical_services_outlined,
               size: size.height * .1,
+              color: Colors.white,
             )),
         Positioned(
           child: Text(
             "Physical\nExamination",
             style: TextStyle(
-                color: HexColor(COLOR_TITLE),
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16),
           ),
@@ -32,7 +33,7 @@ Widget CardPatient(size,percent){
         Positioned(
           child: Text(
             "14/02/2019",
-            style: TextStyle(color: HexColor(COLOR_TITLE)),
+            style: TextStyle(color: Colors.white),
           ),
           left: size.width * .25,
           top: size.height * .075,
@@ -44,12 +45,12 @@ Widget CardPatient(size,percent){
                   Text(
                     "See  reports",
                     style: TextStyle(
-                        color: HexColor(COLOR_PRIMARY),
+                        color: Colors.white,
                         fontSize: 16),
                   ),
                   Icon(
                     Icons.arrow_forward,
-                    color: HexColor(COLOR_PRIMARY),
+                    color: Colors.white,
                   ),
                 ],
               ),

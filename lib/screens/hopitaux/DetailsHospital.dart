@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
 import 'package:projet_flutter/screens/notification/MedicationScreen.dart';
 
 import '../../CONSTANTS/color.dart';
 
-class DetailPharmacy extends StatelessWidget {
+class DetailHospital extends StatelessWidget {
   late String? nom;
   late String? image;
   late String? desc;
 
-  DetailPharmacy({
+  DetailHospital({
     required this.nom,
     required this.image,
     required this.desc,
@@ -179,7 +180,7 @@ class DetailPharmacy extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MedicationScreen())),
+                                  builder: (context) => ListDoctors())),
                           child: Container(
                             child: Chip(
                               labelPadding: EdgeInsets.only(
@@ -190,7 +191,7 @@ class DetailPharmacy extends StatelessWidget {
                               elevation: 5.0,
                               shadowColor: Colors.grey[60],
                               label: Text(
-                                "Voir les medicaments",
+                                "Voir les medecins",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: size.width * .04),
