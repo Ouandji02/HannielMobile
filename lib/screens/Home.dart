@@ -45,7 +45,6 @@ class _Home extends State<Home> {
     final pages = [
       Dashboard(screen),
       ProfilAndList(),
-      Message(screen),
       Medication()
     ];
 
@@ -82,7 +81,7 @@ class _Home extends State<Home> {
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               )),
-          drawer: DrawerLayout("user", context),
+          drawer: DrawerLayout(),
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
               indicatorColor: HexColor(COLOR_PRIMARY).withOpacity(.8),
@@ -112,10 +111,6 @@ class _Home extends State<Home> {
                     icon: Icon(Icons.person,
                         color: index == 1 ? Colors.white : Colors.black),
                     label: 'profil'),
-                NavigationDestination(
-                    icon: Icon(Icons.message_rounded,
-                        color: index == 2 ? Colors.white : Colors.black),
-                    label: 'message'),
                 NavigationDestination(
                     icon: Icon(Icons.medication_outlined,
                         color: index == 3 ? Colors.white : Colors.black),

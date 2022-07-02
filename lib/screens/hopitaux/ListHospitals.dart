@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/API_SERVICES/hospitalApi.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
 import 'package:projet_flutter/function/Search.dart';
@@ -61,21 +62,42 @@ class _Hospital extends State<Hospital> {
                     labelText: 'Search hospitals',
                   ),
                   onChanged: (text) => {
-                        if (text != null) {setState(() => search = text)}
+                        if (text != null)
+                          {
+                            setState(() => search = text),
+                          }
                       }),
             ),
             Expanded(
               child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(search),
+                future: HospitalApi.getHospital(),
                 builder: (BuildContext context,
-                    AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                    AsyncSnapshot<List<HospitalModel>?> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
-                      itemBuilder: (context, index) {
-                        return hospitalWidget(context, snapshot.data, index);
-                      },
-                      itemCount: snapshot.data?.length,
-                    );
+                        itemBuilder: (context, index) {
+                          return search != null
+                              ? (filter(snapshot.data, search)?.length == 0)
+                                  ? Container(
+                                      height: size.height * .6,
+                                      child: const Center(
+                                        child: Text(
+                                          "No results",
+                                          style: TextStyle(
+                                              color: Colors.black38,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    )
+                                  : hospitalWidget(context,
+                                      filter(snapshot.data, search), index)
+                              : hospitalWidget(context, snapshot.data, index);
+                        },
+                        itemCount: search != null
+                            ? (filter(snapshot.data, search)?.length == 0
+                                ? (filter(snapshot.data, search)?.length)! + 1
+                                : filter(snapshot.data, search)?.length)
+                            : snapshot.data!.length);
                   } else {
                     print(snapshot.data);
                     return Center(
@@ -92,4 +114,10 @@ class _Hospital extends State<Hospital> {
       ),
     );
   }
+}
+
+List<HospitalModel>? filter(List<HospitalModel>? snapshot, search) {
+  return snapshot
+      ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
+      .toList();
 }

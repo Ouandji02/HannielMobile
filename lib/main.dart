@@ -27,6 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Home();
+    return userId == null ? EntryApp() : Home();
   }
 }

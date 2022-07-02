@@ -59,11 +59,11 @@ class _PatientDetails extends State<PatientDetails> {
                 child: Card(
                   elevation: 0,
                   child: ListTile(
-                    title: Text("Purpose of visit", style: TextStyle(fontSize: 12),),
+                    title: const Text("Purpose of visit", style: TextStyle(fontSize: 12),),
                     subtitle: Text("Consultation", style: TextStyle(color: HexColor(COLOR_TITLE), fontWeight: FontWeight.bold, fontSize: 15),),
                   ),
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.grey),
                     top: BorderSide(color: Colors.grey),

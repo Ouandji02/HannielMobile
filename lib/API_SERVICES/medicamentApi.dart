@@ -7,7 +7,7 @@ import 'package:projet_flutter/classes/MedicationClass.dart';
 class MedicamentApi {
   static var client = http.Client();
 
-    static Future<List<MedicationModel>?> getPharmacy() async {
+    static Future<List<MedicationModel>?> getMedication() async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 

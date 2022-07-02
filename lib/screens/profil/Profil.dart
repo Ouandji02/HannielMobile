@@ -20,6 +20,7 @@ class Profil extends State<ProfilUser> {
   var user = null;
 
   void getUserStorage() async {
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("user") != null) {
       var userP = jsonDecode(prefs.getString("user")!);
@@ -27,6 +28,7 @@ class Profil extends State<ProfilUser> {
       setState(() {
         user = userP["message"];
       });
+      print('fddddddddddddddsddjdd');
       print(user);
     }
   }
@@ -35,8 +37,7 @@ class Profil extends State<ProfilUser> {
   void initState() {
     super.initState();
     print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-    getUserStorage();
-    print(user);
+    this.getUserStorage();
   }
 
   @override
@@ -49,7 +50,7 @@ class Profil extends State<ProfilUser> {
             context, MaterialPageRoute(builder: (context) => UpdateProfil())),
         child: Icon(Icons.edit),
       ),
-      body: SingleChildScrollView(
+     body: SingleChildScrollView(
         child: Container(
             color: Colors.white,
             constraints:
