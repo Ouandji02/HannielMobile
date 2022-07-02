@@ -9,26 +9,24 @@ import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
 import 'package:projet_flutter/screens/settings/Settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../classes/UserClass.dart';
+import '../function/getUserStorage.dart';
 import '../screens/Home.dart';
 import '../screens/Login.dart';
 import '../screens/profil/Profil.dart';
 
-
-class DrawerLayout extends StatefulWidget{
+class DrawerLayout extends StatefulWidget {
   @override
   _DrawerLayout createState() {
     // TODO: implement createState
     return _DrawerLayout();
   }
-
-
 }
 
-class _DrawerLayout extends State<DrawerLayout>{
-
+class _DrawerLayout extends State<DrawerLayout> {
   var user;
 
-  void getUserStorage() async {
+  void getUserStorageCache() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("user") != null) {
       var userP = jsonDecode(prefs.getString("user")!);
@@ -41,93 +39,103 @@ class _DrawerLayout extends State<DrawerLayout>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    this.getUserStorage();
+    this.getUserStorageCache();
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Drawer(
-        child: Material(
-          color: HexColor(COLOR_PRIMARY),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              user != null
-                  ? userAccountHeader(user["name"], user["email"])
-                  : userAccountHeader("ouandji", "ouandjil@gmail.com"),
-              const SizedBox(
-                height: 5,
-              ),
-              MenuList(
-                  text: 'Home',
-                  icon: Icons.home,
-                  onClicked: () => selectItem(context, 0)),
-              const SizedBox(
-                height: 5,
-              ),
-              MenuList(
-                  text: 'Profile',
-                  icon: Icons.person,
-                  onClicked: () => selectItem(context, 1)),
-              const SizedBox(
-                height: 5,
-              ),
-              const Divider(
-                color: Colors.white,
-              ),
-              MenuList(
-                  text: 'Hopitaux',
-                  icon: Icons.local_hospital,
-                  onClicked: () => selectItem(context, 2)),
-              const SizedBox(
-                height: 5,
-              ),
-              MenuList(
-                  text: 'Pharmacies',
-                  icon: Icons.local_pharmacy,
-                  onClicked: () => selectItem(context, 3)),
-              const SizedBox(
-                height: 5,
-              ),
-              MenuList(
-                  text: 'Specialistes',
-                  icon: Icons.person_sharp,
-                  onClicked: () => selectItem(context, 4)),
-              const SizedBox(
-                height: 5,
-              ),
-              /* MenuList(
+      child: Material(
+        color: HexColor(COLOR_PRIMARY),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            FutureBuilder(
+              builder: (context, AsyncSnapshot<User?> snapshot) {
+                if (snapshot.hasData) {
+                  return userAccountHeader(
+                      snapshot.data!.nom, snapshot.data!.email);
+                } else {
+                  return userAccountHeader("John Doe", "xxxxx@gmail.com");
+                }
+              },
+              future: getUserStorage(),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
+                text: 'Home',
+                icon: Icons.home,
+                onClicked: () => selectItem(context, 0)),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
+                text: 'Profile',
+                icon: Icons.person,
+                onClicked: () => selectItem(context, 1)),
+            const SizedBox(
+              height: 5,
+            ),
+            const Divider(
+              color: Colors.white,
+            ),
+            MenuList(
+                text: 'Hopitaux',
+                icon: Icons.local_hospital,
+                onClicked: () => selectItem(context, 2)),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
+                text: 'Pharmacies',
+                icon: Icons.local_pharmacy,
+                onClicked: () => selectItem(context, 3)),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
+                text: 'Specialistes',
+                icon: Icons.person_sharp,
+                onClicked: () => selectItem(context, 4)),
+            const SizedBox(
+              height: 5,
+            ),
+            /* MenuList(
               text: 'Bookmarks',
               icon: Icons.bookmark,
               onClicked: () => selectItem(context, 5)),
           const SizedBox(
             height: 5,
           ), */
-              const Divider(
-                color: Colors.white,
-              ),
-              /* MenuList(
+            const Divider(
+              color: Colors.white,
+            ),
+            /* MenuList(
               text: 'Notification',
               icon: Icons.notifications,
               onClicked: () => selectItem(context, 6)),
           const SizedBox(
             height: 5,
           ), */
-              MenuList(
-                  text: 'Settings',
-                  icon: Icons.settings,
-                  onClicked: () => selectItem(context, 7)),
-              const SizedBox(
-                height: 5,
-              ),
-              MenuList(
-                  text: 'Logout',
-                  icon: Icons.logout,
-                  onClicked: () => selectItem(context, 8))
-            ],
-          ),
-        ),); }
-
+            MenuList(
+                text: 'Settings',
+                icon: Icons.settings,
+                onClicked: () => selectItem(context, 7)),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
+                text: 'Logout',
+                icon: Icons.logout,
+                onClicked: () => selectItem(context, 8))
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 Widget userAccountHeader(name, email) => Container(
@@ -223,7 +231,6 @@ selectItem(BuildContext context, index) async {
       );
       break;
     case 8:
-
       prefs.remove("userId");
       prefs.clear();
       Navigator.of(context).push(

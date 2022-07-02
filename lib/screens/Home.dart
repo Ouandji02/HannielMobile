@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/function/getCoordonates.dart';
+import 'package:projet_flutter/function/getUserStorage.dart';
 import 'package:projet_flutter/screens/pages/Dashboard.dart';
 import 'package:projet_flutter/screens/pages/Medication.dart';
 import 'package:projet_flutter/screens/pages/Messages.dart';
@@ -35,6 +37,7 @@ class _Home extends State<Home> {
     super.initState();
     print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     userStorage();
+    getCoordonate();
   }
 
   @override

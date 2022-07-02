@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/classes/UserClass.dart';
+import 'package:projet_flutter/function/getUserStorage.dart';
 import 'package:projet_flutter/screens/profil/UpdateProfil.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +18,9 @@ class ProfilUser extends StatefulWidget {
 }
 
 class Profil extends State<ProfilUser> {
-  var user = null;
+  var user;
 
-  void getUserStorage() async {
+  /* void getUserStorage() async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("user") != null) {
@@ -31,13 +32,14 @@ class Profil extends State<ProfilUser> {
       print('fddddddddddddddsddjdd');
       print(user);
     }
-  }
+  }*/
 
   @override
   void initState() {
     super.initState();
-    print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-    this.getUserStorage();
+    user = getUserStorage();
+    print(
+        "ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $user");
   }
 
   @override
@@ -50,84 +52,94 @@ class Profil extends State<ProfilUser> {
             context, MaterialPageRoute(builder: (context) => UpdateProfil())),
         child: Icon(Icons.edit),
       ),
-     body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Container(
             color: Colors.white,
             constraints:
-            BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+                BoxConstraints(minHeight: MediaQuery.of(context).size.height),
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Container(
-                  child: ListTile(
-                    title: Text(user["name"] != null ? user["name"] : null),
-                    subtitle: Text("Nom"),
-                    trailing: CircleAvatar(
-                      backgroundImage:
-                      AssetImage(user["photo"] != null ? user["photo"] : null),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text(
-                      "Contact number",
-                      style: TextStyle(color: Colors.black45, fontSize: 14),
-                    ),
-                    trailing: Text(user["phone"] != null ? user["phone"] : "null"),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("Email",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text(user["email"] != null ? user["email"] : "null"),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("Gender",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text(user["sexe"] != null ? user["sexe"] : "null"),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("Date of birth",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text(user["dateNaissance"] != null ? user["dateNaissance"] : null),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("Blood group",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text("null"),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("height",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text(""),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("weight",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text( "null"),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text("Location",
-                        style: TextStyle(color: Colors.black45, fontSize: 14)),
-                    trailing: Text(""),
-                  ),
-                )
-              ],
+            child: FutureBuilder(
+              builder: (context, AsyncSnapshot<User?> snapshot) {
+                if (snapshot.hasData) {
+                  return Column(
+                    children: [
+                      Container(
+                        child: ListTile(
+                          title: Text(snapshot.data!.nom),
+                          subtitle: Text("Nom"),
+                          trailing: CircleAvatar(
+                            backgroundImage: AssetImage(snapshot.data!.photo),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text(
+                            "Contact number",
+                            style:
+                                TextStyle(color: Colors.black45, fontSize: 14),
+                          ),
+                          trailing: Text(snapshot.data!.tel),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("Email",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.email),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("Gender",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.sexe),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("Date of birth",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.dateNaissance),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("Blood group",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.grpe_sanguin),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("height",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.taille.toString()),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text("weight",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14)),
+                          trailing: Text(snapshot.data!.poids.toString()),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator()
+                  );
+                }
+              },
+              future: getUserStorage(),
             )),
       ),
     );

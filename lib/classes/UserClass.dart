@@ -8,6 +8,7 @@ class User {
   late int poids;
   late String grpe_sanguin;
   late int taille;
+  late String sexe;
 
   User(
       {required this.nom,
@@ -18,7 +19,8 @@ class User {
       required this.tel,
       required this.poids,
       required this.grpe_sanguin,
-      required this.taille});
+      required this.taille,
+      required this.sexe});
 
   User.fromJson(Map<String, dynamic> json) {
     nom = json["name"];
@@ -30,5 +32,6 @@ class User {
     email = json["email"];
     grpe_sanguin = json["grpe_sanguin"];
     taille = json["taille"];
+    sexe = json["sexe"];
   }
 }
