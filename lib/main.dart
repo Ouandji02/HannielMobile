@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/EntryApp.dart';
+import 'package:projet_flutter/screens/campagne/ListCampagne.dart';
+import 'package:projet_flutter/screens/pages/ListExamination.dart';
+import 'package:projet_flutter/screens/pages/ListPresscription.dart';
+import 'package:projet_flutter/screens/pages/ListVisit.dart';
+import 'package:projet_flutter/screens/prescription/PrescriptionDetail.dart';
+import 'package:projet_flutter/widgets/CardPatient.dart';
 import 'package:projet_flutter/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +33,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return userId == null ? EntryApp() : Home();
+    return Campagne();
   }
 }
