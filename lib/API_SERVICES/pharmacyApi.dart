@@ -19,15 +19,6 @@ class PharmacyApi {
     });
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      /*if (key != null) {
-        print('fffffffffffffffffffffffffffffffffffffffffffffff $key');
-        print(pharmacyFromJson(data["message"])
-            .where((pharmacy) => pharmacy.nom!.contains(key))
-            .toList());
-        return pharmacyFromJson(data["message"])
-            .where((pharmacy) => pharmacy.nom!.contains(key))
-            .toList();
-      }*/
       listPharmacy = pharmacyFromJson(data["message"]);
       return pharmacyFromJson(data["message"]);
     } else {

@@ -1,3 +1,5 @@
+List<User> userFromJson(dynamic str) =>
+    List<User>.from((str).map((x) => User.fromJson(x)));
 class User {
   late String nom;
   late String prenom;
@@ -9,6 +11,7 @@ class User {
   late String grpe_sanguin;
   late int taille;
   late String sexe;
+  late String password;
 
   User(
       {required this.nom,
@@ -20,18 +23,20 @@ class User {
       required this.poids,
       required this.grpe_sanguin,
       required this.taille,
-      required this.sexe});
+      required this.sexe,
+      required this.password});
 
   User.fromJson(Map<String, dynamic> json) {
     nom = json["name"];
-    prenom = json["prenom"];
+    prenom = json["surname"];
     photo = json["photo"];
     dateNaissance = json["dateNaissance"];
     poids = json["poids"];
-    tel = json["tel"];
+    tel = json["phone"];
     email = json["email"];
     grpe_sanguin = json["grpe_sanguin"];
     taille = json["taille"];
     sexe = json["sexe"];
+    password = json["password"];
   }
 }

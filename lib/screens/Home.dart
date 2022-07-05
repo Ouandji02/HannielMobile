@@ -31,13 +31,15 @@ class _Home extends State<Home> {
     UserApi.getOneUser(
         await prefs.getString("userId"), await prefs.getString("token"));
   }
-
+var t;
   @override
   void initState() {
     super.initState();
     print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     userStorage();
     getCoordonate();
+     t = getUserStorage();
+    print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ${t}");
   }
 
   @override

@@ -93,7 +93,7 @@ class Profil extends State<ProfilUser> {
                       ),
                       Container(
                         child: ListTile(
-                          title: Text("Gender",
+                          title: Text("Genders",
                               style: TextStyle(
                                   color: Colors.black45, fontSize: 14)),
                           trailing: Text(snapshot.data!.sexe),

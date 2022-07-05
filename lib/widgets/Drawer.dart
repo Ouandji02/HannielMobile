@@ -26,20 +26,11 @@ class DrawerLayout extends StatefulWidget {
 class _DrawerLayout extends State<DrawerLayout> {
   var user;
 
-  void getUserStorageCache() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString("user") != null) {
-      var userP = jsonDecode(prefs.getString("user")!);
-      print("fbgbgbgbbbb${userP["message"]}");
-      user = userP["message"];
-    }
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    this.getUserStorageCache();
+    user = getUserStorage();
   }
 
   @override
@@ -52,15 +43,16 @@ class _DrawerLayout extends State<DrawerLayout> {
           padding: EdgeInsets.zero,
           children: [
             FutureBuilder(
-              builder: (context, AsyncSnapshot<User?> snapshot) {
+              future: getUserStorage(),
+              builder: (context,snapshot) {
+                print('affichekkkkkkkkkkkkkkkkkkkkkkkkk ${snapshot.data}');
                 if (snapshot.hasData) {
                   return userAccountHeader(
-                      snapshot.data!.nom, snapshot.data!.email);
+                      snapshot.data!, snapshot.data!);
                 } else {
                   return userAccountHeader("John Doe", "xxxxx@gmail.com");
                 }
               },
-              future: getUserStorage(),
             ),
             const SizedBox(
               height: 5,
