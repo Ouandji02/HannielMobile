@@ -75,61 +75,74 @@ class _Campagne extends State<Campagne> {
                   return Container(
                     margin: EdgeInsets.all(20),
                     padding: EdgeInsets.only(
-                        top: size.height * .025, left: size.width * .1),
-                    decoration: BoxDecoration(color: HexColor(COLOR_CARD)),
-                    height: size.height * .20,
-                    width: size.width,
+                        top: size.height * .025, left: size.width * .025),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black12.withOpacity(.1),
+                            blurRadius: 5,
+                            offset: Offset(0, -1),
+                            spreadRadius: 1)
+                      ],
+                    ),
+                    height: size.height * .25,
+                    width: size.width * .3,
                     child: Stack(
                       children: [
-                        Positioned(
-                            child: Icon(
-                              Icons.medical_services_outlined,
-                              size: size.height * .1,
-                              color: Colors.white,
-                            )),
+                        //Positioned(
+                            //child: Icon(
+                              //Icons.medical_services_outlined,
+                             // size: size.height * .1,
+                              //color: Colors.white,
+                            //)),
                         Positioned(
                           child: Text(
-                            "Consultation des yeux",
+                            "Campagne de vaccination\ngratuite contre la rougeole",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
-                          left: size.width * .25,
-                          top: size.height * .015,
+                          top: size.height * .01,
                         ),
                         Positioned(
                           child: Text(
                             "Hopital de District",
                             style: TextStyle(color: Colors.white),
                           ),
-                          left: size.width * .25,
-                          top: size.height * .075,
+                          top: size.height * .1,
                         ),
                         Positioned(
-                            child: InkWell(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DetailCampagne(nom: "Consultation des yeux", image: "", desc: "azertyytrezazerttrezazertreza", date_deb: "27 juin 2022", date_fin: "27 juillet 2022", resp: "Doctor SIMO"))),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Details",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            left: size.width * .25,
-                            bottom: size.height * .01)
+                            child: TextButton.icon(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        HexColor(COLOR_MESSAGE_WHITE)),
+                                    side: MaterialStateProperty.all(
+                                        BorderSide(color: Colors.white))
+                                    ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailCampagne(
+                                          nom: "Simo",
+                                          image: "",
+                                          desc: "Une campagne qui vous aidera", date_fin: '', date_deb: '', resp: '',
+                                    ),
+                                  )
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.remove_red_eye_rounded,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  "En savoir plus",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),top: 100),
                       ],
                     ),
                   );
@@ -143,3 +156,5 @@ class _Campagne extends State<Campagne> {
     );
   }
 }
+
+
