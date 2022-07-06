@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/EntryApp.dart';
-import 'package:projet_flutter/screens/campagne/ListCampagne.dart';
 import 'package:projet_flutter/screens/campagne/ListCampagnes.dart';
 import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
 import 'package:projet_flutter/screens/pages/ListExamination.dart';

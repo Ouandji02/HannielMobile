@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/campagne/ListCampagnes.dart';
 import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
 import 'package:projet_flutter/screens/hopitaux/ListHospitals.dart';
 import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
@@ -97,16 +98,23 @@ class _DrawerLayout extends State<DrawerLayout> {
               height: 5,
             ),
             MenuList(
+                text: 'Campagnes',
+                icon: Icons.local_pharmacy,
+                onClicked: () => selectItem(context, 4)),
+            const SizedBox(
+              height: 5,
+            ),
+            MenuList(
                 text: 'Specialistes',
                 icon: Icons.person_sharp,
-                onClicked: () => selectItem(context, 4)),
+                onClicked: () => selectItem(context, 5)),
             const SizedBox(
               height: 5,
             ),
             /* MenuList(
               text: 'Bookmarks',
               icon: Icons.bookmark,
-              onClicked: () => selectItem(context, 5)),
+              onClicked: () => selectItem(context, 6)),
           const SizedBox(
             height: 5,
           ), */
@@ -116,21 +124,21 @@ class _DrawerLayout extends State<DrawerLayout> {
             /* MenuList(
               text: 'Notification',
               icon: Icons.notifications,
-              onClicked: () => selectItem(context, 6)),
+              onClicked: () => selectItem(context, 7)),
           const SizedBox(
             height: 5,
           ), */
             MenuList(
                 text: 'Settings',
                 icon: Icons.settings,
-                onClicked: () => selectItem(context, 7)),
+                onClicked: () => selectItem(context, 8)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
                 text: 'Logout',
                 icon: Icons.logout,
-                onClicked: () => selectItem(context, 8))
+                onClicked: () => selectItem(context, 9))
           ],
         ),
       ),
@@ -219,6 +227,13 @@ selectItem(BuildContext context, index) async {
       );
       break;
     case 4:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ListCampagnes(),
+        ),
+      );
+      break;
+    case 5:
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ListDoctors(),
