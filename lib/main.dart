@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/EntryApp.dart';
 import 'package:projet_flutter/screens/campagne/ListCampagne.dart';
+import 'package:projet_flutter/screens/campagne/ListCampagnes.dart';
+import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
 import 'package:projet_flutter/screens/pages/ListExamination.dart';
 import 'package:projet_flutter/screens/pages/ListPresscription.dart';
 import 'package:projet_flutter/screens/pages/ListVisit.dart';
@@ -33,6 +35,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Campagne();
+    return ListCampagnes();
   }
 }
