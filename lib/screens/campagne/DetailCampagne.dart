@@ -61,6 +61,7 @@ class DetailCampagne extends StatelessWidget {
                 ),
               ),
               Container(
+                height: size.height * .5,
                 padding: EdgeInsets.only(
                     left: size.width * .05, right: size.width * .05),
                 child: Column(
@@ -68,6 +69,7 @@ class DetailCampagne extends StatelessWidget {
                     Container(
                       width: size.width,
                       height: size.height * .1,
+                      margin: EdgeInsets.only(bottom: 10),
                       child: Stack(
                         children: [
                           Positioned(
@@ -87,7 +89,7 @@ class DetailCampagne extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                              top: (size.height * .13) / 3 + 20,
+                              top: (size.height * .13) / 3 + 30,
                               child: Text(
                                 this.resp!,
                                 style: TextStyle(color: Colors.black26),
@@ -119,40 +121,6 @@ class DetailCampagne extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Card(
-                            elevation: 5,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white70,
-                              child: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.phone,
-                                    color: HexColor(COLOR_PRIMARY),
-                                  )),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Card(
-                            elevation: 5,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white70,
-                              child: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.message_rounded,
-                                    color: HexColor(COLOR_PRIMARY),
-                                  )),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               )

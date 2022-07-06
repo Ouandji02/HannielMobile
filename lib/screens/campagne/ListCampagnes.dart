@@ -15,7 +15,7 @@ class ListCampagnes extends StatelessWidget {
   final campagne = [
     CampaignModel(
       nom: "Campagne de consultation \n gratuite contre la rougeole",
-      image: "",
+      image: "assets/images/undraw_doctors_hwty.png",
       description: "azertyuiopazertyuiopazertyuiopazertyuiopazertyuiop",
       date_deb: "27 Juin 2022",
       date_fin: "27 Juillet 2022",
@@ -25,7 +25,7 @@ class ListCampagnes extends StatelessWidget {
       responsabe: "Docteur SIMO",),
     CampaignModel(
       nom: "Consultation des yeux",
-      image: "",
+      image: "assets/images/undraw_doctors_hwty.png",
       description: "azertyuiopazertyuiopazertyuiopazertyuiopazertyuiop",
       date_deb: "27 Juin 2022",
       date_fin: "27 Juillet 2022",
@@ -35,7 +35,7 @@ class ListCampagnes extends StatelessWidget {
       responsabe: "Docteur SIMO",),
     CampaignModel(
       nom: "Consultation des yeux",
-      image: "",
+      image: "assets/images/undraw_doctors_hwty.png",
       description: "azertyuiopazertyuiopazertyuiopazertyuiopazertyuiop",
       date_deb: "27 Juin 2022",
       date_fin: "27 Juillet 2022",
@@ -45,7 +45,7 @@ class ListCampagnes extends StatelessWidget {
       responsabe: "Docteur SIMO",),
     CampaignModel(
       nom: "Consultation des yeux",
-      image: "",
+      image: "assets/images/undraw_doctors_hwty.png",
       description: "azertyuiopazertyuiopazertyuiopazertyuiopazertyuiop",
       date_deb: "27 Juin 2022",
       date_fin: "27 Juillet 2022",
@@ -57,6 +57,7 @@ class ListCampagnes extends StatelessWidget {
     // TODO: implement build
     double heigth = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBarItem("Campagnes"),
       body: Container(
@@ -71,46 +72,73 @@ class ListCampagnes extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: campagne.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          child: Card(
-                              elevation: 5,
-                              child: Container(
-                                padding: EdgeInsets.all(20),
-                                child: Column(
-                                  children: [
-                                    CircleAvatar(
-                                      foregroundImage:
-                                      AssetImage(campagne[index].image),
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      campagne[index].nom,
-                                      style: TextStyle(
-                                          color: HexColor(COLOR_TITLE),
-                                          fontSize: 20),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      campagne[index].description,
-                                      style: TextStyle(
-                                          color: HexColor(COLOR_SUBTITLE_MESSAGE)),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      campagne[index].responsabe,
-                                      style: TextStyle(
-                                          color: HexColor(COLOR_SUBTITLE_MESSAGE)),
-                                    ),
-                                  ],
+                        return Container(
+                          margin: EdgeInsets.all(20),
+                          padding: EdgeInsets.only(
+                              top: size.height * .025, left: size.width * .025),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12.withOpacity(.1),
+                                  blurRadius: 5,
+                                  offset: Offset(0, -1),
+                                  spreadRadius: 1)
+                            ],
+                          ),
+                          height: size.height * .2,
+                          width: size.width * .7,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                child: Text(
+                                  campagne[index].nom,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
                                 ),
-                              )),
+                                top: size.height * .01,
+                              ),Positioned(
+                                child: ImageIcon(AssetImage(campagne[index].image),size: 90,),
+                                top: 50,
+                                left: 150,
+                              ),
+                              Positioned(
+                                  child: TextButton.icon(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            HexColor(COLOR_MESSAGE_WHITE)),
+                                        side: MaterialStateProperty.all(
+                                            BorderSide(color: Colors.white))
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DetailCampagne(
+                                              nom: campagne[index].nom,
+                                              image: campagne[index].image,
+                                              desc: campagne[index].description,
+                                              date_fin: campagne[index].date_fin,
+                                              date_deb: campagne[index].date_deb,
+                                              resp: campagne[index].responsabe,
+                                            ),
+                                          )
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.remove_red_eye_rounded,
+                                      color: Colors.white,
+                                    ),
+                                    label: Text(
+                                      "En savoir plus",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),top: 100),
+                            ],
+                          ),
                         );
                       },
                     ))
