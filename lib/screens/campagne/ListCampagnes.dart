@@ -100,8 +100,18 @@ class ListCampagnes extends StatelessWidget {
                                       fontSize: 16),
                                 ),
                                 top: size.height * .01,
-                              ),Positioned(
-                                child: ImageIcon(AssetImage(campagne[index].image),size: 90,),
+                              ),
+                              Positioned(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(campagne[index].image),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  height: size.height * .12,
+                                  width: size.width * .24,
+                                ),
                                 top: 50,
                                 left: 150,
                               ),
