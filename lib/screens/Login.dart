@@ -147,7 +147,7 @@ class _Login extends State<Login> {
                               width: size.width,
                               alignment: Alignment.center,
                               child: Text(
-                                'Welcome to MedAPP',
+                                'Bienvenue sur MedAPP',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -163,7 +163,7 @@ class _Login extends State<Login> {
                         right: 20,
                         left: 20,
                         bottom: 10),
-                    child: Text('Login to your account to continue',
+                    child: Text('Connectez-vous a votre compte pour continuer',
                         style: TextStyle(
                             color: HexColor(COLOR_TITLE),
                             fontSize: 20,
@@ -274,7 +274,7 @@ class _Login extends State<Login> {
                         Container(
                           margin: EdgeInsets.only(top: 10),
                           child: Text(
-                            "you don't have account?",
+                            "Vous n'avez pas de compte?",
                             style: STYLE_INPUT,
                           ),
                         ),
@@ -285,7 +285,7 @@ class _Login extends State<Login> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Register())),
-                            child: Text('Register now'),
+                            child: Text('Creer un compte'),
                           ),
                         )
                       ],

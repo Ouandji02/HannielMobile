@@ -10,13 +10,14 @@ class DetailDoctor extends StatelessWidget {
   String desc;
   String specialite;
   String prenom;
-  DetailDoctor({
-    required this.prenom,
-    required this.nom,
-    required this.image,
-    required this.desc,
-    required this.specialite
-});
+
+  DetailDoctor(
+      {required this.prenom,
+      required this.nom,
+      required this.image,
+      required this.desc,
+      required this.specialite});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -46,7 +47,7 @@ class DetailDoctor extends StatelessWidget {
                         top: 5,
                         left: 5,
                         child: IconButton(
-                            onPressed: ()=>Navigator.pop(context),
+                            onPressed: () => Navigator.pop(context),
                             icon: Icon(
                               Icons.arrow_back,
                               color: HexColor(COLOR_PRIMARY),
@@ -82,11 +83,12 @@ class DetailDoctor extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                              top: (size.height * .13) / 3 + 20,
-                              child: Text(
-                                'Docteur familial '+ this.specialite,
-                                style: TextStyle(color: Colors.black26),
-                              ),),
+                            top: (size.height * .13) / 3 + 20,
+                            child: Text(
+                              'Docteur familial ' + this.specialite,
+                              style: TextStyle(color: Colors.black26),
+                            ),
+                          ),
                           Positioned(
                             top: (size.height * .13) / 3,
                             right: 0,
@@ -122,7 +124,7 @@ class DetailDoctor extends StatelessWidget {
                       ),
                     ),
                     Divider(),
-                    Container(
+                    /*Container(
                       margin: EdgeInsets.only(top: 10, bottom: 10),
                       child: Row(
                         children: [
@@ -181,7 +183,7 @@ class DetailDoctor extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
+                    ),*/
                     Divider(),
                     Container(
                       margin: EdgeInsets.only(bottom: 20),

@@ -6,6 +6,7 @@ import 'package:projet_flutter/classes/PharmacyModel.dart';
 import 'package:projet_flutter/function/Search.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:projet_flutter/widgets/ErrorPage.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
 import '../../classes/HospitalModel.dart';
@@ -59,7 +60,7 @@ class _Hospital extends State<Hospital> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search hospitals',
+                    hintText: 'Rechercher un hopital',
                   ),
                   onChanged: (text) => {
                         if (text != null)
@@ -73,6 +74,9 @@ class _Hospital extends State<Hospital> {
                 future: HospitalApi.getHospital(),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<HospitalModel>?> snapshot) {
+                  if (snapshot.hasError) {
+                    return page404Error(context, Hospital());
+                  }
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemBuilder: (context, index) {
@@ -82,7 +86,7 @@ class _Hospital extends State<Hospital> {
                                       height: size.height * .6,
                                       child: const Center(
                                         child: Text(
-                                          "No results",
+                                          "Aucun resultat",
                                           style: TextStyle(
                                               color: Colors.black38,
                                               fontSize: 20),

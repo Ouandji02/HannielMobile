@@ -216,7 +216,7 @@ class _Register extends State<Register> {
                             width: size.width,
                             alignment: Alignment.center,
                             child: Text(
-                              'Welcome to MedAPP',
+                              'Bienvenue sur Teemes',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: size.height * .045,
@@ -235,7 +235,7 @@ class _Register extends State<Register> {
                             right: 20,
                             left: 20,
                             bottom: 10),
-                        child: Text('Create an account to get started',
+                        child: Text('Creer un compte et commencez',
                             style: TextStyle(
                                 color: HexColor(COLOR_TITLE),
                                 fontSize: size.height * .035,
@@ -544,7 +544,7 @@ class _Register extends State<Register> {
                                     ? CircularProgressIndicator(
                                         color: Colors.white)
                                     : Text(
-                                        'Register',
+                                        'Creer un compte',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 25,
@@ -568,7 +568,7 @@ class _Register extends State<Register> {
                                   Container(
                                     margin: EdgeInsets.only(top: 10),
                                     child: Text(
-                                      "Already a members?",
+                                      "Deja un membre?",
                                       style: STYLE_INPUT,
                                     ),
                                   ),
@@ -580,7 +580,7 @@ class _Register extends State<Register> {
                                           MaterialPageRoute(
                                               builder: (context) => Login())),
                                       child: Text(
-                                        'Login',
+                                        'Se connecter',
                                         style: TextStyle(
                                             fontSize: size.height * .025),
                                       ),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/screens/campagne/ListCampagne.dart';
 import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
 import 'package:projet_flutter/screens/hopitaux/ListHospitals.dart';
 import 'package:projet_flutter/screens/pharmacy/Pharmacy.dart';
@@ -105,13 +106,13 @@ class _DrawerLayout extends State<DrawerLayout> {
             const Divider(
               color: Colors.white,
             ),
-            /* MenuList(
-              text: 'Notification',
+             MenuList(
+              text: 'campagne',
               icon: Icons.notifications,
               onClicked: () => selectItem(context, 6)),
           const SizedBox(
             height: 5,
-          ), */
+          ),
             MenuList(
                 text: 'Settings',
                 icon: Icons.settings,
@@ -214,6 +215,13 @@ selectItem(BuildContext context, index) async {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ListDoctors(),
+        ),
+      );
+      break;
+    case 6:
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Campagne(),
         ),
       );
       break;

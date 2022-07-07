@@ -33,6 +33,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Campagne();
+    return const SafeArea(child: Home());
   }
 }

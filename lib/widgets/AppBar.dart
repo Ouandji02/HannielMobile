@@ -13,14 +13,13 @@ AppBarItem(title){
               fontWeight: FontWeight.bold)),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: 2,
       leading: Builder(
         builder: (context) => IconButton(
             icon: Icon(
               Icons.arrow_back,
               color: HexColor(COLOR_PRIMARY),
             ),
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home()))),
+            onPressed: () => Navigator.pop(context)),
       ));
 }

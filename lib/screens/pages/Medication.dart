@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/widgets/ErrorPage.dart';
 
 import '../../API_SERVICES/medicamentApi.dart';
 import '../../CONSTANTS/color.dart';
@@ -44,7 +45,7 @@ class _Medication extends State<Medication> {
                       borderRadius: BorderRadius.circular(10)),
                   labelStyle: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.w400),
-                  labelText: 'Search medication',
+                  labelText: 'Rechercher un medicament',
                 ),
                 onChanged: (text) => {
                   if (text != null) setState(() => {search = text})
@@ -80,6 +81,9 @@ class _Medication extends State<Medication> {
                   future: MedicamentApi.getMedication(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<MedicationModel>?> snapshot) {
+                    if (snapshot.hasError) {
+                      return page404Error(context, Medication());
+                    }
                     if (snapshot.hasData) {
                       return ListView.builder(
                           shrinkWrap: true,
@@ -90,7 +94,8 @@ class _Medication extends State<Medication> {
                           });
                     } else {
                       return Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                            color: HexColor(COLOR_PRIMARY)),
                       );
                     }
                   }),

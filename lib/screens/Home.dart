@@ -26,20 +26,19 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+
   void userStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     UserApi.getOneUser(
         await prefs.getString("userId"), await prefs.getString("token"));
   }
-var t;
+
   @override
   void initState() {
     super.initState();
     print("ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     userStorage();
     getCoordonate();
-     t = getUserStorage();
-    print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ${t}");
   }
 
   @override
@@ -118,7 +117,7 @@ var t;
                     label: 'profil'),
                 NavigationDestination(
                     icon: Icon(Icons.medication_outlined,
-                        color: index == 3 ? Colors.white : Colors.black),
+                        color: index == 2 ? Colors.white : Colors.black),
                     label: 'medicament'),
               ],
             ),

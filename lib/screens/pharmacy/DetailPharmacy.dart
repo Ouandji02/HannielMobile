@@ -125,7 +125,7 @@ class DetailPharmacy extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 20),
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        "About",
+                        "A propos",
                         style: TextStyle(
                             fontSize: size.width * .08,
                             color: HexColor(COLOR_TITLE),

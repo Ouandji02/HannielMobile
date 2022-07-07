@@ -15,7 +15,7 @@ class MedicamentApi {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
-    print("sdffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+    print("sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffs");
     print(response.statusCode);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);

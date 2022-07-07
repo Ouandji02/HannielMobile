@@ -60,7 +60,7 @@ class _Campagne extends State<Campagne> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search campagne',
+                    hintText: 'Rechercher campagne',
                   ),
                   onChanged: (text) => {
                     if (text != null)
@@ -76,7 +76,7 @@ class _Campagne extends State<Campagne> {
                     margin: EdgeInsets.all(20),
                     padding: EdgeInsets.only(
                         top: size.height * .025, left: size.width * .1),
-                    decoration: BoxDecoration(color: HexColor(COLOR_CARD)),
+                    decoration: BoxDecoration(color: HexColor(COLOR_CARD),borderRadius: BorderRadius.circular(5)),
                     height: size.height * .20,
                     width: size.width,
                     child: Stack(

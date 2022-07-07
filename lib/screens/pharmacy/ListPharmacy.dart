@@ -79,7 +79,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                             );
                           },
                           label: Text(
-                            "Detail",
+                             "Detail",
                             style: TextStyle(color: HexColor(COLOR_PRIMARY)),
                           ),
                           icon: Icon(

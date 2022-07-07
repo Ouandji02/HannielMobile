@@ -4,6 +4,7 @@ import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:projet_flutter/widgets/ErrorPage.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
 
@@ -49,7 +50,7 @@ class _Pharmacy extends State<Pharmacy> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search pharmacy',
+                    hintText: 'Rechercher une pharmacie',
                   ),
                   onChanged: (text) => {
                         if (text != null) {setState(() => search = text)}
@@ -60,6 +61,9 @@ class _Pharmacy extends State<Pharmacy> {
                 future: PharmacyApi.getPharmacy(search),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                  if (snapshot.hasError) {
+                    return page404Error(context, Pharmacy());
+                  }
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemBuilder: (context, index) {
@@ -69,7 +73,7 @@ class _Pharmacy extends State<Pharmacy> {
                                       height: size.height * .6,
                                       child: Center(
                                         child: Text(
-                                          "No results",
+                                          "Aucun resultat",
                                           style: TextStyle(
                                               color: Colors.black38,
                                               fontSize: 20),
