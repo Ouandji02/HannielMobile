@@ -8,3 +8,4 @@ const COLOR_CARD = '27b34a';
 const COLOR_UNSELECTED_ICON = '9d9d9d';
 const COLOR_TEXTFIELD = 'f5f5f5';
 const COLOR_MESSAGE_SEND = '505f7e';
+const COLOR_MESSAGE_WHITE = 'fff';

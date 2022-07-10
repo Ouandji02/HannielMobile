@@ -58,7 +58,7 @@ class _Pharmacy extends State<Pharmacy> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(search),
+                future: PharmacyApi.getPharmacy(),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PharmacyModel>?> snapshot) {
                   if (snapshot.hasError) {
@@ -73,7 +73,7 @@ class _Pharmacy extends State<Pharmacy> {
                                       height: size.height * .6,
                                       child: Center(
                                         child: Text(
-                                          "Aucun resultat",
+                                          "Aucun resultats",
                                           style: TextStyle(
                                               color: Colors.black38,
                                               fontSize: 20),

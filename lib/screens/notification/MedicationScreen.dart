@@ -47,7 +47,7 @@ class _Medication extends State<MedicationScreen> {
                         borderRadius: BorderRadius.circular(10)),
                     labelStyle: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400),
-                    labelText: 'Search medication',
+                    labelText: 'Rechercher un medicament',
                   ),
                   onChanged: (text) {
                     setState(() => search = text);
@@ -83,11 +83,11 @@ class _Medication extends State<MedicationScreen> {
                   future: MedicamentApi.getMedication(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<MedicationModel>?> snapshot) {
+                    print("khhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ${snapshot.hasError}");
                     if (snapshot.hasError) {
                       return page404Error(context, MedicationScreen());
                     }
                     if (snapshot.hasData) {
-                        return page404Error(context, MedicationScreen());
                       return ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,

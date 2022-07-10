@@ -9,7 +9,7 @@ class PharmacyApi {
 
   static  List? listPharmacy;
 
-  static Future<List<PharmacyModel>?> getPharmacy(String? key) async {
+  static Future<List<PharmacyModel>?> getPharmacy() async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
@@ -17,10 +17,15 @@ class PharmacyApi {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      listPharmacy = pharmacyFromJson(data["message"]);
-      return pharmacyFromJson(data["message"]);
+      try{
+        var data = jsonDecode(response.body);
+        print(data["message"]);
+        return pharmacyFromJson(data["message"]);
+      }catch(e){
+        print("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr $e");
+      }
     } else {
       return null;
     }

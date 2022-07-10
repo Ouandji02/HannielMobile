@@ -23,12 +23,12 @@ class PharmacyModel {
 
   PharmacyModel.fromJson(Map<String, dynamic> json) {
     nom = json["name"].toLowerCase();
-    longitude = json["longitude"].toLowerCase();
-    latitude = json["latitude"].toLowerCase();
-    logo = json["logo"].toLowerCase();
-    description = json["description"].toLowerCase();
-    phone = json["phone"].toLowerCase();
-    email = json["email"].toLowerCase();
-    id = json["id"].toLowerCase();
+    longitude = json["longitude"];
+    latitude = json["latitude"];
+    logo = json["logo"];
+    description = json["description"];
+    phone = json["phone"];
+    email = json["email"];
+    id = json["id"];
   }
 }

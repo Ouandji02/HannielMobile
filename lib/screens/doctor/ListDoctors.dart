@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/API_SERVICES/hospitalApi.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
 import 'package:projet_flutter/screens/doctor/DetailDoctor.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/Drawer.dart';
+import 'package:projet_flutter/widgets/ErrorPage.dart';
+import '../../API_SERVICES/DoctorApi.dart';
 import '../../CONSTANTS/color.dart';
 import '../../classes/DoctorClass.dart';
 import '../Home.dart';
+import 'DoctorWidget.dart';
 
 class ListDoctors extends StatelessWidget {
   @override
   final doctors = [];
+
   Widget build(BuildContext context) {
     // TODO: implement build
     double heigth = MediaQuery.of(context).size.height;
@@ -23,7 +28,27 @@ class ListDoctors extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: heigth * .1,
+              width: width * .9,
+              margin: EdgeInsets.only(top: 25),
+              child: TextField(
+                  style: TextStyle(
+                      fontSize: 16.0, height: .2, color: Colors.black),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    fillColor: Colors.black.withOpacity(.1),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    labelStyle: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w400),
+                    hintText: 'Rechercher un medecin',
+                  ),
+                  onChanged: (text) => {if (text != null) {}}),
+            ),
+            Container(
+                height: heigth * .1,
                 margin: EdgeInsets.only(bottom: 10),
                 child: ListView.builder(
                   itemBuilder: (context, snapshot) {
@@ -52,64 +77,26 @@ class ListDoctors extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                 )),
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: heigth * .02),
-                        child: ListTile(
-                          title: Text(doctors[index].nom,
-                              style: TextStyle(
-                                color: HexColor(COLOR_TITLE),
-                                fontWeight: FontWeight.bold,
-                              )),
-                          subtitle: Container(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Column(
-                              children: [
-                                Text('docteur familiale' +
-                                    doctors[index].specialite),
-                              ],
-                            ),
-                          ),
-                          trailing: Container(
-                            margin: EdgeInsets.only(right: 30),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: HexColor(COLOR_PRIMARY),
-                                ),
-                                Text(
-                                  "4.5",
-                                  style:
-                                      TextStyle(color: HexColor(COLOR_PRIMARY)),
-                                )
-                              ],
-                            ),
-                          ),
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage(doctors[index].photo),
-                          ),
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DetailDoctor(
-                                        desc: doctors[index].description,
-                                        nom: doctors[index].nom,
-                                        image: doctors[index].photo,
-                                        specialite: doctors[index].specialite,
-                                        prenom: doctors[index].prenom,
-                                      ))),
-                        ),
-                      ),
-                    ],
+                child: FutureBuilder(
+              future: DoctorApi.getDoctor(),
+              builder: (context, AsyncSnapshot<List<Doctor>?> snapshot) {
+                if (snapshot.hasError)
+                  return page404Error(context, ListDoctors());
+                if (snapshot.hasData)
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return DoctorWidget(doctors: snapshot.data, index: index);
+                    },
+                    itemCount: snapshot.data!.length,
                   );
-                },
-                itemCount: doctors.length,
-              ),
-            )
+                else
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: HexColor(COLOR_PRIMARY),
+                    ),
+                  );
+              },
+            )),
           ],
         ),
       ),

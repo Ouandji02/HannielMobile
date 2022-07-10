@@ -8,7 +8,6 @@ import 'package:projet_flutter/function/Search.dart';
 import 'package:projet_flutter/screens/campagne/DetailCampagne.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
-
 import '../../API_SERVICES/pharmacyApi.dart';
 import '../../classes/CampaignClass.dart';
 import 'Campagne.dart';

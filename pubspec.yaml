@@ -26,6 +26,7 @@ dependencies:
   http: ^0.13.4
   image_picker: ^0.8.5+3
   location: ^4.4.0
+  provider:
 
 dev_dependencies:
   flutter_test:

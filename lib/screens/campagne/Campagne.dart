@@ -14,7 +14,7 @@ Widget campagneWidget(context, snapshot, index) {
           boxShadow: [
             BoxShadow(
                 color: Colors.black12.withOpacity(.1),
-                blurRadius: 2,
+                blurRadius: 5,
                 offset: Offset(0, -1),
                 spreadRadius: 1)
           ],

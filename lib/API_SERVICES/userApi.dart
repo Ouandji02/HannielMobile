@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserApi {
   static var client = http.Client();
-  static Future getOneUser(id,token) async {
+  static Future<User?> getOneUser(id,token) async {
    /* String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 */
@@ -17,9 +17,9 @@ class UserApi {
     print(GETUSERURL+id);
     print(token);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print("dsfffffffffffffffffffffffffffffffffffffffffffssssss");
+      print("dsffffffffffffffffffffffffffffffffffffffffffsssssUSERAPI");
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("user", response.body);
+      prefs.setString("user", response.body.toString());
       var data = jsonDecode(response.body);
       print(data);
       return User.fromJson(data);

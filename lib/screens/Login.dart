@@ -43,7 +43,6 @@ class _Login extends State<Login> {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         var bodyResponse = json.decode(response.body).cast<String, dynamic>();
-        print(bodyResponse);
         if (bodyResponse['userId'] != null) {
           setState(() {
             _loading = false;
@@ -52,6 +51,7 @@ class _Login extends State<Login> {
           prefs.setString("userId", bodyResponse["userId"]);
           prefs.setString("token", bodyResponse["token"]);
           if (prefs.getString('userId') != null) {
+            UserApi.getOneUser(bodyResponse["userId"], bodyResponse["token"]);
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           }

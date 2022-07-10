@@ -18,7 +18,7 @@ Widget page404Error(context, Widget page) {
             Container(
                 padding: EdgeInsets.only(bottom: 10),
                 child: Text(
-                    "Mais ne vous inquietez pas, ce n'est pas de votre faute")),
+                    "Mais ne vous inquietez pas, ce n'est pas de\n votre faute")),
           ],
         ),
         Row(

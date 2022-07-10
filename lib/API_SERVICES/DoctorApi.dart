@@ -4,14 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:projet_flutter/CONSTANTS/CONFIG.dart';
 import 'package:projet_flutter/classes/HospitalModel.dart';
 
-class HospitalApi {
+import '../classes/DoctorClass.dart';
+
+class DoctorApi {
   static var client = http.Client();
 
-  static Future<List<HospitalModel>?> getHospital() async {
+  static Future<List<Doctor>?> getDoctor() async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
-    var response = await client.get(Uri.parse(HOSPITALURL), headers: {
+    var response = await client.get(Uri.parse(DOCTORURL), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
@@ -20,7 +22,7 @@ class HospitalApi {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       print(data["message"]);
-      return HospitalFromJson(data["message"]);
+      return doctorFromJson(data["message"]);
 
     } else {
       return null;
