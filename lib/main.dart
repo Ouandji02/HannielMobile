@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/provider/CampaignProvider.dart';
 import 'package:projet_flutter/provider/DataClass.dart';
-import 'package:projet_flutter/screens/EntryApp.dart';
-import 'package:projet_flutter/screens/campagne/ListCampagnes.dart';
-import 'package:projet_flutter/screens/doctor/ListDoctors.dart';
-import 'package:projet_flutter/screens/pages/ListExamination.dart';
-import 'package:projet_flutter/screens/pages/ListPresscription.dart';
-import 'package:projet_flutter/screens/pages/ListVisit.dart';
-import 'package:projet_flutter/screens/prescription/PrescriptionDetail.dart';
-import 'package:projet_flutter/widgets/CardPatient.dart';
+import 'package:projet_flutter/provider/DoctorProvider.dart';
+import 'package:projet_flutter/provider/HospitalProvider.dart';
+import 'package:projet_flutter/provider/MedicamentProvider.dart';
+import 'package:projet_flutter/provider/PharmacyProvider.dart';
 import 'package:projet_flutter/screens/Home.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(
-    MyApp()
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,8 +24,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DataClass(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => DataClass(),
+        ),
+        ChangeNotifierProvider(create: (context) => CampaignProvider()),
+        ChangeNotifierProvider(create: (context) => DoctorProvider()),
+        ChangeNotifierProvider(create: (context) => HospitalProvider()),
+        ChangeNotifierProvider(create: (context) => MedicamentProvider()),
+        ChangeNotifierProvider(create: (context) => PharmacyProvider())
+      ],
       builder: (context, child) {
         return MaterialApp(
           theme: ThemeData(
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: SafeArea(
             top: true,
-            child: SafeArea(child: EntryApp()),
+            child: SafeArea(child:Home()),
           ),
         );
       },

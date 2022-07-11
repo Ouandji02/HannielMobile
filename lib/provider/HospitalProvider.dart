@@ -6,7 +6,7 @@ class HospitalProvider extends ChangeNotifier{
   List<HospitalModel?>? hospital;
 
   getHospital()async {
-    hospital = (await HospitalApi.getHospital());
+    //hospital = (await HospitalApi.getHospital());
     notifyListeners();
   }
 }

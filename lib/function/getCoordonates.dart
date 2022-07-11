@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void getCoordonate() async {
+import '../classes/Coordonate.dart';
+
+Future<Coordonate?> getCoordonate() async {
   Location location = new Location();
 
   bool _serviceEnabled;
@@ -12,7 +16,7 @@ void getCoordonate() async {
   if (!_serviceEnabled) {
     _serviceEnabled = await location.requestService();
     if (!_serviceEnabled) {
-      return;
+      return null;
     }
   }
 
@@ -20,19 +24,14 @@ void getCoordonate() async {
   if (_permissionGranted == PermissionStatus.denied) {
     _permissionGranted = await location.requestPermission();
     if (_permissionGranted != PermissionStatus.granted) {
-      return;
+      return null;
     }
   }
-
   _locationData = await location.getLocation();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  if(_locationData != null ){
-    await prefs.setDouble('longitude',  _locationData.longitude!);
-    await prefs.setDouble('latitude', _locationData.latitude!);
-  }
-
-  print("coordinatesssssssssssssssssssssssssss ${_locationData.longitude}");
-
+  var t = {_locationData.longitude, _locationData.latitude};
+  Coordonate? pos;
+  pos?.latitude = _locationData.latitude;
+  pos?.longitude = _locationData.longitude;
+  return pos;
 }

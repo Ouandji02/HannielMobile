@@ -59,6 +59,14 @@ Widget pharmacyWidget(context, snapshot, index) {
                           fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      'distance : ${snapshot[index].distance.toString()}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 14),
+                    ),
+                  ),
                   Container(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Directionality(
@@ -72,14 +80,16 @@ Widget pharmacyWidget(context, snapshot, index) {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailPharmacy(
-                                    nom: snapshot[index].nom,
-                                    image: snapshot[index].logo,
-                                    desc: snapshot[index].description),
+                                  nom: snapshot[index].nom,
+                                  image: snapshot[index].logo,
+                                  desc: snapshot[index].description,
+                                  pharmacyUid: snapshot[index].pharmacyUid,
+                                ),
                               ),
                             );
                           },
                           label: Text(
-                             "Detail",
+                            "Detail",
                             style: TextStyle(color: HexColor(COLOR_PRIMARY)),
                           ),
                           icon: Icon(

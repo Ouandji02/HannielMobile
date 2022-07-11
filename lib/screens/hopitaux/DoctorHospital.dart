@@ -13,9 +13,9 @@ import '../../CONSTANTS/chips.dart';
 import '../../CONSTANTS/color.dart';
 import '../../classes/DoctorClass.dart';
 import '../Home.dart';
-import 'DoctorWidget.dart';
+import '../doctor/DoctorWidget.dart';
 
-class ListDoctors extends StatefulWidget {
+class ListDoctorsHospital extends StatefulWidget {
   @override
   _ListDoctors createState() {
     // TODO: implement createState
@@ -23,16 +23,19 @@ class ListDoctors extends StatefulWidget {
   }
 }
 
-class _ListDoctors extends State<ListDoctors> {
+class _ListDoctors extends State<ListDoctorsHospital> {
   @override
   final doctors = [];
   bool cat = false;
   String? search;
   int? indexColor;
+  String? id;
 
   Widget build(BuildContext context) {
     double heigth = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final doctor = Provider.of<DoctorProvider>(context);
+    List<Doctor>? doctors = filterWithId(doctor.doctor, id);
     return Scaffold(
       appBar: AppBarItem("Doctor"),
       body: Container(
@@ -100,54 +103,22 @@ class _ListDoctors extends State<ListDoctors> {
                   scrollDirection: Axis.horizontal,
                 )),
             Expanded(
-                child: FutureBuilder(
-                    future: DoctorApi.getDoctor(),
-                    builder: (context, AsyncSnapshot<List<Doctor>?> snapshot) {
-                      if (snapshot.hasError) {
-                        return page404Error(context, ListDoctors());
-                      }
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            itemBuilder: (context, index) {
-                              return search != null
-                                  ? (filter(snapshot.data, search, cat)
-                                              ?.length ==
-                                          0)
-                                      ? Container(
-                                          height: heigth * .6,
-                                          child: const Center(
-                                            child: Text(
-                                              "Aucun resultat",
-                                              style: TextStyle(
-                                                  color: Colors.black38,
-                                                  fontSize: 20),
-                                            ),
-                                          ),
-                                        )
-                                      : DoctorWidget(
-                                          doctors: filter(
-                                              snapshot.data, search, cat),
-                                          index: index)
-                                  : DoctorWidget(
-                                      doctors: snapshot.data, index: index);
-                            },
-                            itemCount: search != null
-                                ? (filter(snapshot.data, search, cat)
-                                            ?.length ==
-                                        0
-                                    ? (filter(snapshot.data, search, cat)
-                                            ?.length)! +
-                                        1
-                                    : filter(snapshot.data, search, cat)
-                                        ?.length)
-                                : snapshot.data!.length);
-                      } else
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: HexColor(COLOR_PRIMARY),
+                child: doctors!.length == 0
+                    ? Container(
+                        height: heigth * .6,
+                        child: const Center(
+                          child: Text(
+                            "Aucun resultat",
+                            style:
+                                TextStyle(color: Colors.black38, fontSize: 20),
                           ),
-                        );
-                    })),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          return DoctorWidget(doctors: doctors, index: index);
+                        },
+                        itemCount: doctors!.length)),
           ],
         ),
       ),
@@ -166,5 +137,11 @@ List<Doctor>? filter(List<Doctor>? snapshot, search, bool type) {
       ?.where((element) =>
           (element.nom)!.contains(search!.toLowerCase()) ||
           (element.specialite)!.contains(search!.toLowerCase()))
+      .toList();
+}
+
+List<Doctor>? filterWithId(List<Doctor>? snapshot, id) {
+  return snapshot
+      ?.where((element) => (element.nom)!.contains(id!.toLowerCase()))
       .toList();
 }

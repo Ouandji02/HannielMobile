@@ -60,6 +60,14 @@ Widget hospitalWidget(context, snapshot, index) {
                           fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      'distance: ${snapshot[index].distance.toString()}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 14),
+                    ),
+                  ),
                   Container(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Directionality(

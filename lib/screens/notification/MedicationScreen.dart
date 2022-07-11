@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/provider/MedicamentProvider.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/ErrorPage.dart';
-
+import 'package:provider/provider.dart';
 import '../../API_SERVICES/medicamentApi.dart';
 import '../../CONSTANTS/color.dart';
 import '../../classes/MedicationClass.dart';
 
 class MedicationScreen extends StatefulWidget {
-  const MedicationScreen({Key? key}) : super(key: key);
+  String? id;
+
+  MedicationScreen({required id});
 
   @override
   _Medication createState() {
-    return _Medication();
+    return _Medication(id: id);
   }
 }
 
 class _Medication extends State<MedicationScreen> {
+  String? id;
+
+  _Medication({required id});
+
   String? search;
 
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-
+    final medication = Provider.of<MedicamentProvider>(context);
+    List<MedicationModel?>? medications = filterWithId(medication.medication, id);
     return Scaffold(
       appBar: AppBarItem('Medicaments'),
       body: Container(
@@ -79,31 +87,24 @@ class _Medication extends State<MedicationScreen> {
                     }),
               ),
               Expanded(
-                child: FutureBuilder(
-                  future: MedicamentApi.getMedication(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<MedicationModel>?> snapshot) {
-                    print("khhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ${snapshot.hasError}");
-                    if (snapshot.hasError) {
-                      return page404Error(context, MedicationScreen());
-                    }
-                    if (snapshot.hasData) {
-                      return ListView.builder(
+                  child: medications!.length == 0
+                      ? Container(
+                          height: screen.height * .6,
+                          child: const Center(
+                            child: Text(
+                              "Cette Pharmacie est vide",
+                              style: TextStyle(
+                                  color: Colors.black38, fontSize: 20),
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: snapshot.data!.length,
+                          itemCount: medications!.length,
                           itemBuilder: (context, i) {
-                            return MedicationWidget(snapshot.data, i);
-                          });
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(
-                            color: HexColor(COLOR_PRIMARY)),
-                      );
-                    }
-                  },
-                ),
-              ),
+                            return MedicationWidget(medications, i);
+                          })),
             ],
           ),
         ),
@@ -167,4 +168,10 @@ Widget MedicationWidget(snapshot, i) {
       ),
     ),
   );
+}
+
+List<MedicationModel?>? filterWithId(List<MedicationModel?>? snapshot, id) {
+  return snapshot
+      ?.where((element) => (element?.pharmacyUid)!.contains(id!.toLowerCase()))
+      .toList();
 }

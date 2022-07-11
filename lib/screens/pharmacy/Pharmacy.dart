@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/provider/PharmacyProvider.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/ErrorPage.dart';
+import 'package:provider/provider.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
+import '../../provider/DataClass.dart';
+import '../../provider/MedicamentProvider.dart';
 
 class Pharmacy extends StatefulWidget {
   @override
@@ -22,7 +26,9 @@ class _Pharmacy extends State<Pharmacy> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final MedicationModel = Provider.of<MedicamentProvider>(context, listen: false);
+    MedicationModel.getMedication();
+    final coordonate = Provider.of<DataClass>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBarItem("Pharmacy"),
@@ -58,7 +64,7 @@ class _Pharmacy extends State<Pharmacy> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(),
+                future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PharmacyModel>?> snapshot) {
                   if (snapshot.hasError) {
@@ -67,6 +73,7 @@ class _Pharmacy extends State<Pharmacy> {
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemBuilder: (context, index) {
+                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
                           return search != null
                               ? (filter(snapshot.data, search)?.length == 0)
                                   ? Container(
@@ -90,7 +97,6 @@ class _Pharmacy extends State<Pharmacy> {
                                 : filter(snapshot.data, search)?.length)
                             : snapshot.data!.length);
                   } else {
-                    print(snapshot.data);
                     return Center(
                       child: CircularProgressIndicator(
                         color: HexColor(COLOR_PRIMARY),
@@ -112,3 +118,4 @@ List<PharmacyModel>? filter(List<PharmacyModel>? snapshot, search) {
       ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
       .toList();
 }
+

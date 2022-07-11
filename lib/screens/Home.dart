@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../API_SERVICES/userApi.dart';
+import '../classes/Coordonate.dart';
 import '../classes/UserClass.dart';
 import '../provider/DataClass.dart';
 import 'notification/Notifications.dart';
@@ -33,8 +34,7 @@ class _Home extends State<Home> {
   @override
   void initState() {
     super.initState();
-    final userModel = Provider.of<DataClass>(context, listen: false);
-    userModel.getUserData();
+    getCoordonate();
   }
 
   @override
@@ -42,14 +42,16 @@ class _Home extends State<Home> {
 
   Widget build(BuildContext context) {
     final pages = [Dashboard1(), ProfilAndList(), Medication()];
-
+    final userModel = Provider.of<DataClass>(context, listen: false);
+    userModel.getUserData();
+    userModel.getCoordonate();
     return WillPopScope(
         child: Scaffold(
           appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
               title: Text(
-                "MediApp",
+                "MedApp",
                 style: TextStyle(color: HexColor(COLOR_PRIMARY)),
               ),
               centerTitle: true,

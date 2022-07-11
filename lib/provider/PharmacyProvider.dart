@@ -7,7 +7,7 @@ class PharmacyProvider extends ChangeNotifier {
   List<PharmacyModel?>? pharmacy;
 
   getPharmacy() async {
-    pharmacy = (await PharmacyApi.getPharmacy());
+    //pharmacy = (await PharmacyApi.getPharmacy());
     notifyListeners();
   }
 }

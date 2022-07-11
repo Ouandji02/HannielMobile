@@ -8,11 +8,13 @@ class DetailPharmacy extends StatelessWidget {
   late String? nom;
   late String? image;
   late String? desc;
+  late String? pharmacyUid;
 
   DetailPharmacy({
     required this.nom,
     required this.image,
     required this.desc,
+    required this.pharmacyUid
   });
 
   @override
@@ -179,7 +181,7 @@ class DetailPharmacy extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MedicationScreen())),
+                                  builder: (context) => MedicationScreen(id:this.pharmacyUid))),
                           child: Container(
                             child: Chip(
                               labelPadding: EdgeInsets.only(

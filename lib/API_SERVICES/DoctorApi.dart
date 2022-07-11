@@ -13,15 +13,13 @@ class DoctorApi {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
-    var response = await client.get(Uri.parse(DOCTORURL), headers: {
+    var response = await client.get(Uri.parse("https://hanniel-api.herokuapp.com/admin/all/hospital"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
-    print("sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffs");
     print(response.statusCode);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      print(data["message"]);
       return doctorFromJson(data["message"]);
 
     } else {

@@ -7,7 +7,6 @@ Future<User?> getUserStorage() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   if (prefs.getString("user") != null) {
     try{
-      print("sdffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       var userP = jsonDecode(prefs.getString("user")!);
       return User.fromJson(userP["message"]);
     }catch(e){

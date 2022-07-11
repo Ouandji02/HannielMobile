@@ -6,5 +6,5 @@ const PHARMACYURL = "https://hanniel-api.herokuapp.com/patient/all/pharmacy";
 const HOSPITALURL = "https://hanniel-api.herokuapp.com/admin/all/hospital";
 const MEDICATIONURL = "https://hanniel-api.herokuapp.com/admin/all/medicament";
 const CAMPAIGNURL = "https://hanniel-api.herokuapp.com/admin/all/campaign";
-const DOCTORURL = "https://hanniel-api.herokuapp.com/admin/all/doctor";
+const DOCTORURL = "https://hanniel-api.herokuapp.com/admin/all/hospital";
 const GETUSERURL = "https://hanniel-api.herokuapp.com/patient/g/";

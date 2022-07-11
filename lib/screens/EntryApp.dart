@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
+import 'package:projet_flutter/function/getUserStorage.dart';
 import 'package:projet_flutter/screens/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Home.dart';
 
 class EntryApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
+    final user = getUserStorage();
 
     /*Future.delayed(const Duration(seconds: 0), () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();

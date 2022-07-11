@@ -4,7 +4,7 @@ class CampaignModel {
   late String nom;
   late String date_deb;
   late String date_fin;
-  late String responsabe;
+  late String responsable;
   late String image;
   late String hour;
   late String description;
@@ -15,7 +15,7 @@ class CampaignModel {
       {required this.nom,
       required this.date_deb,
       required this.date_fin,
-      required this.responsabe,
+      required this.responsable,
       required this.description,
       required this.hour,
       required this.hospitalId,
@@ -23,14 +23,14 @@ class CampaignModel {
       required this.image});
 
   CampaignModel.fromJson(Map<String, dynamic> json) {
-    nom = json["name"];
-    hospitalId = json["hospitalId"];
-    hour = json["hour"];
-    image = json["image"];
-    description = json["description"];
-    responsabe = json["responsabe"];
-    id = json["id"];
-    date_deb = json["date_deb"];
-    date_fin = json["date_fin"];
+    nom = "Campagne de vaccination";
+    hospitalId = json["hospitalId"].toString();
+    hour = json["hour"].toString();
+    image = "image";
+    description = json["description"].toString();
+    responsable = "responsabe";
+    id = json["id"].toString();
+    date_deb = json["dateBegin"].toString();
+    date_fin = json["dateEnd"].toString();
   }
 }

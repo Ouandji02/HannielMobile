@@ -5,7 +5,6 @@ import 'package:projet_flutter/CONSTANTS/CONFIG.dart';
 import 'package:projet_flutter/classes/CampaignClass.dart';
 
 class CampaignApi {
-  
   static var client = http.Client();
 
   static Future<List<CampaignModel>?> getCampaign() async {
@@ -16,11 +15,14 @@ class CampaignApi {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
-    print("sdffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
     print(response.statusCode);
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      return campaignFromJson(data["message"]);
+      try {
+        var data = jsonDecode(response.body);
+        return campaignFromJson(data["message"]);
+      } catch (e) {
+        print("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr $e");
+      }
     } else {
       return null;
     }

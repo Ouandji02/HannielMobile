@@ -1,5 +1,12 @@
-List<HospitalModel> HospitalFromJson(dynamic str) =>
-    List<HospitalModel>.from((str).map((x) => HospitalModel.fromJson(x)));
+import 'package:flutter/material.dart';
+import 'package:projet_flutter/provider/DataClass.dart';
+import 'package:provider/provider.dart';
+
+import '../function/getDistanceBetweenTwoLocation.dart';
+
+List<HospitalModel> HospitalFromJson(dynamic str,lat,long) =>
+    List<HospitalModel>.from(
+        (str).map((x) => HospitalModel.fromJson(x,lat,long)));
 
 class HospitalModel {
   late String? nom;
@@ -11,7 +18,7 @@ class HospitalModel {
   late String? email;
   late String? id;
   late String? bd;
-
+  late double? distance;
   HospitalModel(
       {this.nom,
       this.longitude,
@@ -21,9 +28,9 @@ class HospitalModel {
       this.logo,
       this.phone,
       this.id,
-      this.bd});
+      this.bd, this.distance});
 
-  HospitalModel.fromJson(Map<String, dynamic> json) {
+  HospitalModel.fromJson(Map<String, dynamic> json,lat,long) {
     nom = json["name"].toLowerCase();
     longitude = json["longitude"].toLowerCase();
     latitude = json["latitude"].toLowerCase();
@@ -33,5 +40,7 @@ class HospitalModel {
     email = json["email"].toLowerCase();
     id = json["id"].toLowerCase();
     bd = json["bp"].toLowerCase();
+    distance = calculateDistance(double.parse(json["latitude"]),double.parse(json["longitude"]),lat,long);
   }
+
 }

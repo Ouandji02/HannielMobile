@@ -44,8 +44,17 @@ class _DrawerLayout extends State<DrawerLayout> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            userAccountHeader(user.user!.nom ?? 'John Doe',
-                user.user!.email ?? "xxxx@gmail.com"),
+            FutureBuilder(
+              builder: (context, AsyncSnapshot<User?> snapshot) {
+                if (snapshot.hasData)
+                  return userAccountHeader(
+                      snapshot.data!.nom, snapshot.data!.email);
+                else {
+                  return userAccountHeader("John Doe", "xxxx@gmail.com");
+                }
+              },
+              future: getUserStorage(),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -225,7 +234,6 @@ selectItem(BuildContext context, index) async {
       );
       break;
     case 7:
-      prefs.remove("userId");
       prefs.clear();
       Navigator.of(context).push(
         MaterialPageRoute(

@@ -85,6 +85,7 @@ class _Dashboard extends State<Dashboard1> {
     // TODO: implement build
     Size screen = MediaQuery.of(context).size;
     final user = Provider.of<DataClass>(context);
+    print("sdffffffffff ${user.lat}");
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(color: Colors.white),

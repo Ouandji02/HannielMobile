@@ -3,13 +3,13 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/API_SERVICES/hospitalApi.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
-import 'package:projet_flutter/function/Search.dart';
-import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
+import 'package:projet_flutter/provider/HospitalProvider.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/ErrorPage.dart';
-
-import '../../API_SERVICES/pharmacyApi.dart';
+import 'package:provider/provider.dart';
 import '../../classes/HospitalModel.dart';
+import '../../provider/DataClass.dart';
+import '../../provider/DoctorProvider.dart';
 import 'Hospital.dart';
 
 class Hospital extends StatefulWidget {
@@ -34,6 +34,9 @@ class _Hospital extends State<Hospital> {
   Widget build(BuildContext context) {
     // TODO: implement build
     Size size = MediaQuery.of(context).size;
+    final doctorModel = Provider.of<DoctorProvider>(context, listen: false);
+    doctorModel.getDoctor();
+    final coordonate = Provider.of<DataClass>(context);
     return Scaffold(
       appBar: AppBarItem("Hospital"),
       body: Container(
@@ -71,9 +74,10 @@ class _Hospital extends State<Hospital> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: HospitalApi.getHospital(),
+                future: HospitalApi.getHospital(coordonate.lat,coordonate.long),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<HospitalModel>?> snapshot) {
+                  snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
                   if (snapshot.hasError) {
                     return page404Error(context, Hospital());
                   }

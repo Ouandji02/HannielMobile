@@ -14,14 +14,10 @@ class UserApi {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token"
     });
-    print(GETUSERURL+id);
-    print(token);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print("dsffffffffffffffffffffffffffffffffffffffffffsssssUSERAPI");
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("user", response.body.toString());
       var data = jsonDecode(response.body);
-      print(data);
       return User.fromJson(data);
     } else {
       return null;

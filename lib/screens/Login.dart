@@ -9,9 +9,11 @@ import 'package:projet_flutter/CONSTANTS/CONFIG.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/CONSTANTS/style.dart';
 import 'package:projet_flutter/screens/Register.dart';
+import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../provider/DataClass.dart';
 import 'Home.dart';
 
 class Login extends StatefulWidget {
@@ -52,6 +54,8 @@ class _Login extends State<Login> {
           prefs.setString("token", bodyResponse["token"]);
           if (prefs.getString('userId') != null) {
             UserApi.getOneUser(bodyResponse["userId"], bodyResponse["token"]);
+            final userModel = Provider.of<DataClass>(context, listen: false);
+            userModel.getUserData();
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           }
