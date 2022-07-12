@@ -61,11 +61,11 @@ class EntryApp extends StatelessWidget {
                       child: Container(
                         width: size.width * .8,
                         child: Text(
-                          'Sick is easy, \nbut health is hard',
+                          'Etre malade est facile, \nmais se soigner est diffcile!',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
-                              fontSize: size.width * .09),
+                              fontSize: size.width * .065),
                         ),
                       )),
                   Positioned(

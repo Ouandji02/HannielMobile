@@ -30,7 +30,7 @@ class PharmacyModel {
     nom = json["name"].toLowerCase();
     longitude = json["longitude"];
     latitude = json["latitude"];
-    logo = "logo";
+    logo = json["logo"];
     description = json["description"];
     phone = json["phone"];
     email = json["email"];
