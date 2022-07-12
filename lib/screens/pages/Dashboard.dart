@@ -112,7 +112,7 @@ class _Dashboard extends State<Dashboard1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "salut ${user.user?.nom ?? ""}",
+                      "Salut ${user.user?.nom ?? ""}",
                       style:
                           TextStyle(color: HexColor(COLOR_TITLE), fontSize: 15),
                     ),
