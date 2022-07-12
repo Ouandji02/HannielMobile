@@ -97,7 +97,7 @@ class _DrawerLayout extends State<DrawerLayout> {
               height: 5,
             ),
             MenuList(
-                text: 'Specialistes',
+                text: 'Docteurs',
                 icon: Icons.person_sharp,
                 onClicked: () => selectItem(context, 5)),
             const SizedBox(

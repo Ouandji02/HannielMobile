@@ -34,7 +34,7 @@ class _ListDoctors extends State<ListDoctors> {
     double heigth = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBarItem("Doctor"),
+      appBar: AppBarItem("Docteurs"),
       body: Container(
         color: Colors.white,
         padding: EdgeInsets.only(left: 10, right: 10, top: 10),
