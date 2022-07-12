@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/classes/DoctorClass.dart';
+import 'package:projet_flutter/function/getCoordonates.dart';
 import 'package:projet_flutter/provider/DataClass.dart';
+import 'package:projet_flutter/screens/pharmacy/DetailPharmacy.dart';
+import 'package:projet_flutter/screens/pharmacy/pharmacyHome.dart';
 import 'package:provider/provider.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
@@ -130,7 +133,7 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 10,
             ),
-            Text("Doctors",
+            Text("Pharmacies",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,
@@ -138,33 +141,43 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 20,
             ),
-            Container(
-              height: 170,
-              child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<PharmacyModel>?> snapshot) {
-                  if (snapshot.hasError) {
-                    return page404Error(context, Pharmacy());
-                  }
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
-                          return pharmacyWidget(context, snapshot.data, index);
-                        },
-                        itemCount: snapshot.data!.length);
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: HexColor(COLOR_PRIMARY),
-                      ),
-                    );
-                  }
-                },
-              ),
+            FutureBuilder(
+              future: getCoordonate(),
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return Container(
+                    height: 250,
+                    child: FutureBuilder(
+                      future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                        if (snapshot.hasError) {
+                          return page404Error(context, Pharmacy());
+                        }
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
+                                return pharmacyHome(context, snapshot.data, index);
+                              },
+                              itemCount: snapshot.data!.length);
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: HexColor(COLOR_PRIMARY),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
             ),
+
             SizedBox(
               height: 10,
             ),
