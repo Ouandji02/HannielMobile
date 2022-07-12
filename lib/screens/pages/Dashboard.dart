@@ -206,7 +206,7 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 10,
             ),
-            Text("Doctors",
+            Text("Phamacies",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,
