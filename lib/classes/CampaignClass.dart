@@ -23,12 +23,12 @@ class CampaignModel {
       required this.image});
 
   CampaignModel.fromJson(Map<String, dynamic> json) {
-    nom = "Campagne de vaccination";
+    nom = json["name"].toString();
     hospitalId = json["hospitalId"].toString();
     hour = json["hour"].toString();
-    image = "image";
+    image = json["image"];
     description = json["description"].toString();
-    responsable = "responsabe";
+    responsable = json["responsable"].toString();
     id = json["id"].toString();
     date_deb = json["dateBegin"].toString();
     date_fin = json["dateEnd"].toString();

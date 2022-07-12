@@ -34,7 +34,7 @@ class _ListDoctors extends State<ListDoctors> {
     double heigth = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBarItem("Doctor"),
+      appBar: AppBarItem("Docteurs"),
       body: Container(
         color: Colors.white,
         padding: EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -159,12 +159,12 @@ List<Doctor>? filter(List<Doctor>? snapshot, search, bool type) {
   if (type) {
     return snapshot
         ?.where(
-            (element) => (element.specialite)!.contains(search!.toLowerCase()))
+            (element) => (element.specialite).contains(search!.toLowerCase()))
         .toList();
   }
   return snapshot
       ?.where((element) =>
-          (element.nom)!.contains(search!.toLowerCase()) ||
-          (element.specialite)!.contains(search!.toLowerCase()))
+          (element.nom).contains(search!.toLowerCase()) ||
+          (element.specialite).contains(search!.toLowerCase()))
       .toList();
 }

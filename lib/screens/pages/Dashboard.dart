@@ -1,13 +1,16 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/classes/DoctorClass.dart';
 import 'package:projet_flutter/provider/DataClass.dart';
 import 'package:provider/provider.dart';
 
+import '../../API_SERVICES/pharmacyApi.dart';
 import '../../CONSTANTS/color.dart';
+import '../../classes/PharmacyModel.dart';
+import '../../widgets/ErrorPage.dart';
 import '../doctor/DetailDoctor.dart';
+import '../pharmacy/ListPharmacy.dart';
+import '../pharmacy/Pharmacy.dart';
 
 class Dashboard1 extends StatefulWidget {
   @override
@@ -84,6 +87,7 @@ class _Dashboard extends State<Dashboard1> {
   Widget build(BuildContext context) {
     // TODO: implement build
     Size screen = MediaQuery.of(context).size;
+    final coordonate = Provider.of<DataClass>(context);
     final user = Provider.of<DataClass>(context);
     print("sdffffffffff ${user.lat}");
     return SingleChildScrollView(
@@ -123,7 +127,10 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 20,
             ),
-            Text("Prochain rendez vous",
+            SizedBox(
+              height: 10,
+            ),
+            Text("Doctors",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,
@@ -131,82 +138,37 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 20,
             ),
-            Card(
-                elevation: 1,
-                color: HexColor(COLOR_PRIMARY),
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Demain",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text("20 Mai 2021, 10:00",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12))
-                            ],
-                          ),
-                          CircleAvatar(
-                            child: Icon(
-                              Icons.map,
-                              color: HexColor(COLOR_PRIMARY),
-                            ),
-                            backgroundColor: Colors.white,
-                          )
-                        ],
+            Container(
+              height: 170,
+              child: FutureBuilder(
+                future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                  if (snapshot.hasError) {
+                    return page404Error(context, Pharmacy());
+                  }
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
+                          return pharmacyWidget(context, snapshot.data, index);
+                        },
+                        itemCount: snapshot.data!.length);
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: HexColor(COLOR_PRIMARY),
                       ),
-                      SizedBox(height: 10),
-                      Divider(color: Colors.white),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            foregroundImage:
-                                AssetImage("assets/images/doctor.png"),
-                            backgroundColor: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Larissa babes",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Text("Hopital district, dentiste",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12))
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )),
+                    );
+                  }
+                },
+              ),
+            ),
             SizedBox(
               height: 10,
             ),
-            Text("Doctors",
+            Text("Phamacies",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,

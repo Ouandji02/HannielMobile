@@ -34,7 +34,7 @@ class HospitalModel {
     nom = json["name"].toLowerCase();
     longitude = json["longitude"].toLowerCase();
     latitude = json["latitude"].toLowerCase();
-    logo = "null";
+    logo = json["logo"];
     description = json["description"].toLowerCase();
     phone = json["phone"].toLowerCase();
     email = json["email"].toLowerCase();

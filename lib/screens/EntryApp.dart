@@ -49,7 +49,7 @@ class EntryApp extends StatelessWidget {
                       bottom: size.height * .4,
                       left: 30,
                       child: Text(
-                        'MedApp',
+                        'Teemes',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: size.height * .07,
@@ -61,11 +61,11 @@ class EntryApp extends StatelessWidget {
                       child: Container(
                         width: size.width * .8,
                         child: Text(
-                          'Sick is easy, \nbut health is hard',
+                          'Etre malade est facile, \nmais se soigner est diffcile!',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
-                              fontSize: size.width * .09),
+                              fontSize: size.width * .065),
                         ),
                       )),
                   Positioned(
@@ -95,7 +95,7 @@ class EntryApp extends StatelessWidget {
                                     builder: (context) => Login()));
                           },
                           child: Text(
-                            'Get Started',
+                            'Commençons',
                             style: TextStyle(
                                 color: HexColor(COLOR_PRIMARY),
                                 fontSize: 20,
