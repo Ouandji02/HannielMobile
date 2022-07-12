@@ -59,14 +59,14 @@ class _DrawerLayout extends State<DrawerLayout> {
               height: 5,
             ),
             MenuList(
-                text: 'Home',
+                text: 'Accueil',
                 icon: Icons.home,
                 onClicked: () => selectItem(context, 0)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
-                text: 'Profile',
+                text: 'Profil',
                 icon: Icons.person,
                 onClicked: () => selectItem(context, 1)),
             const SizedBox(
