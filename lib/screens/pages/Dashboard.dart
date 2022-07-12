@@ -141,7 +141,7 @@ class _Dashboard extends State<Dashboard1> {
               height: 20,
             ),
             Container(
-              height: 250,
+              height: 265,
               child: FutureBuilder(
                 future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
                 builder: (BuildContext context,
@@ -168,9 +168,12 @@ class _Dashboard extends State<Dashboard1> {
               ),
             ),
             SizedBox(
+              height: 20,
+            ),
+            SizedBox(
               height: 10,
             ),
-            Text("Hopitaux",
+            Text("Docteurs",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,

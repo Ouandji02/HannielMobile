@@ -34,14 +34,14 @@ Widget pharmacyHome(context, data, index) {
           ],),
         width: size.width * .7,
         child: Card(
-            elevation: 3,
+            elevation: 0,
             child: Container(
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
                   Container(
                     height: 100,
-                    width: 150,
+                    //width: 150,
                     child: Image(image: NetworkImage(data[index].logo),),
                   ),
                   SizedBox(
