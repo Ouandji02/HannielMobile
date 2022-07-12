@@ -59,14 +59,14 @@ class _DrawerLayout extends State<DrawerLayout> {
               height: 5,
             ),
             MenuList(
-                text: 'Home',
+                text: 'Accueil',
                 icon: Icons.home,
                 onClicked: () => selectItem(context, 0)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
-                text: 'Profile',
+                text: 'Profil',
                 icon: Icons.person,
                 onClicked: () => selectItem(context, 1)),
             const SizedBox(
@@ -77,27 +77,27 @@ class _DrawerLayout extends State<DrawerLayout> {
             ),
             MenuList(
                 text: 'Hopitaux',
-                icon: Icons.local_hospital,
+                icon: Icons.add_business,
                 onClicked: () => selectItem(context, 2)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
                 text: 'Pharmacies',
-                icon: Icons.local_pharmacy,
+                icon: Icons.account_balance_outlined,
                 onClicked: () => selectItem(context, 3)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
                 text: 'Campagnes',
-                icon: Icons.local_pharmacy,
+                icon: Icons.add_box_outlined,
                 onClicked: () => selectItem(context, 4)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
-                text: 'Specialistes',
+                text: 'Docteurs',
                 icon: Icons.person_sharp,
                 onClicked: () => selectItem(context, 5)),
             const SizedBox(

@@ -51,7 +51,7 @@ class _Home extends State<Home> {
               backgroundColor: Colors.white,
               elevation: 0,
               title: Text(
-                "MedApp",
+                "Teemes",
                 style: TextStyle(color: HexColor(COLOR_PRIMARY)),
               ),
               centerTitle: true,

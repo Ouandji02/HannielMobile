@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/classes/PharmacyModel.dart';
 
-Widget pharmacyWidget(context) {
+Widget pharmacyWidget(context, List<PharmacyModel>? data,index) {
   final size = MediaQuery.of(context).size;
   return Container(
       margin: EdgeInsets.only(right: 30, top: 10),
