@@ -77,21 +77,21 @@ class _DrawerLayout extends State<DrawerLayout> {
             ),
             MenuList(
                 text: 'Hopitaux',
-                icon: Icons.local_hospital,
+                icon: Icons.add_business,
                 onClicked: () => selectItem(context, 2)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
                 text: 'Pharmacies',
-                icon: Icons.local_pharmacy,
+                icon: Icons.account_balance_outlined,
                 onClicked: () => selectItem(context, 3)),
             const SizedBox(
               height: 5,
             ),
             MenuList(
                 text: 'Campagnes',
-                icon: Icons.local_pharmacy,
+                icon: Icons.add_box_outlined,
                 onClicked: () => selectItem(context, 4)),
             const SizedBox(
               height: 5,
