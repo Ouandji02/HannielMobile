@@ -159,12 +159,12 @@ List<Doctor>? filter(List<Doctor>? snapshot, search, bool type) {
   if (type) {
     return snapshot
         ?.where(
-            (element) => (element.specialite)!.contains(search!.toLowerCase()))
+            (element) => (element.specialite).contains(search!.toLowerCase()))
         .toList();
   }
   return snapshot
       ?.where((element) =>
-          (element.nom)!.contains(search!.toLowerCase()) ||
-          (element.specialite)!.contains(search!.toLowerCase()))
+          (element.nom).contains(search!.toLowerCase()) ||
+          (element.specialite).contains(search!.toLowerCase()))
       .toList();
 }

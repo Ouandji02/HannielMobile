@@ -87,7 +87,7 @@ class _Medication extends State<MedicationScreen> {
                     }),
               ),
               Expanded(
-                  child: medications!.length == 0
+                  child: medications?.length == 0
                       ? Container(
                           height: screen.height * .6,
                           child: const Center(
