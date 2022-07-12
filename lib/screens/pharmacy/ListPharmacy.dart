@@ -83,7 +83,10 @@ Widget pharmacyWidget(context, snapshot, index) {
                                   nom: snapshot[index].nom,
                                   image: snapshot[index].logo,
                                   desc: snapshot[index].description,
-                                  pharmacyUid: snapshot[index].pharmacyUid,
+                                  pharmacyUid: "jjhghg",
+                                  lat: snapshot[index].latitude,
+                                  long: snapshot[index].longitude,
+                                  phone: snapshot[index].phone,
                                 ),
                               ),
                             );

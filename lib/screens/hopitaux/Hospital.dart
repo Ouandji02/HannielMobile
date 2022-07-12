@@ -25,7 +25,7 @@ Widget hospitalWidget(context, snapshot, index) {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image:
-                DecorationImage(image: NetworkImage(snapshot[index].logo))),
+                    DecorationImage(image: NetworkImage(snapshot[index].logo))),
             width: size.width * .3,
             height: size.height * .19,
           ),
@@ -81,9 +81,12 @@ Widget hospitalWidget(context, snapshot, index) {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailHospital(
-                                    nom: snapshot[index].nom,
-                                    image: snapshot[index].logo,
-                                    desc: snapshot[index].description),
+                                  nom: snapshot[index].nom,
+                                  image: snapshot[index].logo,
+                                  desc: snapshot[index].description,
+                                  lat: snapshot[index].latitude,
+                                  long: snapshot[index].longitude, phone: snapshot[index].phone,
+                                ),
                               ),
                             );
                           },

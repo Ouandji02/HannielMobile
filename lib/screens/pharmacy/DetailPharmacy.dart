@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:projet_flutter/function/launchCall.dart';
+import 'package:projet_flutter/function/launchWhatsapp.dart';
 import 'package:projet_flutter/screens/notification/MedicationScreen.dart';
+import 'package:provider/provider.dart';
 
 import '../../CONSTANTS/color.dart';
+import '../../function/geolocalisation.dart';
+import '../../provider/DataClass.dart';
 
 class DetailPharmacy extends StatelessWidget {
   late String? nom;
   late String? image;
   late String? desc;
   late String? pharmacyUid;
+  late String? lat;
+  late String? long;
+  late String? phone;
 
-  DetailPharmacy({
-    required this.nom,
-    required this.image,
-    required this.desc,
-    required this.pharmacyUid
-  });
+  DetailPharmacy(
+      {required this.nom,
+      required this.image,
+      required this.desc,
+      required this.pharmacyUid,
+      required this.lat,
+      required this.long,
+      required this.phone});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
+    final coordonate = Provider.of<DataClass>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -154,7 +165,7 @@ class DetailPharmacy extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: null,
+                                  onPressed: () => launchCall(this.phone!),
                                   icon: Icon(
                                     Icons.phone,
                                     color: HexColor(COLOR_PRIMARY),
@@ -169,7 +180,7 @@ class DetailPharmacy extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: null,
+                                  onPressed: () =>launchWhatsApp(this.phone!),
                                   icon: Icon(
                                     Icons.message_rounded,
                                     color: HexColor(COLOR_PRIMARY),
@@ -181,7 +192,8 @@ class DetailPharmacy extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MedicationScreen(id:this.pharmacyUid))),
+                                  builder: (context) =>
+                                      MedicationScreen(id: this.pharmacyUid))),
                           child: Container(
                             child: Chip(
                               labelPadding: EdgeInsets.only(
@@ -201,6 +213,35 @@ class DetailPharmacy extends StatelessWidget {
                           ),
                         )
                       ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          geolocalisation(this.lat, this.long, coordonate.lat,
+                              coordonate.long);
+                        },
+                        label: Text(
+                          'Voir la carte ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                HexColor(COLOR_PRIMARY)),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(size.width, 50)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)))),
+                        icon: Icon(
+                          Icons.map,
+                          color: Colors.white,
+                        ),
+                      ),
                     )
                   ],
                 ),
