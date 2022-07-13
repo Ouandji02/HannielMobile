@@ -34,7 +34,11 @@ class _Home extends State<Home> {
   @override
   void initState() {
     super.initState();
-    getCoordonate();
+    var c =getCoordonate();
+    print('sfffffffff $c');
+    final userModel = Provider.of<DataClass>(context, listen: false);
+    userModel.getUserData();
+    userModel.getCoordonate();
   }
 
   @override

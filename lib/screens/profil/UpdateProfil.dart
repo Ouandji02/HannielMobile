@@ -5,10 +5,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/screens/profil/Profil.dart';
 import 'package:http/http.dart' as http;
 import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../CONSTANTS/CONFIG.dart';
 import '../../CONSTANTS/color.dart';
 import '../../CONSTANTS/style.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../provider/DataClass.dart';
 
 class UpdateProfil extends StatefulWidget {
   @override
@@ -85,9 +89,11 @@ class _UpdateProfil extends State<UpdateProfil> {
     try {
       String token =
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var url =
+          Uri.http(APIURL, UPDATEUSERURL + '/' + prefs.getString('userId')!);
 
-      var url = Uri.http(APIURL, UPDATEUSERURL);
-      var requestMethod = "POST";
+      var requestMethod = "PUT";
       var request = http.MultipartRequest(requestMethod, url);
       request.fields["name"] = firstname;
       request.fields["surname"] = lastname;

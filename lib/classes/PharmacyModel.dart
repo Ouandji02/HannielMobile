@@ -14,6 +14,7 @@ class PharmacyModel {
   late String? email;
   late String? id;
   late double? distance;
+  late String? pharmacyUid;
 
   PharmacyModel(
       {this.nom,
@@ -24,7 +25,8 @@ class PharmacyModel {
       this.logo,
       this.phone,
       this.id,
-      this.distance});
+      this.distance,
+      this.pharmacyUid});
 
   PharmacyModel.fromJson(Map<String, dynamic> json, lat, long) {
     nom = json["name"].toLowerCase();
@@ -35,6 +37,7 @@ class PharmacyModel {
     phone = json["phone"];
     email = json["email"];
     id = json["id"];
+    pharmacyUid = json['pharmacyUid'];
     distance = calculateDistance(double.parse(json["latitude"]),
         double.parse(json["longitude"]), lat, long);
   }

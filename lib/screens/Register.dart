@@ -78,11 +78,15 @@ class _Register extends State<Register> {
           body: jsonEncode(<String, String>{
             'name': firstname,
             'surname': lastname,
-            'date': datetime,
+            'dateNaissance': datetime,
             'sexe': sexe,
             'email': email.trim(),
             'phone': phone,
             'password': password,
+            'taille': '',
+            'poids': '',
+            'grpe_sanguin': '',
+            'photo': ''
           }),
         );
         ;

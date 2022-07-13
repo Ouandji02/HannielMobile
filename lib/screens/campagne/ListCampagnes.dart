@@ -18,8 +18,17 @@ import '../Home.dart';
 import '../doctor/ListDoctors.dart';
 import 'Campagne.dart';
 
-class ListCampagnes extends StatelessWidget {
-  const ListCampagnes({Key? key}) : super(key: key);
+class ListCampagnes extends StatefulWidget {
+  @override
+  _ListCampagnes createState() {
+    // TODO: implement createState
+    return _ListCampagnes();
+  }
+}
+
+class _ListCampagnes extends State<ListCampagnes> {
+  String? search;
+
   @override
   Widget build(BuildContext context) {
     final campaignModel = Provider.of<CampaignProvider>(context, listen: false);
@@ -50,7 +59,9 @@ class ListCampagnes extends StatelessWidget {
                         color: Colors.black, fontWeight: FontWeight.w400),
                     hintText: 'Rechercher campagne',
                   ),
-                  onChanged: (text) => {if (text != null) {}}),
+                  onChanged: (text) => {
+                        if (text != null) {setState(() => search = text)}
+                      }),
             ),
             Expanded(
                 child: Container(
@@ -63,13 +74,36 @@ class ListCampagnes extends StatelessWidget {
                         }
                         if (snapshot.hasData) {
                           return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return campagneWidget(
-                                  context, snapshot.data, index);
-                            },
-                          );
+                              itemBuilder: (context, index) {
+                                return search != null
+                                    ? (filter(snapshot.data, search)?.length ==
+                                            0)
+                                        ? Container(
+                                            height: size.height * .6,
+                                            child: const Center(
+                                              child: Text(
+                                                "Aucun resultat",
+                                                style: TextStyle(
+                                                    color: Colors.black38,
+                                                    fontSize: 20),
+                                              ),
+                                            ),
+                                          )
+                                        : campagneWidget(
+                                            context,
+                                            filter(snapshot.data, search),
+                                            index)
+                                    : campagneWidget(
+                                        context, snapshot.data, index);
+                              },
+                              itemCount: search != null
+                                  ? (filter(snapshot.data, search)?.length == 0
+                                      ? (filter(snapshot.data, search)
+                                              ?.length)! +
+                                          1
+                                      : filter(snapshot.data, search)?.length)
+                                  : snapshot.data!.length);
+                          ;
                         } else {
                           return Center(
                             child: CircularProgressIndicator(
@@ -85,4 +119,10 @@ class ListCampagnes extends StatelessWidget {
       ),
     );
   }
+}
+
+List<CampaignModel?>? filter(List<CampaignModel?>? snapshot, search) {
+  return snapshot
+      ?.where((element) => (element?.nom)!.contains(search!.toLowerCase()))
+      .toList();
 }

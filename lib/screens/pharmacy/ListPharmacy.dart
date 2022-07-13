@@ -22,11 +22,10 @@ Widget pharmacyWidget(context, snapshot, index) {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
                 image:
-                    DecorationImage(image: NetworkImage(snapshot[index].logo))),
+                    DecorationImage(image: NetworkImage(snapshot[index].logo,),fit: BoxFit.fill)),
             width: size.width * .3,
-            height: size.height * .19,
+            height: size.height * .1,
           ),
           Container(
               width: size.width * .6,
@@ -39,24 +38,8 @@ Widget pharmacyWidget(context, snapshot, index) {
                       snapshot[index].nom,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 19,
+                          fontSize: 16,
                           color: HexColor(COLOR_TITLE)),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      snapshot[index].email,
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 14),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      'phone: ${snapshot[index].phone}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
                   Align(
@@ -72,9 +55,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                     child: Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextButton.icon(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.all(
-                                  BorderSide(color: HexColor(COLOR_PRIMARY)))),
+                          style: ButtonStyle(),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -83,7 +64,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                                   nom: snapshot[index].nom,
                                   image: snapshot[index].logo,
                                   desc: snapshot[index].description,
-                                  pharmacyUid: "jjhghg",
+                                  pharmacyUid: snapshot[index].pharmacyUid,
                                   lat: snapshot[index].latitude,
                                   long: snapshot[index].longitude,
                                   phone: snapshot[index].phone,

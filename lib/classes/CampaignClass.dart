@@ -26,7 +26,7 @@ class CampaignModel {
     nom = json["name"].toString();
     hospitalId = json["hospitalId"].toString();
     hour = json["hour"].toString();
-    image = json["image"];
+    image = json["image"]?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRarcp_JM4Lppgpve-qEtSo0RmW6YS8C2qy8XJKRoa6pA&s";
     description = json["description"].toString();
     responsable = json["responsable"].toString();
     id = json["id"].toString();

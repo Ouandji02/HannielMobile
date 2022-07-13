@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../function/getDistanceBetweenTwoLocation.dart';
 
-List<HospitalModel> HospitalFromJson(dynamic str,lat,long) =>
+List<HospitalModel> HospitalFromJson(dynamic str,double lat,double long) =>
     List<HospitalModel>.from(
         (str).map((x) => HospitalModel.fromJson(x,lat,long)));
 
@@ -30,7 +30,7 @@ class HospitalModel {
       this.id,
       this.bd, this.distance});
 
-  HospitalModel.fromJson(Map<String, dynamic> json,lat,long) {
+  HospitalModel.fromJson(Map<String, dynamic> json,double lat,double long) {
     nom = json["name"].toLowerCase();
     longitude = json["longitude"].toLowerCase();
     latitude = json["latitude"].toLowerCase();

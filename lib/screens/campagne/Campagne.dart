@@ -12,7 +12,7 @@ Widget campagneWidget(context, snapshot, index) {
     padding: EdgeInsets.only(
         top: size.height * .025, left: size.width * .025),
     decoration: BoxDecoration(
-      color: HexColor(COLOR_PRIMARY),
+      color: Colors.white,
       borderRadius: BorderRadius.circular(5),
       boxShadow: [
         BoxShadow(
@@ -29,7 +29,7 @@ Widget campagneWidget(context, snapshot, index) {
           child: Text(
             snapshot[index].nom,
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 16),
           ),
@@ -43,8 +43,8 @@ Widget campagneWidget(context, snapshot, index) {
                 fit: BoxFit.cover,
               ),
             ),
-            height: size.height * .12,
-            width: size.width * .24,
+            height: size.height * .05,
+            width: size.width * .12,
           ),
           bottom: 10,
           right: 10,
@@ -55,7 +55,7 @@ Widget campagneWidget(context, snapshot, index) {
                   backgroundColor: MaterialStateProperty.all(
                       Colors.white),
                   side: MaterialStateProperty.all(
-                      BorderSide(color: Colors.white))
+                      BorderSide(color: HexColor(COLOR_PRIMARY)))
               ),
               onPressed: () {
                 Navigator.push(

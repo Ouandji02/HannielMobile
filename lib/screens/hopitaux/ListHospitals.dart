@@ -49,7 +49,7 @@ class _Hospital extends State<Hospital> {
           children: [
             Container(
               width: size.width * .9,
-              margin: EdgeInsets.only(top: 25),
+              margin: EdgeInsets.only(top: 25,bottom: 25),
               child: TextField(
                   style: TextStyle(
                       fontSize: 16.0, height: .2, color: Colors.black),
@@ -74,16 +74,17 @@ class _Hospital extends State<Hospital> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: HospitalApi.getHospital(coordonate.lat,coordonate.long),
+                future: HospitalApi.getHospital(coordonate.lat!,coordonate.long!),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<HospitalModel>?> snapshot) {
-                  snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
+
                   if (snapshot.hasError) {
                     return page404Error(context, Hospital());
                   }
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemBuilder: (context, index) {
+                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
                           return search != null
                               ? (filter(snapshot.data, search)?.length == 0)
                                   ? Container(
@@ -107,7 +108,6 @@ class _Hospital extends State<Hospital> {
                                 : filter(snapshot.data, search)?.length)
                             : snapshot.data!.length);
                   } else {
-                    print(snapshot.data);
                     return Center(
                       child: CircularProgressIndicator(
                         color: HexColor(COLOR_PRIMARY),

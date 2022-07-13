@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../classes/Coordonate.dart';
 
-Future<Coordonate?> getCoordonate() async {
+Future<Map<String, double?>?> getCoordonate() async {
   Location location = new Location();
 
   bool _serviceEnabled;
@@ -29,9 +29,13 @@ Future<Coordonate?> getCoordonate() async {
   }
   _locationData = await location.getLocation();
 
-  var t = {_locationData.longitude, _locationData.latitude};
+  var t = {
+    "longitude": _locationData.longitude,
+    "latitude": _locationData.latitude
+  };
   Coordonate? pos;
   pos?.latitude = _locationData.latitude;
   pos?.longitude = _locationData.longitude;
-  return pos;
+  print('dsfrtgrgtdefsjkkkkkkkkkkkkkkkkkkk $t');
+  return t;
 }
