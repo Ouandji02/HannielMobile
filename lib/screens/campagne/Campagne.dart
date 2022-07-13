@@ -27,7 +27,7 @@ Widget campagneWidget(context, snapshot, index) {
       children: [
         Positioned(
           child: Text(
-            snapshot[index].nom[18],
+            snapshot[index].nom,
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

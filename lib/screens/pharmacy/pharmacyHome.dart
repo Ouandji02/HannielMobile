@@ -53,12 +53,15 @@ Widget pharmacyHome(context, data, index) {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    data[index].nom.toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: HexColor(COLOR_TITLE),
-                        fontSize: size.width / 20),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      data[index].nom.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: HexColor(COLOR_TITLE),
+                          fontSize: size.width / 20),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
