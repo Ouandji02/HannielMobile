@@ -65,7 +65,7 @@ class _Login extends State<Login> {
               style: TextStyle(color: Colors.white),
             ),
             duration: Duration(seconds: 5),
-            backgroundColor: Colors.greenAccent,
+            backgroundColor: Colors.green,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
         } else {

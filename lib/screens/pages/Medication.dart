@@ -86,12 +86,29 @@ class _Medication extends State<Medication> {
                     }
                     if (snapshot.hasData) {
                       return ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, i) {
-                            return MedicationWidget(snapshot.data, i);
-                          });
+                          itemBuilder: (context, index) {
+                            return search != null
+                                ? (filter(snapshot.data, search)?.length == 0)
+                                    ? Container(
+                                        height: screen.height * .6,
+                                        child: const Center(
+                                          child: Text(
+                                            "Aucun resultat",
+                                            style: TextStyle(
+                                                color: Colors.black38,
+                                                fontSize: 20),
+                                          ),
+                                        ),
+                                      )
+                                    : MedicationWidget(
+                                        filter(snapshot.data, search), index)
+                                : MedicationWidget(snapshot.data, index);
+                          },
+                          itemCount: search != null
+                              ? (filter(snapshot.data, search)?.length == 0
+                                  ? (filter(snapshot.data, search)?.length)! + 1
+                                  : filter(snapshot.data, search)?.length)
+                              : snapshot.data!.length);
                     } else {
                       return Center(
                         child: CircularProgressIndicator(

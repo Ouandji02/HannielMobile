@@ -89,7 +89,7 @@ class _Dashboard extends State<Dashboard1> {
     Size screen = MediaQuery.of(context).size;
     final coordonate = Provider.of<DataClass>(context);
     final user = Provider.of<DataClass>(context);
-    print("sdffffffffff ${user.lat}");
+    print("sdffffffffff ${user.lat} et ${user.long}");
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(color: Colors.white),
