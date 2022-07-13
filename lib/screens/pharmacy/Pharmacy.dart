@@ -31,7 +31,7 @@ class _Pharmacy extends State<Pharmacy> {
     final coordonate = Provider.of<DataClass>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBarItem("Pharmacy"),
+      appBar: AppBarItem("Pharmacies"),
       body: Container(
         color: Colors.white,
         constraints: BoxConstraints(
@@ -41,8 +41,7 @@ class _Pharmacy extends State<Pharmacy> {
         child: Column(
           children: [
             Container(
-              width: size.width * .9,
-              margin: EdgeInsets.only(top: 25),
+              margin: EdgeInsets.only(top: 25,bottom: 25),
               child: TextField(
                   style: TextStyle(
                       fontSize: 16.0, height: .2, color: Colors.black),

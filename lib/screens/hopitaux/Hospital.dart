@@ -23,11 +23,10 @@ Widget hospitalWidget(context, snapshot, index) {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
                 image:
-                    DecorationImage(image: NetworkImage(snapshot[index].logo))),
+                    DecorationImage(image: NetworkImage(snapshot[index].logo),fit: BoxFit.fill),),
             width: size.width * .3,
-            height: size.height * .19,
+            height: size.height * .1,
           ),
           Container(
               width: size.width * .6,
@@ -40,24 +39,8 @@ Widget hospitalWidget(context, snapshot, index) {
                       snapshot[index].nom,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 19,
+                          fontSize: 16,
                           color: HexColor(COLOR_TITLE)),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      snapshot[index].email,
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 14),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      'phone: ${snapshot[index].phone}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
                   Align(
@@ -65,7 +48,7 @@ Widget hospitalWidget(context, snapshot, index) {
                     child: Text(
                       'distance: ${snapshot[index].distance.toString()}',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 14),
+                          fontWeight: FontWeight.w400, fontSize: 14),
                     ),
                   ),
                   Container(
@@ -73,9 +56,7 @@ Widget hospitalWidget(context, snapshot, index) {
                     child: Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextButton.icon(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.all(
-                                  BorderSide(color: HexColor(COLOR_PRIMARY)))),
+                          style: ButtonStyle(),
                           onPressed: () {
                             Navigator.push(
                               context,

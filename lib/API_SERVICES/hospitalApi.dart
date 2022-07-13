@@ -10,7 +10,7 @@ import '../classes/Coordonate.dart';
 class HospitalApi {
   static var client = http.Client();
 
-  static Future<List<HospitalModel>?> getHospital(lat,long) async {
+  static Future<List<HospitalModel>?> getHospital(double lat,double long) async {
     String token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 

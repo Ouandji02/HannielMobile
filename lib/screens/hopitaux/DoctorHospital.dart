@@ -44,8 +44,7 @@ class _ListDoctors extends State<ListDoctorsHospital> {
         child: Column(
           children: [
             Container(
-              width: width * .9,
-              margin: EdgeInsets.only(top: 25),
+              margin: EdgeInsets.only(top: 25,bottom: 25),
               child: TextField(
                   style: TextStyle(
                       fontSize: 16.0, height: .2, color: Colors.black),
