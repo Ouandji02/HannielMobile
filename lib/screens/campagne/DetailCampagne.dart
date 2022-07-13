@@ -117,6 +117,7 @@ class DetailCampagne extends StatelessWidget {
                         this.desc!,
                         style: TextStyle(
                           fontSize: size.width * .048,
+                          fontWeight: FontWeight.w300,
                           color: Colors.black26,
                         ),
                       ),
