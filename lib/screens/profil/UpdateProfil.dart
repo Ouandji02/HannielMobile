@@ -87,7 +87,7 @@ class _UpdateProfil extends State<UpdateProfil> {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
 
       var url = Uri.http(APIURL, UPDATEUSERURL);
-      var requestMethod = "POST";
+      var requestMethod = "PUT";
       var request = http.MultipartRequest(requestMethod, url);
       request.fields["name"] = firstname;
       request.fields["surname"] = lastname;
