@@ -18,6 +18,15 @@ class _RatingViewState extends State<RatingView> {
   var _selectedchipindex = -1;
   var _ismoredatailactive = false;
   var _moredetailfocusnode = FocusNode();
+  final _myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _myController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,20 +60,20 @@ class _RatingViewState extends State<RatingView> {
             child: Container(
               color: Colors.green,
               child: MaterialButton(
-                onPressed:_hidedialog,
+                onPressed: _hidedialog,
                 child: Text('Done'),
                 textColor: Colors.white,
               ),
             ),
           ),
           //skip button
-          Positioned(
-            right: 0,
-            child: MaterialButton(
-              onPressed: _hidedialog,
-              child: Text('Skip'),
-            ),
-          ),
+          // Positioned(
+          // right: 0,
+          //child: MaterialButton(
+          // onPressed: _hidedialog,
+          //child: Text('Skip'),
+          //),
+          //),
           //star rating
           AnimatedPositioned(
             top: _starPosition,
@@ -134,32 +143,13 @@ class _RatingViewState extends State<RatingView> {
       alignment: Alignment.center,
       children: [
         Visibility(
-          visible: !_ismoredatailactive,
+          visible: _ismoredatailactive,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('what could be better?'),
               //cause selection
-              Wrap(
-                spacing: 8.0,
-                alignment: WrapAlignment.center,
-                children: List.generate(
-                  6,
-                  (index) => InkWell(
-                    onTap: () {
-                      setState(() {
-                        _selectedchipindex = index;
-                      });
-                    },
-                    child: Chip(
-                      backgroundColor: _selectedchipindex == index
-                          ? Colors.red
-                          : Colors.grey[300],
-                      label: Text('Text ${index + 1}'),
-                    ),
-                  ),
-                ),
-              ),
+
               SizedBox(height: 16),
               //more button
               InkWell(
@@ -180,18 +170,29 @@ class _RatingViewState extends State<RatingView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Tell us more'),
-              Chip(label: Text('text ${_selectedchipindex + 1}')),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  focusNode: _moredetailfocusnode,
-                  decoration: InputDecoration(
-                    hintText: 'write your review here...',
-                    hintStyle: TextStyle(
-                      color: Colors.grey[400],
-                    ),
-                  ),
+                  controller: _myController,
                 ),
+              ),
+              FloatingActionButton(
+                // When the user presses the button, show an alert dialog containing
+                // the text that the user has entered into the text field.
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        // Retrieve the text the that user has entered by using the
+                        // TextEditingController.
+                        content: Text(_myController.text),
+                      );
+                    },
+                  );
+                },
+                tooltip: 'Show me the value!',
+                child: const Icon(Icons.text_fields),
               ),
             ],
           ),
@@ -209,4 +210,11 @@ class _RatingViewState extends State<RatingView> {
   _hidedialog() {
     if (Navigator.canPop(context)) Navigator.pop(context);
   }
+
+  _getfield() {
+    return TextField(
+      controller: _myController,
+    );
+  }
+
 }

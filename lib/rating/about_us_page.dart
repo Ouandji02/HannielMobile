@@ -13,14 +13,7 @@ class AboutUsPage extends StatelessWidget {
           alignment: Alignment.center,
           child: Column(
             children: [
-              const FlutterLogo(
-                size: 100,
-              ),
-              Text(
-                "AWESOME APP",
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              Spacer(), //for space btw text n button
+              //Spacer(), //for space btw text n button
               TextButton.icon(
                 onPressed: () {
                   openRatingDialog(context);
