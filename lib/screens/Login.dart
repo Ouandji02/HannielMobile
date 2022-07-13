@@ -151,7 +151,7 @@ class _Login extends State<Login> {
                               width: size.width,
                               alignment: Alignment.center,
                               child: Text(
-                                'Bienvenue sur MedAPP',
+                                'Bienvenue sur Teemes',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
