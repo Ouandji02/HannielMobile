@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/classes/DoctorClass.dart';
 import 'package:projet_flutter/provider/DataClass.dart';
+import 'package:projet_flutter/screens/pharmacy/DetailPharmacy.dart';
+import 'package:projet_flutter/screens/pharmacy/pharmacyHome.dart';
 import 'package:provider/provider.dart';
 
 import '../../API_SERVICES/pharmacyApi.dart';
@@ -110,7 +112,7 @@ class _Dashboard extends State<Dashboard1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "salut ${user.user?.nom ?? ""}",
+                      "Salut ${user.user?.nom ?? ""}",
                       style:
                           TextStyle(color: HexColor(COLOR_TITLE), fontSize: 15),
                     ),
@@ -130,7 +132,7 @@ class _Dashboard extends State<Dashboard1> {
             SizedBox(
               height: 10,
             ),
-            Text("Doctors",
+            Text("Pharmacies",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,
@@ -139,7 +141,7 @@ class _Dashboard extends State<Dashboard1> {
               height: 20,
             ),
             Container(
-              height: 170,
+              height: 265,
               child: FutureBuilder(
                 future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
                 builder: (BuildContext context,
@@ -152,7 +154,7 @@ class _Dashboard extends State<Dashboard1> {
                       scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
-                          return pharmacyWidget(context, snapshot.data, index);
+                          return pharmacyHome(context, snapshot.data, index);
                         },
                         itemCount: snapshot.data!.length);
                   } else {
@@ -166,9 +168,12 @@ class _Dashboard extends State<Dashboard1> {
               ),
             ),
             SizedBox(
+              height: 20,
+            ),
+            SizedBox(
               height: 10,
             ),
-            Text("Phamacies",
+            Text("Docteurs",
                 style: TextStyle(
                     color: HexColor(COLOR_TITLE),
                     fontWeight: FontWeight.w400,

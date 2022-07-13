@@ -31,7 +31,7 @@ class _Pharmacy extends State<Pharmacy> {
     final coordonate = Provider.of<DataClass>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBarItem("Pharmacy"),
+      appBar: AppBarItem("Pharmacies"),
       body: Container(
         color: Colors.white,
         constraints: BoxConstraints(
