@@ -92,6 +92,7 @@ class _UpdateProfil extends State<UpdateProfil> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var url =
           Uri.http(APIURL, UPDATEUSERURL + '/' + prefs.getString('userId')!);
+
       var requestMethod = "PUT";
       var request = http.MultipartRequest(requestMethod, url);
       request.fields["name"] = firstname;
