@@ -9,17 +9,19 @@ Widget pharmacyHome(context, data, index) {
   final size = MediaQuery.of(context).size;
   return InkWell(
       onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
+            context,
+            MaterialPageRoute(
               builder: (context) => DetailPharmacy(
-                    nom: data[index].nom.toString(),
-                    long: data[index].longitude.toString(),
-                    lat: data[index].latitude.toString(),
-                    image: data[index].logo.toString(),
-                    desc: data[index].description.toString(),
-                    phone: data[index].phone.toString(),
-                    pharmacyUid: data[index].id.toString(),
-                  ))),
+                nom: data[index].nom.toString(),
+                long: data[index].longitude.toString(),
+                lat: data[index].latitude.toString(),
+                image: data[index].logo.toString(),
+                desc: data[index].description.toString(),
+                phone: data[index].phone.toString(),
+                pharmacyUid: data[index].id.toString(),
+              ),
+            ),
+          ),
       child: Container(
         margin: EdgeInsets.only(right: 30, top: 10),
         padding: EdgeInsets.all(5),
@@ -44,7 +46,8 @@ Widget pharmacyHome(context, data, index) {
                     height: 100,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(data[index].logo),fit: BoxFit.fill)),
+                            image: NetworkImage(data[index].logo),
+                            fit: BoxFit.fill)),
                     width: 200,
                   ),
                   SizedBox(
@@ -62,14 +65,13 @@ Widget pharmacyHome(context, data, index) {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child:Text(
+                    child: Text(
                       data[index].distance.toString(),
                       style: TextStyle(
                           color: HexColor(COLOR_TITLE),
                           fontSize: size.width / 23),
-                    ) ,
-                  )
-                  ,
+                    ),
+                  ),
                 ],
               ),
             )),
