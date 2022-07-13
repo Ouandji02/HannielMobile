@@ -11,8 +11,8 @@ void geolocalisation(lat1, long1, lat2, long2) async {
       long1.toString() +
       '+&travelmode=driving');
 
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
+  if (await canLaunchUrl(url,)) {
+    await launchUrl(url,mode: LaunchMode.externalApplication);
   }else{
     print("Nous ne pouvons pas lancer ce lien");
   }

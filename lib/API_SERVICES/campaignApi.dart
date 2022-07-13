@@ -18,6 +18,7 @@ class CampaignApi {
     if (response.statusCode == 200) {
       try {
         var data = jsonDecode(response.body);
+        print(data); 
         return campaignFromJson(data["message"]);
       } catch (e) {
         print("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr $e");
