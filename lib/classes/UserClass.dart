@@ -28,16 +28,16 @@ class User {
       required this.image});
 
   User.fromJson(Map<String, dynamic> json) {
-    nom = json["name"];
-    prenom = json["surname"];
-    photo = json["image"];
-    dateNaissance = json["dateNaissance"];
-    poids = json["poids"];
-    tel = json["phone"];
-    email = json["email"];
-    grpe_sanguin = json["grpe_sanguin"];
+    nom = json["name"]??'';
+    prenom = json["surname"]??'';
+    photo = json["image"]??'';
+    dateNaissance = json["dateNaissance"]??'';
+    poids = json["poids"]??'';
+    tel = json["phone"]??'';
+    email = json["email"]??'';
+    grpe_sanguin = json["grpe_sanguin"]??'';
     taille = json["taille"];
-    sexe = json["sexe"];
+    sexe = json["sexe"]??'';
     image = json["image"]??'';
   }
 }
