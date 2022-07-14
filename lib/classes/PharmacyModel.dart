@@ -29,7 +29,7 @@ class PharmacyModel {
       this.pharmacyUid});
 
   PharmacyModel.fromJson(Map<String, dynamic> json, lat, long) {
-    nom = json["name"].toLowerCase();
+    nom = json["name"];
     longitude = json["longitude"];
     latitude = json["latitude"];
     logo = json["logo"];

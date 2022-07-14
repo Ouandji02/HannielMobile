@@ -27,8 +27,7 @@ class DetailPharmacy extends StatelessWidget {
       required this.pharmacyUid,
       required this.lat,
       required this.long,
-      required this.phone,
-        required this.email});
+      required this.phone,});
 
   @override
   Widget build(BuildContext context) {

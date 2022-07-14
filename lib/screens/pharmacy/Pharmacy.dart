@@ -114,7 +114,7 @@ class _Pharmacy extends State<Pharmacy> {
 
 List<PharmacyModel>? filter(List<PharmacyModel>? snapshot, search) {
   return snapshot
-      ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
+      ?.where((element) => (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }
 

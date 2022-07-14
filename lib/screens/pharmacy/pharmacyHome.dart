@@ -70,7 +70,7 @@ Widget pharmacyHome(context, data, index) {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      data[index].distance.toString().substring(0,5) + 'km',
+                     'Distance : ' + data[index].distance.toString().substring(0,5) + 'km',
                       style: TextStyle(
                           color: HexColor(COLOR_TITLE),
                           fontSize: size.width / 23),

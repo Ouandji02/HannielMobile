@@ -27,9 +27,9 @@ Widget campagneWidget(context, snapshot, index) {
         Positioned(
           child: Text(
             snapshot[index].nom.toString().length > 30
-                ? snapshot[index].nom.toString().substring(0, 20) +
+                ? snapshot[index].nom.toString().substring(0, 23) +
                     '\n' +
-                    snapshot[index].nom.toString().substring(21)
+                    snapshot[index].nom.toString().substring(24)
                 : snapshot[index].nom.toString(),
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),

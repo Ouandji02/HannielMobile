@@ -123,6 +123,6 @@ class _ListCampagnes extends State<ListCampagnes> {
 
 List<CampaignModel?>? filter(List<CampaignModel?>? snapshot, search) {
   return snapshot
-      ?.where((element) => (element?.nom)!.contains(search!.toLowerCase()))
+      ?.where((element) => (element?.nom)!.toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }

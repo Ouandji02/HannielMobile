@@ -126,6 +126,6 @@ class _Hospital extends State<Hospital> {
 
 List<HospitalModel>? filter(List<HospitalModel>? snapshot, search) {
   return snapshot
-      ?.where((element) => (element.nom)!.contains(search!.toLowerCase()))
+      ?.where((element) => (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }

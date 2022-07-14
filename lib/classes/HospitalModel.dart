@@ -31,7 +31,7 @@ class HospitalModel {
       this.bd, this.distance});
 
   HospitalModel.fromJson(Map<String, dynamic> json,double lat,double long) {
-    nom = json["name"].toLowerCase();
+    nom = json["name"];
     longitude = json["longitude"].toLowerCase();
     latitude = json["latitude"].toLowerCase();
     logo = json["logo"];
