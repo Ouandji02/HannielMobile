@@ -1,6 +1,6 @@
 const CHIPS = [
-  'masculn',
-  'feminin',
+  'male',
+  'female',
   'pediatre',
   'chirugie',
 ];

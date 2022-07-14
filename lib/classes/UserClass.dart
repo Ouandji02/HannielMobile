@@ -12,6 +12,7 @@ class User {
   late String grpe_sanguin;
   late String taille;
   late String sexe;
+  late String? image;
 
   User(
       {required this.nom,
@@ -23,12 +24,13 @@ class User {
       required this.poids,
       required this.grpe_sanguin,
       required this.taille,
-      required this.sexe});
+      required this.sexe,
+      required this.image});
 
   User.fromJson(Map<String, dynamic> json) {
     nom = json["name"];
     prenom = json["surname"];
-    photo = json["photo"];
+    photo = json["image"];
     dateNaissance = json["dateNaissance"];
     poids = json["poids"];
     tel = json["phone"];
@@ -36,5 +38,6 @@ class User {
     grpe_sanguin = json["grpe_sanguin"];
     taille = json["taille"];
     sexe = json["sexe"];
+    image = json["image"]??'';
   }
 }

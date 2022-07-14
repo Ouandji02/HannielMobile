@@ -9,8 +9,7 @@ Widget campagneWidget(context, snapshot, index) {
   return Container(
     height: size.height * .16,
     margin: EdgeInsets.all(10),
-    padding: EdgeInsets.only(
-        top: size.height * .025, left: size.width * .025),
+    padding: EdgeInsets.only(top: size.height * .025, left: size.width * .025),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(5),
@@ -27,11 +26,13 @@ Widget campagneWidget(context, snapshot, index) {
       children: [
         Positioned(
           child: Text(
-            snapshot[index].nom,
+            snapshot[index].nom.toString().length > 30
+                ? snapshot[index].nom.toString().substring(0, 20) +
+                    '\n' +
+                    snapshot[index].nom.toString().substring(21)
+                : snapshot[index].nom.toString(),
             style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 16),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           top: size.height * .01,
         ),
@@ -43,8 +44,8 @@ Widget campagneWidget(context, snapshot, index) {
                 fit: BoxFit.cover,
               ),
             ),
-            height: size.height * .05,
-            width: size.width * .12,
+            height: size.height * .12,
+            width: size.width * .24,
           ),
           bottom: 10,
           right: 10,
@@ -52,11 +53,9 @@ Widget campagneWidget(context, snapshot, index) {
         Positioned(
             child: TextButton.icon(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Colors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
                   side: MaterialStateProperty.all(
-                      BorderSide(color: HexColor(COLOR_PRIMARY)))
-              ),
+                      BorderSide(color: HexColor(COLOR_PRIMARY)))),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -69,18 +68,18 @@ Widget campagneWidget(context, snapshot, index) {
                         date_deb: snapshot[index].date_deb,
                         resp: snapshot[index].responsable,
                       ),
-                    )
-                );
+                    ));
               },
               icon: Icon(
                 Icons.remove_red_eye_rounded,
-                color:HexColor(COLOR_PRIMARY),
+                color: HexColor(COLOR_PRIMARY),
               ),
               label: Text(
                 "En savoir plus",
                 style: TextStyle(color: HexColor(COLOR_PRIMARY)),
               ),
-            ),bottom: 10),
+            ),
+            bottom: 10),
       ],
     ),
   );

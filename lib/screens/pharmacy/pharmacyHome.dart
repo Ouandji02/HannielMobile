@@ -19,6 +19,7 @@ Widget pharmacyHome(context, data, index) {
                 desc: data[index].description.toString(),
                 phone: data[index].phone.toString(),
                 pharmacyUid: data[index].id.toString(),
+                email: data[index].email,
               ),
             ),
           ),
@@ -69,7 +70,7 @@ Widget pharmacyHome(context, data, index) {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      data[index].distance.toString(),
+                      data[index].distance.toString().substring(0,5) + 'km',
                       style: TextStyle(
                           color: HexColor(COLOR_TITLE),
                           fontSize: size.width / 23),

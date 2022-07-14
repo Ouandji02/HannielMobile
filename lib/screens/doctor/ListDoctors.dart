@@ -58,7 +58,9 @@ class _ListDoctors extends State<ListDoctors> {
                         color: Colors.black, fontWeight: FontWeight.w400),
                     hintText: 'Rechercher un medecin',
                   ),
-                  onChanged: (text) => {if (text != null) {}}),
+                  onChanged: (text) => {
+                        if (text != null) {search = text, cat = false}
+                      }),
             ),
             Container(
                 height: heigth * .1,
@@ -76,8 +78,8 @@ class _ListDoctors extends State<ListDoctors> {
                           labelPadding: EdgeInsets.all(2.0),
                           deleteIcon: Icon(Icons.error),
                           avatar: const CircleAvatar(
-                            backgroundColor: Colors.white70,
-                          ),
+                              backgroundColor: Colors.white70,
+                              backgroundImage: NetworkImage('')),
                           label: Text(
                             CHIPS[index],
                             style: TextStyle(
@@ -158,13 +160,14 @@ class _ListDoctors extends State<ListDoctors> {
 List<Doctor>? filter(List<Doctor>? snapshot, search, bool type) {
   if (type) {
     return snapshot
-        ?.where(
-            (element) => (element.specialite).contains(search!.toLowerCase()))
+        ?.where((element) =>
+            (element.grade).toLowerCase().contains(search!.toLowerCase()) ||
+            (element.sexe).toLowerCase().contains(search!.toLowerCase()))
         .toList();
   }
   return snapshot
       ?.where((element) =>
-          (element.nom).contains(search!.toLowerCase()) ||
-          (element.specialite).contains(search!.toLowerCase()))
+          (element.grade).toLowerCase().contains(search!.toLowerCase()) ||
+          (element.sexe).toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }

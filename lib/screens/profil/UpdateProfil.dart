@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../API_SERVICES/userApi.dart';
 import '../../CONSTANTS/CONFIG.dart';
 import '../../CONSTANTS/color.dart';
 import '../../CONSTANTS/style.dart';
@@ -15,14 +16,22 @@ import 'package:image_picker/image_picker.dart';
 import '../../provider/DataClass.dart';
 
 class UpdateProfil extends StatefulWidget {
+  late String? image;
+
+  UpdateProfil({required this.image});
+
   @override
   _UpdateProfil createState() {
     // TODO: implement createState
-    return _UpdateProfil();
+    return _UpdateProfil(image1: this.image);
   }
 }
 
 class _UpdateProfil extends State<UpdateProfil> {
+  late String? image1;
+
+  _UpdateProfil({required this.image1});
+
   @override
   String dropdownValue = "Male";
   String sanguin = "O+";
@@ -97,13 +106,13 @@ class _UpdateProfil extends State<UpdateProfil> {
       var request = http.MultipartRequest(requestMethod, url);
       request.fields["name"] = firstname;
       request.fields["surname"] = lastname;
-      request.fields["date"] = datetime;
+      request.fields["dateNaissance"] = datetime;
       request.fields["sexe"] = sexe;
       request.fields["email"] = email;
       request.fields["phone"] = phone;
       request.fields["poids"] = poids;
       request.fields["taille"] = taille;
-      request.fields["sanguin"] = sanguin;
+      request.fields["grpe_sanguin"] = sanguin;
       http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
         "image",
         _image.path,
@@ -114,6 +123,7 @@ class _UpdateProfil extends State<UpdateProfil> {
       print(
           "cccccccccccccccccccccccc ${response.statusCode} ${response.request}");
       if (response.statusCode == 201 || response.statusCode == 200) {
+        UserApi.getOneUser(prefs.getString("userId"), prefs.getString("token"));
         print("fghffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         setState(() {
           _loading = false;
@@ -124,13 +134,13 @@ class _UpdateProfil extends State<UpdateProfil> {
             builder: (context) => ProfilUser(),
           ),
         );
-        const snackbar = SnackBar(
+        var snackbar = SnackBar(
           content: Text(
             'Mis a jour reussie',
             style: TextStyle(color: Colors.white),
           ),
           duration: Duration(seconds: 5),
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: HexColor(COLOR_PRIMARY),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
         setState(() {
@@ -201,6 +211,9 @@ class _UpdateProfil extends State<UpdateProfil> {
   Widget build(BuildContext context) {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
+    final userModel = Provider.of<DataClass>(context);
+    userModel.getUserData();
+    final user = Provider.of<DataClass>(context);
     return Scaffold(
       appBar: AppBarItem("Edit profil"),
       body: SingleChildScrollView(
@@ -233,8 +246,8 @@ class _UpdateProfil extends State<UpdateProfil> {
                                                   FileImage(File(_image!.path)),
                                               fit: BoxFit.cover)
                                           : DecorationImage(
-                                              image: AssetImage(
-                                                "assets/images/firstDoctor.png",
+                                              image: NetworkImage(
+                                                user.user!.image ?? '',
                                               ),
                                               fit: BoxFit.cover)),
                                 ),
@@ -249,8 +262,8 @@ class _UpdateProfil extends State<UpdateProfil> {
                                                       image: FileImage(
                                                           File(_image!.path)))
                                                   : DecorationImage(
-                                                      image: AssetImage(
-                                                          "assets/images/firstDoctor.png")),
+                                                      image:
+                                                          NetworkImage('user')),
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: Colors.black12,
@@ -307,7 +320,9 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   controller: _firstnameController,
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
-                                      hintText: 'Simo', hintStyle: STYLE_INPUT),
+                                      hintText: 'Simo',
+                                      hintStyle: STYLE_INPUT,
+                                      label: Text(user.user!.nom ?? '')),
                                 ),
                                 Text(
                                   firstnameError,
@@ -333,6 +348,7 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                       hintText: 'Larissa',
+                                      label: Text(user.user!.prenom ?? ''),
                                       hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
@@ -401,6 +417,7 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                       hintText: 'thierry@gmail.com',
+                                      label: Text(user.user!.email ?? ''),
                                       hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
@@ -427,6 +444,7 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       hintText: '699665914',
+                                      label: Text(user.user!.tel ?? ''),
                                       hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
@@ -465,6 +483,8 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   decoration: InputDecoration(
                                       hintText:
                                           "${datetime?.day}--${datetime?.month}--${datetime?.year}",
+                                      label: Text(
+                                          "${datetime?.day}--${datetime?.month}--${datetime?.year}"),
                                       hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
@@ -489,7 +509,9 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   controller: _taille,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                      hintText: '1.60', hintStyle: STYLE_INPUT),
+                                      hintText: '1.60',
+                                      label: Text(user.user!.taille ?? ''),
+                                      hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
                                   tailleError,
@@ -513,7 +535,9 @@ class _UpdateProfil extends State<UpdateProfil> {
                                   controller: _poids,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                      hintText: '45Kg', hintStyle: STYLE_INPUT),
+                                      hintText: '45Kg',
+                                      label: Text(user.user!.poids ?? ''),
+                                      hintStyle: STYLE_INPUT),
                                 ),
                                 Text(
                                   poidsError,

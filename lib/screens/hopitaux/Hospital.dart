@@ -23,8 +23,9 @@ Widget hospitalWidget(context, snapshot, index) {
         children: [
           Container(
             decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: NetworkImage(snapshot[index].logo),fit: BoxFit.fill),),
+              image: DecorationImage(
+                  image: NetworkImage(snapshot[index].logo), fit: BoxFit.fill),
+            ),
             width: size.width * .3,
             height: size.height * .1,
           ),
@@ -46,9 +47,9 @@ Widget hospitalWidget(context, snapshot, index) {
                   Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      'distance: ${snapshot[index].distance.toString()}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 14),
+                      'distance: ${snapshot[index].distance.toString().substring(0,5)} km',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
                     ),
                   ),
                   Container(
@@ -66,7 +67,9 @@ Widget hospitalWidget(context, snapshot, index) {
                                   image: snapshot[index].logo,
                                   desc: snapshot[index].description,
                                   lat: snapshot[index].latitude,
-                                  long: snapshot[index].longitude, phone: snapshot[index].phone,
+                                  long: snapshot[index].longitude,
+                                  phone: snapshot[index].phone,
+                                  email: snapshot[index].email,
                                 ),
                               ),
                             );

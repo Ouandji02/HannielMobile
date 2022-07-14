@@ -86,7 +86,7 @@ class _Register extends State<Register> {
             'taille': '',
             'poids': '',
             'grpe_sanguin': '',
-            'photo': ''
+            'image': ''
           }),
         );
         ;
@@ -102,13 +102,13 @@ class _Register extends State<Register> {
             });
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Login()));
-            const snackbar = SnackBar(
+            var snackbar = SnackBar(
               content: Text(
                 'votre compte a ete cree avec succes',
                 style: TextStyle(color: Colors.white),
               ),
               duration: Duration(seconds: 5),
-              backgroundColor: Colors.greenAccent,
+              backgroundColor: HexColor(COLOR_PRIMARY),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackbar);
           } else {
@@ -223,7 +223,7 @@ class _Register extends State<Register> {
                               'Bienvenue sur Teemes',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: size.height * .045,
+                                  fontSize: 25,
                                   fontWeight: FontWeight.w700),
                             ),
                           ))

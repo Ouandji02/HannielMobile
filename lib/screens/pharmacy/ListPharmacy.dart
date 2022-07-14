@@ -22,8 +22,11 @@ Widget pharmacyWidget(context, snapshot, index) {
         children: [
           Container(
             decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: NetworkImage(snapshot[index].logo,),fit: BoxFit.fill)),
+                image: DecorationImage(
+                    image: NetworkImage(
+                      snapshot[index].logo,
+                    ),
+                    fit: BoxFit.fill)),
             width: size.width * .3,
             height: size.height * .1,
           ),
@@ -45,7 +48,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                   Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      'distance : ${snapshot[index].distance.toString()}',
+                      'distance : ${snapshot[index].distance.toString().substring(0,5)} km',
                       style: TextStyle(
                           fontWeight: FontWeight.normal, fontSize: 14),
                     ),
@@ -68,6 +71,7 @@ Widget pharmacyWidget(context, snapshot, index) {
                                   lat: snapshot[index].latitude,
                                   long: snapshot[index].longitude,
                                   phone: snapshot[index].phone,
+                                  email: snapshot[index].email,
                                 ),
                               ),
                             );

@@ -35,7 +35,6 @@ class _Home extends State<Home> {
   void initState() {
     super.initState();
     var c =getCoordonate();
-    print('sfffffffff $c');
     final userModel = Provider.of<DataClass>(context, listen: false);
     userModel.getUserData();
     userModel.getCoordonate();
@@ -45,7 +44,7 @@ class _Home extends State<Home> {
   int index = 0;
 
   Widget build(BuildContext context) {
-    final pages = [Dashboard1(), ProfilAndList(), Medication()];
+    final pages = [Dashboard1(), Medication()];
     final userModel = Provider.of<DataClass>(context, listen: false);
     userModel.getUserData();
     userModel.getCoordonate();
@@ -109,12 +108,8 @@ class _Home extends State<Home> {
                     ),
                     label: 'home'),
                 NavigationDestination(
-                    icon: Icon(Icons.person,
-                        color: index == 1 ? Colors.white : Colors.black),
-                    label: 'profil'),
-                NavigationDestination(
                     icon: Icon(Icons.medication_outlined,
-                        color: index == 2 ? Colors.white : Colors.black),
+                        color: index == 1 ? Colors.white : Colors.black),
                     label: 'medicament'),
               ],
             ),

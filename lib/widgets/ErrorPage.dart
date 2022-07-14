@@ -56,7 +56,7 @@ Widget errorNoHasData(context, Widget page) {
           Container(
             padding: EdgeInsets.only(bottom: 20, top: 20),
             child: Text(
-              'Pas de donnees encore disponibles',
+              'veuillez activer votre localisation',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
             ),
           ),
@@ -64,8 +64,12 @@ Widget errorNoHasData(context, Widget page) {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => page));
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (a, b, c) => page,
+                        transitionDuration: Duration(seconds: 0)),
+                  );
                 },
                 child: Text(
                   'Reessayer',

@@ -37,7 +37,6 @@ class _DrawerLayout extends State<DrawerLayout> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final user = Provider.of<DataClass>(context);
     return Drawer(
       child: Material(
         color: HexColor(COLOR_PRIMARY),
@@ -47,10 +46,17 @@ class _DrawerLayout extends State<DrawerLayout> {
             FutureBuilder(
               builder: (context, AsyncSnapshot<User?> snapshot) {
                 if (snapshot.hasData)
-                  return userAccountHeader(
-                      snapshot.data!.nom, snapshot.data!.email);
+                  return UserAccountHeader(
+                    name: snapshot.data!.nom,
+                    email: snapshot.data!.email,
+                    image: snapshot.data!.image,
+                  );
                 else {
-                  return userAccountHeader("John Doe", "xxxx@gmail.com");
+                  return UserAccountHeader(
+                    name: 'John Doe',
+                    email: 'xxxxx@gmail.com',
+                    image: 'null',
+                  );
                 }
               },
               future: getUserStorage(),
@@ -134,7 +140,18 @@ class _DrawerLayout extends State<DrawerLayout> {
   }
 }
 
-Widget userAccountHeader(name, email) => Container(
+class UserAccountHeader extends StatelessWidget {
+  late String? name;
+  late String? email;
+  late String? image;
+
+  UserAccountHeader(
+      {required this.name, required this.email, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
       color: HexColor(COLOR_PRIMARY),
       width: double.infinity,
       height: 200,
@@ -145,19 +162,18 @@ Widget userAccountHeader(name, email) => Container(
           Container(
             margin: const EdgeInsets.only(bottom: 10),
             height: 70,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage('assets/images/undraw_doctors_hwty.png'),
-              ),
+            child: CircleAvatar(
+              radius: 100,
+              backgroundImage: NetworkImage(
+                  "https://res.cloudinary.com/dgopegp6d/image/upload/v1657733828/viusxaul4uafuws0zdzz.jpg"),
             ),
           ),
           Text(
-            name,
+            this.name!,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            email,
+            this.email!,
             style: TextStyle(
               color: Colors.grey[200],
               fontSize: 14,
@@ -166,6 +182,8 @@ Widget userAccountHeader(name, email) => Container(
         ],
       ),
     );
+  }
+}
 
 Widget MenuList(
     {required String text, required IconData icon, VoidCallback? onClicked}) {

@@ -9,9 +9,9 @@ import '../../CONSTANTS/color.dart';
 import '../../classes/MedicationClass.dart';
 
 class MedicationScreen extends StatefulWidget {
-  String? id;
+  String id;
 
-  MedicationScreen({required id});
+  MedicationScreen({required this.id});
 
   @override
   _Medication createState() {
@@ -20,9 +20,9 @@ class MedicationScreen extends StatefulWidget {
 }
 
 class _Medication extends State<MedicationScreen> {
-  String? id;
+  String id;
 
-  _Medication({required id});
+  _Medication({required this.id});
 
   String? search;
 
@@ -30,7 +30,8 @@ class _Medication extends State<MedicationScreen> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     final medication = Provider.of<MedicamentProvider>(context);
-    List<MedicationModel?>? medications = filterWithId(medication.medication, id);
+    List<MedicationModel?>? medications = medication.medication;
+    print("ggggggggggggggggggggg $id");
     return Scaffold(
       appBar: AppBarItem('Medicaments'),
       body: Container(
@@ -140,11 +141,11 @@ Widget MedicationWidget(snapshot, i) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Phamarciee ${snapshot[i].pharmacyUid}",
+              "dose ${snapshot[i].dose}",
               style: TextStyle(color: Colors.white.withOpacity(.6)),
             ),
             Text(
-              "3km environ",
+              "prix: ${snapshot[i].prix}",
               style:
                   TextStyle(color: Colors.white.withOpacity(.6), fontSize: 12),
             )

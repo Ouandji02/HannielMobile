@@ -17,9 +17,11 @@ class DetailHospital extends StatelessWidget {
   late String? long;
   late String? lat;
   late String? phone;
+  late String? email;
 
   DetailHospital(
-      {required this.nom,
+      {required this.email,
+      required this.nom,
       required this.image,
       required this.desc,
       required this.lat,
@@ -180,7 +182,7 @@ class DetailHospital extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: ()=> launchWhatsApp(this.phone!),
+                                  onPressed: () => launchWhatsApp(this.email!),
                                   icon: Icon(
                                     Icons.message_rounded,
                                     color: HexColor(COLOR_PRIMARY),
@@ -231,8 +233,8 @@ class DetailHospital extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 HexColor(COLOR_PRIMARY)),
-                            minimumSize: MaterialStateProperty.all(
-                                Size(size.width, 50)),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(size.width, 50)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5)))),

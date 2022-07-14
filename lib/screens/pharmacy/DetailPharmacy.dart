@@ -17,9 +17,11 @@ class DetailPharmacy extends StatelessWidget {
   late String? lat;
   late String? long;
   late String? phone;
+  late String? email;
 
   DetailPharmacy(
-      {required this.nom,
+      {required this.email,
+      required this.nom,
       required this.image,
       required this.desc,
       required this.pharmacyUid,
@@ -32,6 +34,7 @@ class DetailPharmacy extends StatelessWidget {
     // TODO: implement build
     final size = MediaQuery.of(context).size;
     final coordonate = Provider.of<DataClass>(context);
+    print("skjjjjjjjjjjjjjjjjjj $pharmacyUid");
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -181,7 +184,7 @@ class DetailPharmacy extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: () =>launchWhatsApp(this.phone!),
+                                  onPressed: () => launchWhatsApp(this.email!),
                                   icon: Icon(
                                     Icons.message_rounded,
                                     color: HexColor(COLOR_PRIMARY),
@@ -194,7 +197,7 @@ class DetailPharmacy extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      MedicationScreen(id: this.pharmacyUid))),
+                                      MedicationScreen(id: this.pharmacyUid!))),
                           child: Container(
                             child: Chip(
                               labelPadding: EdgeInsets.only(

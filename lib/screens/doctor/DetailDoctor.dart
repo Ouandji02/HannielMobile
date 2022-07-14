@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:projet_flutter/function/launchCall.dart';
+import 'package:projet_flutter/function/launchWhatsapp.dart';
 
 import '../../CONSTANTS/color.dart';
 
 class DetailDoctor extends StatelessWidget {
-  String nom;
-  String image;
-  String desc;
-  String specialite;
-  String prenom;
+  late String? nom;
+  late String? image;
+  late String? desc;
+  late String? dateDeb;
+  late String? phone;
+  late String? specialite;
+  late String? email;
 
-  DetailDoctor(
-      {required this.prenom,
-      required this.nom,
-      required this.image,
-      required this.desc,
-      required this.specialite});
+  DetailDoctor({
+    required this.email,
+    required this.dateDeb,
+    required this.phone,
+    required this.specialite,
+    required this.nom,
+    required this.image,
+    required this.desc,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,7 @@ class DetailDoctor extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(this.image),
+                          image: NetworkImage(this.image!),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -69,13 +76,13 @@ class DetailDoctor extends StatelessWidget {
                           Positioned(
                               top: (size.height * .13) / 3 - 20,
                               child: Text(
-                                "Disponible maintenant",
+                                "ouvert a partir de " + this.dateDeb!,
                                 style: TextStyle(color: Colors.green),
                               )),
                           Positioned(
                             top: (size.height * .13) / 3,
                             child: Text(
-                              this.nom + " " + this.prenom,
+                              this.nom! + " ",
                               style: TextStyle(
                                 color: HexColor(COLOR_TITLE),
                                 fontWeight: FontWeight.bold,
@@ -85,7 +92,7 @@ class DetailDoctor extends StatelessWidget {
                           Positioned(
                             top: (size.height * .13) / 3 + 20,
                             child: Text(
-                              'Docteur familial ' + this.specialite,
+                              'Specialite ' + this.specialite!,
                               style: TextStyle(color: Colors.black26),
                             ),
                           ),
@@ -200,7 +207,7 @@ class DetailDoctor extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 20),
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        this.desc,
+                        this.desc!,
                         style: TextStyle(
                           fontSize: size.width * .048,
                           color: Colors.black26,
@@ -216,7 +223,7 @@ class DetailDoctor extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: null,
+                                  onPressed: ()=> launchCall(this.phone!),
                                   icon: Icon(
                                     Icons.phone,
                                     color: HexColor(COLOR_PRIMARY),
@@ -231,7 +238,7 @@ class DetailDoctor extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Colors.white70,
                               child: IconButton(
-                                  onPressed: null,
+                                  onPressed: ()=>launchWhatsApp(this.email!),
                                   icon: Icon(
                                     Icons.message_rounded,
                                     color: HexColor(COLOR_PRIMARY),

@@ -59,13 +59,13 @@ class _Login extends State<Login> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           }
-          const snackbar = SnackBar(
+          var snackbar = SnackBar(
             content: Text(
               'Connexion reussie',
               style: TextStyle(color: Colors.white),
             ),
             duration: Duration(seconds: 5),
-            backgroundColor: Colors.green,
+            backgroundColor: HexColor(COLOR_PRIMARY),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
         } else {

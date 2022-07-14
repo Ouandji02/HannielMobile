@@ -8,15 +8,11 @@ class DoctorWidget extends StatelessWidget {
   late var doctors;
   int? index;
 
-  DoctorWidget({
-    required this.doctors, required this.index
-  });
+  DoctorWidget({required this.doctors, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: [
@@ -32,7 +28,7 @@ class DoctorWidget extends StatelessWidget {
                 alignment: AlignmentDirectional.centerStart,
                 child: Column(
                   children: [
-                    Text('docteur familiale' + doctors[index].specialite),
+                    Text('Specialite : ' + doctors[index].grade),
                   ],
                 ),
               ),
@@ -52,20 +48,20 @@ class DoctorWidget extends StatelessWidget {
                 ),
               ),
               leading: CircleAvatar(
-                backgroundImage: AssetImage(doctors[index].photo),
+                backgroundImage: NetworkImage(doctors[index].photo),
               ),
-              onTap: () =>
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              DetailDoctor(
-                                desc: doctors[index].description,
-                                nom: doctors[index].nom,
-                                image: doctors[index].photo,
-                                specialite: doctors[index].specialite,
-                                prenom: doctors[index].prenom,
-                              ))),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailDoctor(
+                            desc: doctors[index].description,
+                            nom: doctors[index].nom,
+                            image: doctors[index].photo,
+                            dateDeb: doctors[index].dateBegin,
+                            phone: doctors[index].tel,
+                            specialite: doctors[index].grade,
+                            email: doctors[index].email,
+                          ))),
             ),
           ),
         ],

@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/classes/UserClass.dart';
 import 'package:projet_flutter/function/getUserStorage.dart';
+import 'package:projet_flutter/provider/DataClass.dart';
 import 'package:projet_flutter/screens/profil/UpdateProfil.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../API_SERVICES/userApi.dart';
@@ -45,11 +47,16 @@ class Profil extends State<ProfilUser> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final user = Provider.of<DataClass>(context);
     return Scaffold(
       appBar: AppBarItem("profil"),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UpdateProfil())),
+            context,
+            MaterialPageRoute(
+                builder: (context) => UpdateProfil(
+                      image: user.user!.image,
+                    ),),),
         child: Icon(Icons.edit),
       ),
       body: SingleChildScrollView(
@@ -69,7 +76,7 @@ class Profil extends State<ProfilUser> {
                           title: Text(snapshot.data!.nom),
                           subtitle: Text("Nom"),
                           trailing: CircleAvatar(
-                            backgroundImage: AssetImage(snapshot.data!.photo),
+                            backgroundImage: NetworkImage(snapshot.data!.photo),
                           ),
                         ),
                       ),
@@ -134,9 +141,7 @@ class Profil extends State<ProfilUser> {
                     ],
                   );
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator()
-                  );
+                  return Center(child: CircularProgressIndicator());
                 }
               },
               future: getUserStorage(),
