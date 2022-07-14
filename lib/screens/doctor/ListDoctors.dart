@@ -49,6 +49,7 @@ class _ListDoctors extends State<ListDoctors> {
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.search,
+
                       color: Colors.black,
                     ),
                     fillColor: Colors.black.withOpacity(.1),

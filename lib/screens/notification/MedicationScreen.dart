@@ -30,7 +30,6 @@ class _Medication extends State<MedicationScreen> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     final medication = Provider.of<MedicamentProvider>(context);
-    List<MedicationModel?>? medications = filterWithId(medication.medication, "id");
     return Scaffold(
       appBar: AppBarItem('Medicaments'),
       body: Container(
@@ -62,49 +61,49 @@ class _Medication extends State<MedicationScreen> {
                   },
                 ),
               ),
-              Container(
-                height: screen.height * .1,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context, i) {
-                      return Container(
-                          margin: EdgeInsets.all(10),
-                          child: Chip(
-                            backgroundColor: HexColor(COLOR_SECONDARY),
-                            avatar: Image(
-                              image: i % 2 == 0
-                                  ? AssetImage(
-                                      "assets/images/icons8-syrup-28.png")
-                                  : AssetImage(
-                                      "assets/images/icons8-pills-28.png"),
-                            ),
-                            label: Text(
-                              "Sirop",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ));
-                    }),
-              ),
               Expanded(
-                  child: medications?.length == 0
-                      ? Container(
-                          height: screen.height * .6,
-                          child: const Center(
-                            child: Text(
-                              "Cette Pharmacie est vide",
-                              style: TextStyle(
-                                  color: Colors.black38, fontSize: 20),
+                  child: FutureBuilder(
+                future: MedicamentApi.getMedicationById(id),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data?.length == 0) {
+                      return Center(
+                        child: Text("Pharmacie Vide"),
+                      );
+                    }
+                    return ListView.builder(
+                        itemBuilder: (context, index) {
+                          return search != null
+                              ? (filter(snapshot.data, search)?.length == 0)
+                              ? Container(
+                            height: screen.height * .6,
+                            child: const Center(
+                              child: Text(
+                                "Aucun resultat",
+                                style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 20),
+                              ),
                             ),
-                          ),
-                        )
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: medications!.length,
-                          itemBuilder: (context, i) {
-                            return MedicationWidget(medications, i);
-                          })),
+                          )
+                              : MedicationWidget(
+                              filter(snapshot.data, search), index)
+                              : MedicationWidget(snapshot.data, index);
+                        },
+                        itemCount: search != null
+                            ? (filter(snapshot.data, search)?.length == 0
+                            ? (filter(snapshot.data, search)?.length)! + 1
+                            : filter(snapshot.data, search)?.length)
+                            : snapshot.data!.length);
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: HexColor(COLOR_PRIMARY),
+                      ),
+                    );
+                  }
+                },
+              )),
             ],
           ),
         ),

@@ -18,6 +18,24 @@ class MedicamentApi {
     print(response.statusCode);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      print('data');
+      return medicationFromJson(data["message"]);
+
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<MedicationModel>?> getMedicationById(id) async {
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJWTlhTbHJCS1NlTmQxdlhxVEY1M0FiSHJPQVYyIiwiaWF0IjoxNjU0MjAxMzQxfQ.w-YcokPb426pO31iJ-eHh--1lm6bouAdzG3lEEbO9i0";
+    var response = await client.get(Uri.parse(MEDICATIONURL+'/'+id), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': "Bearer $token"
+    });
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
       return medicationFromJson(data["message"]);
 
     } else {
