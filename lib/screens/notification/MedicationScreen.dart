@@ -30,8 +30,7 @@ class _Medication extends State<MedicationScreen> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     final medication = Provider.of<MedicamentProvider>(context);
-    List<MedicationModel?>? medications = medication.medication;
-    print("ggggggggggggggggggggg $id");
+    List<MedicationModel?>? medications = filterWithId(medication.medication, "id");
     return Scaffold(
       appBar: AppBarItem('Medicaments'),
       body: Container(

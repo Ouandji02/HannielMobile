@@ -25,7 +25,7 @@ Widget pharmacyHome(context, data, index) {
           ),
       child: Container(
         margin: EdgeInsets.only(right: 30, top: 10),
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
