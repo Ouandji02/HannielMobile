@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/API_SERVICES/hospitalApi.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/function/getCoordonates.dart';
 import 'package:projet_flutter/provider/HospitalProvider.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
 import 'package:projet_flutter/widgets/ErrorPage.dart';
@@ -49,7 +50,7 @@ class _Hospital extends State<Hospital> {
           children: [
             Container(
               width: size.width * .9,
-              margin: EdgeInsets.only(top: 25,bottom: 25),
+              margin: EdgeInsets.only(top: 25, bottom: 25),
               child: TextField(
                   style: TextStyle(
                       fontSize: 16.0, height: .2, color: Colors.black),
@@ -74,39 +75,60 @@ class _Hospital extends State<Hospital> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: HospitalApi.getHospital(coordonate.lat!,coordonate.long!),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<HospitalModel>?> snapshot) {
-
-                  if (snapshot.hasError) {
-                    return page404Error(context, Hospital());
-                  }
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        itemBuilder: (context, index) {
-                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
-                          return search != null
-                              ? (filter(snapshot.data, search)?.length == 0)
-                                  ? Container(
-                                      height: size.height * .6,
-                                      child: const Center(
-                                        child: Text(
-                                          "Aucun resultat",
-                                          style: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    )
-                                  : hospitalWidget(context,
-                                      filter(snapshot.data, search), index)
-                              : hospitalWidget(context, snapshot.data, index);
-                        },
-                        itemCount: search != null
-                            ? (filter(snapshot.data, search)?.length == 0
-                                ? (filter(snapshot.data, search)?.length)! + 1
-                                : filter(snapshot.data, search)?.length)
-                            : snapshot.data!.length);
+                future: getCoordonate(),
+                builder: (context, AsyncSnapshot snapshot1) {
+                  if (snapshot1.hasData) {
+                    return FutureBuilder(
+                      future: HospitalApi.getHospital(
+                          snapshot1.data!["latitude"],
+                          snapshot1.data!["longitude"]),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<HospitalModel>?> snapshot) {
+                        if (snapshot.hasError) {
+                          return page404Error(context, Hospital());
+                        }
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemBuilder: (context, index) {
+                                snapshot.data!.sort((a, b) =>
+                                    (a.distance!).compareTo(b.distance!));
+                                return search != null
+                                    ? (filter(snapshot.data, search)?.length ==
+                                            0)
+                                        ? Container(
+                                            height: size.height * .6,
+                                            child: const Center(
+                                              child: Text(
+                                                "Aucun resultat",
+                                                style: TextStyle(
+                                                    color: Colors.black38,
+                                                    fontSize: 20),
+                                              ),
+                                            ),
+                                          )
+                                        : hospitalWidget(
+                                            context,
+                                            filter(snapshot.data, search),
+                                            index)
+                                    : hospitalWidget(
+                                        context, snapshot.data, index);
+                              },
+                              itemCount: search != null
+                                  ? (filter(snapshot.data, search)?.length == 0
+                                      ? (filter(snapshot.data, search)
+                                              ?.length)! +
+                                          1
+                                      : filter(snapshot.data, search)?.length)
+                                  : snapshot.data!.length);
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: HexColor(COLOR_PRIMARY),
+                            ),
+                          );
+                        }
+                      },
+                    );
                   } else {
                     return Center(
                       child: CircularProgressIndicator(
@@ -126,6 +148,7 @@ class _Hospital extends State<Hospital> {
 
 List<HospitalModel>? filter(List<HospitalModel>? snapshot, search) {
   return snapshot
-      ?.where((element) => (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
+      ?.where((element) =>
+          (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }

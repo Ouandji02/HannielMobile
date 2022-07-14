@@ -239,11 +239,7 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.1.5"
-=======
-    version: "0.1.4"
->>>>>>> e9d5730a38ff9a4fb46e6db309306161290fc44c
   meta:
     dependency: transitive
     description:
@@ -264,11 +260,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.8.2"
-=======
-    version: "1.8.1"
->>>>>>> e9d5730a38ff9a4fb46e6db309306161290fc44c
   path_provider:
     dependency: transitive
     description:
@@ -434,11 +426,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.9.0"
-=======
-    version: "1.8.2"
->>>>>>> e9d5730a38ff9a4fb46e6db309306161290fc44c
   stack_trace:
     dependency: transitive
     description:

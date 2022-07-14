@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:projet_flutter/CONSTANTS/color.dart';
 import 'package:projet_flutter/classes/PharmacyModel.dart';
+import 'package:projet_flutter/function/getCoordonates.dart';
 import 'package:projet_flutter/provider/PharmacyProvider.dart';
 import 'package:projet_flutter/screens/pharmacy/ListPharmacy.dart';
 import 'package:projet_flutter/widgets/AppBar.dart';
@@ -26,7 +27,8 @@ class _Pharmacy extends State<Pharmacy> {
 
   @override
   Widget build(BuildContext context) {
-    final MedicationModel = Provider.of<MedicamentProvider>(context, listen: false);
+    final MedicationModel =
+        Provider.of<MedicamentProvider>(context, listen: false);
     MedicationModel.getMedication();
     final coordonate = Provider.of<DataClass>(context);
     Size size = MediaQuery.of(context).size;
@@ -41,7 +43,7 @@ class _Pharmacy extends State<Pharmacy> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 25,bottom: 25),
+              margin: EdgeInsets.only(top: 25, bottom: 25),
               child: TextField(
                   style: TextStyle(
                       fontSize: 16.0, height: .2, color: Colors.black),
@@ -63,48 +65,71 @@ class _Pharmacy extends State<Pharmacy> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: PharmacyApi.getPharmacy(coordonate.lat,coordonate.long),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<PharmacyModel>?> snapshot) {
-                  if (snapshot.hasError) {
-                    return page404Error(context, Pharmacy());
-                  }
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        itemBuilder: (context, index) {
-                          snapshot.data!.sort((a,b)=> (a.distance!).compareTo(b.distance!));
-                          return search != null
-                              ? (filter(snapshot.data, search)?.length == 0)
-                                  ? Container(
-                                      height: size.height * .6,
-                                      child: Center(
-                                        child: Text(
-                                          "Aucun resultats",
-                                          style: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    )
-                                  : pharmacyWidget(context,
-                                      filter(snapshot.data, search), index)
-                              : pharmacyWidget(context, snapshot.data, index);
+                  future: getCoordonate(),
+                  builder: (context, AsyncSnapshot snapshot1) {
+                    if (snapshot1.hasData) {
+                      return FutureBuilder(
+                        future: PharmacyApi.getPharmacy(
+                            snapshot1.data!["latitude"],
+                            snapshot1.data!["longitude"]),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<PharmacyModel>?> snapshot) {
+                          if (snapshot.hasError) {
+                            return page404Error(context, Pharmacy());
+                          }
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                itemBuilder: (context, index) {
+                                  snapshot.data!.sort((a, b) =>
+                                      (a.distance!).compareTo(b.distance!));
+                                  return search != null
+                                      ? (filter(snapshot.data, search)
+                                                  ?.length ==
+                                              0)
+                                          ? Container(
+                                              height: size.height * .6,
+                                              child: Center(
+                                                child: Text(
+                                                  "Aucun resultats",
+                                                  style: TextStyle(
+                                                      color: Colors.black38,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+                                            )
+                                          : pharmacyWidget(
+                                              context,
+                                              filter(snapshot.data, search),
+                                              index)
+                                      : pharmacyWidget(
+                                          context, snapshot.data, index);
+                                },
+                                itemCount: search != null
+                                    ? (filter(snapshot.data, search)?.length ==
+                                            0
+                                        ? (filter(snapshot.data, search)
+                                                ?.length)! +
+                                            1
+                                        : filter(snapshot.data, search)?.length)
+                                    : snapshot.data!.length);
+                          } else {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: HexColor(COLOR_PRIMARY),
+                              ),
+                            );
+                          }
                         },
-                        itemCount: search != null
-                            ? (filter(snapshot.data, search)?.length == 0
-                                ? (filter(snapshot.data, search)?.length)! + 1
-                                : filter(snapshot.data, search)?.length)
-                            : snapshot.data!.length);
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: HexColor(COLOR_PRIMARY),
-                      ),
-                    );
-                  }
-                },
-              ),
-            )
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: HexColor(COLOR_PRIMARY),
+                        ),
+                      );
+                    }
+                  }),
+            ),
           ],
         ),
       ),
@@ -114,7 +139,7 @@ class _Pharmacy extends State<Pharmacy> {
 
 List<PharmacyModel>? filter(List<PharmacyModel>? snapshot, search) {
   return snapshot
-      ?.where((element) => (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
+      ?.where((element) =>
+          (element.nom)!.toLowerCase().contains(search!.toLowerCase()))
       .toList();
 }
-
