@@ -27,7 +27,8 @@ class DetailPharmacy extends StatelessWidget {
       required this.pharmacyUid,
       required this.lat,
       required this.long,
-      required this.phone});
+      required this.phone,
+        required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,7 @@ class DetailPharmacy extends StatelessWidget {
                           Positioned(
                               top: (size.height * .13) / 3 + 20,
                               child: Text(
-                                'responsable ',
+                                this.email!,
                                 style: TextStyle(color: Colors.black26),
                               )),
                           Positioned(
